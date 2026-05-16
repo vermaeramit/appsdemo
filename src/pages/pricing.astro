@@ -1,0 +1,154 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import CtaBanner from "../components/CtaBanner.astro";
+
+type Plan = {
+  name: string;
+  price: string;
+  cadence: string;
+  description: string;
+  features: string[];
+  cta: string;
+  href: string;
+  featured?: boolean;
+};
+
+// These should mirror the plans configured in TravelERP's SubscriptionPlans table.
+const plans: Plan[] = [
+  {
+    name: "Trial",
+    price: "Free",
+    cadence: "for 30 days",
+    description: "Full access. No credit card. Convert to a paid plan whenever you're ready.",
+    features: ["5 users", "All modules", "Email support", "Public quote URLs", "1 GB attachments"],
+    cta: "Start free trial",
+    href: "https://crm.appsdemo.in/register",
+  },
+  {
+    name: "Starter",
+    price: "₹2,499",
+    cadence: "/ month",
+    description: "Small agencies just getting structured. Everything you need to ditch spreadsheets.",
+    features: ["10 users", "All modules", "Email support", "API access", "10 GB attachments"],
+    cta: "Choose Starter",
+    href: "https://crm.appsdemo.in/register",
+  },
+  {
+    name: "Business",
+    price: "₹5,999",
+    cadence: "/ month",
+    description: "Growing teams that want priority support and custom branding on every customer touchpoint.",
+    features: ["50 users", "All modules", "Priority support", "Custom branding", "Custom reports", "50 GB attachments"],
+    cta: "Choose Business",
+    href: "https://crm.appsdemo.in/register",
+    featured: true,
+  },
+  {
+    name: "Enterprise",
+    price: "Custom",
+    cadence: "talk to us",
+    description: "White-label, dedicated infra, SSO and SLAs for established agencies.",
+    features: ["Unlimited users", "White-label", "Dedicated support", "SSO / SAML", "SLA"],
+    cta: "Contact sales",
+    href: "/contact",
+  },
+];
+
+const faqs = [
+  { q: "Can I switch plans later?",          a: "Yes — upgrade or downgrade any time. Unused days are pro-rated." },
+  { q: "What payment methods do you accept?", a: "All major cards, UPI, and bank transfer for annual plans. Indian GST invoice included." },
+  { q: "Is my data isolated?",                a: "Every tenant gets its own database. No data leaks across customers, ever." },
+  { q: "Do you offer onboarding help?",       a: "Yes — Starter onwards includes a 30-minute setup call. Business and Enterprise include data import." },
+];
+---
+
+<BaseLayout
+  title="Pricing"
+  description="Simple, predictable monthly pricing for TravelERP. Start with a 30-day free trial — no credit card required."
+>
+  <section class="relative overflow-hidden">
+    <div class="hero-blob"></div>
+    <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-20 pb-12 sm:pt-24 sm:pb-12 text-center">
+      <p class="text-sm font-bold uppercase tracking-widest text-indigo-600">Pricing</p>
+      <h1 class="mt-3 text-4xl sm:text-5xl font-extrabold tracking-tight text-slate-900">
+        Simple, <span class="gradient-text">predictable pricing</span>
+      </h1>
+      <p class="mt-5 max-w-2xl mx-auto text-slate-600 text-lg">
+        Every plan includes the full feature set. Pay only for the seats you need.
+        Cancel any time.
+      </p>
+    </div>
+  </section>
+
+  <section class="pb-16 sm:pb-24">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        {plans.map((p) => (
+          <div class={[
+            "lift relative flex flex-col rounded-2xl border p-6 sm:p-7",
+            p.featured ? "border-indigo-500 ring-1 ring-indigo-500/40 bg-gradient-to-b from-white to-indigo-50/40" : "border-slate-200 bg-white"
+          ].join(" ")}>
+            {p.featured && (
+              <span class="absolute -top-3 left-1/2 -translate-x-1/2 px-2.5 py-1 rounded-full bg-indigo-600 text-white text-[10px] font-bold uppercase tracking-wider shadow">
+                Most popular
+              </span>
+            )}
+            <p class="text-sm font-bold uppercase tracking-wider text-indigo-600">{p.name}</p>
+            <div class="mt-3 flex items-baseline gap-1">
+              <span class="text-4xl font-extrabold text-slate-900">{p.price}</span>
+              <span class="text-sm text-slate-500">{p.cadence}</span>
+            </div>
+            <p class="mt-2 text-sm text-slate-600 leading-relaxed">{p.description}</p>
+            <ul class="mt-5 space-y-2 flex-1">
+              {p.features.map((f) => (
+                <li class="flex items-start gap-2 text-sm text-slate-700">
+                  <svg class="mt-0.5 shrink-0 text-indigo-500" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="20 6 9 17 4 12"/>
+                  </svg>
+                  <span>{f}</span>
+                </li>
+              ))}
+            </ul>
+            <a href={p.href}
+               class={[
+                 "mt-6 inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2.5 text-sm font-semibold transition",
+                 p.featured
+                   ? "text-white bg-gradient-to-r from-indigo-600 to-cyan-600 shadow hover:shadow-lg"
+                   : "text-slate-900 border border-slate-200 hover:border-indigo-300 hover:text-indigo-600"
+               ].join(" ")}>
+              {p.cta}
+            </a>
+          </div>
+        ))}
+      </div>
+
+      <p class="mt-8 text-center text-sm text-slate-500">
+        Prices in INR · GST applicable for Indian customers · Cancel anytime
+      </p>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="py-16 sm:py-20 bg-slate-50">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold tracking-tight text-slate-900 text-center">
+        Common questions
+      </h2>
+      <div class="mt-10 space-y-3">
+        {faqs.map((f) => (
+          <details class="group rounded-xl border border-slate-200 bg-white p-5">
+            <summary class="cursor-pointer list-none flex items-center justify-between font-semibold text-slate-900">
+              {f.q}
+              <svg class="shrink-0 transition-transform group-open:rotate-180" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="6 9 12 15 18 9"/>
+              </svg>
+            </summary>
+            <p class="mt-3 text-sm text-slate-600 leading-relaxed">{f.a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <CtaBanner />
+</BaseLayout>

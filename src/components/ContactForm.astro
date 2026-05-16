@@ -1,0 +1,113 @@
+---
+import { site } from "../data/site";
+// If site.formEndpoint is set, the form POSTs to it (e.g. Web3Forms / Formspree).
+// Otherwise the JS handler builds a mailto: link and opens the user's email client.
+const hasEndpoint = !!site.formEndpoint;
+---
+
+<form
+  id="contactForm"
+  action={hasEndpoint ? site.formEndpoint : `mailto:${site.contactEmail}`}
+  method="POST"
+  enctype={hasEndpoint ? "application/x-www-form-urlencoded" : "text/plain"}
+  class="space-y-4"
+>
+  <div class="grid sm:grid-cols-2 gap-4">
+    <div>
+      <label for="name" class="block text-sm font-semibold text-slate-800">Your name</label>
+      <input id="name" name="name" type="text" required maxlength="80"
+             class="mt-1 block w-full rounded-lg border border-slate-300 bg-white px-3 py-2.5 text-sm shadow-sm placeholder:text-slate-400 focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100 transition"
+             placeholder="Jane Doe" />
+    </div>
+    <div>
+      <label for="email" class="block text-sm font-semibold text-slate-800">Email</label>
+      <input id="email" name="email" type="email" required maxlength="120"
+             class="mt-1 block w-full rounded-lg border border-slate-300 bg-white px-3 py-2.5 text-sm shadow-sm placeholder:text-slate-400 focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100 transition"
+             placeholder="jane@company.com" />
+    </div>
+  </div>
+
+  <div class="grid sm:grid-cols-2 gap-4">
+    <div>
+      <label for="company" class="block text-sm font-semibold text-slate-800">Company <span class="text-slate-400 font-normal">(optional)</span></label>
+      <input id="company" name="company" type="text" maxlength="120"
+             class="mt-1 block w-full rounded-lg border border-slate-300 bg-white px-3 py-2.5 text-sm shadow-sm placeholder:text-slate-400 focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100 transition"
+             placeholder="Acme Travels" />
+    </div>
+    <div>
+      <label for="topic" class="block text-sm font-semibold text-slate-800">I'm interested in</label>
+      <select id="topic" name="topic"
+              class="mt-1 block w-full rounded-lg border border-slate-300 bg-white px-3 py-2.5 text-sm shadow-sm focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100 transition">
+        <option value="travel-crm">TravelERP — travel agency CRM</option>
+        <option value="inventory-pro">Inventory Pro (coming soon)</option>
+        <option value="hr-hub">HR Hub (coming soon)</option>
+        <option value="other">Something else</option>
+      </select>
+    </div>
+  </div>
+
+  <div>
+    <label for="message" class="block text-sm font-semibold text-slate-800">Message</label>
+    <textarea id="message" name="message" rows="4" required maxlength="2000"
+              class="mt-1 block w-full rounded-lg border border-slate-300 bg-white px-3 py-2.5 text-sm shadow-sm placeholder:text-slate-400 focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100 transition"
+              placeholder="Tell us a bit about your team and what you're looking to solve..."></textarea>
+  </div>
+
+  <!-- Honeypot — bots fill this, humans don't see it -->
+  <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" class="hidden" aria-hidden="true" />
+
+  <button type="submit"
+          class="inline-flex items-center justify-center gap-2 rounded-xl px-5 py-3 text-sm font-semibold text-white bg-gradient-to-r from-indigo-600 to-cyan-600 shadow-md hover:shadow-lg hover:opacity-95 transition w-full sm:w-auto">
+    Send message
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M5 12h14"/><path d="M13 6l6 6-6 6"/>
+    </svg>
+  </button>
+
+  <p id="contactStatus" class="text-sm" role="status" aria-live="polite"></p>
+</form>
+
+<script is:inline define:vars={{ hasEndpoint, contactEmail: site.contactEmail }}>
+  const form = document.getElementById("contactForm");
+  const status = document.getElementById("contactStatus");
+
+  form?.addEventListener("submit", async (e) => {
+    // Honeypot trip → silently drop
+    const hp = form.querySelector('[name="_gotcha"]');
+    if (hp && hp.value) { e.preventDefault(); return; }
+
+    if (hasEndpoint) {
+      // Let the form POST natively to the configured endpoint.
+      // Most form services (Formspree, Web3Forms) redirect to a thank-you page or
+      // accept Accept: application/json — keep this simple and let the user upgrade later.
+      status.textContent = "Sending…";
+      status.className = "text-sm text-slate-500";
+      return;
+    }
+
+    // No endpoint configured → build a mailto: link from the inputs and open the user's email client.
+    e.preventDefault();
+    const fd = new FormData(form);
+    const name    = (fd.get("name")    || "").toString().trim();
+    const email   = (fd.get("email")   || "").toString().trim();
+    const company = (fd.get("company") || "").toString().trim();
+    const topic   = (fd.get("topic")   || "").toString().trim();
+    const message = (fd.get("message") || "").toString().trim();
+
+    const body = [
+      `Name:    ${name}`,
+      `Email:   ${email}`,
+      `Company: ${company || "—"}`,
+      `Topic:   ${topic}`,
+      ``,
+      message,
+    ].join("\n");
+
+    const subject = `[AppsDemo enquiry] ${topic} — ${name}`;
+    const mailto  = `mailto:${contactEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+    window.location.href = mailto;
+    status.textContent = "Opening your email app…";
+    status.className   = "text-sm text-indigo-600 font-medium";
+  });
+</script>

@@ -1,0 +1,187 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import CtaBanner from "../../components/CtaBanner.astro";
+import { products } from "../../data/products";
+import { site } from "../../data/site";
+
+const product = products.find((p) => p.slug === "travel-crm")!;
+
+const sections = [
+  {
+    title: "Leads",
+    body: "Capture every enquiry. Pipeline statuses, source attribution, assignment, activity timeline, scheduled follow-ups, one-click WhatsApp and email — and a Today panel that tells your team exactly who to call next.",
+    bullets: [
+      "Pipeline + Kanban-style status board",
+      "Activity timeline (calls, emails, WA, meetings)",
+      "Scheduled follow-ups with reminders",
+      "Public lead-intake API with X-Api-Key auth",
+    ],
+  },
+  {
+    title: "Packages & quotes",
+    body: "Build packages with multiple options, day-wise itineraries, hotels & meal plans, inclusions/exclusions. Generate a beautiful public quote link (no login needed) and a print-perfect PDF.",
+    bullets: [
+      "Multi-option packages — Standard / Deluxe / Premium",
+      "Day-wise itinerary with sightseeing tags",
+      "Public token-based quote URL + PDF export",
+      "Google Business reviews on the public page",
+    ],
+  },
+  {
+    title: "Bookings & money",
+    body: "Convert a quote into a booking, set up installments, track payments and aging. Generate hotel vouchers your customers actually want to read.",
+    bullets: [
+      "Installment schedules + payment status",
+      "Payment aging report with bucket breakdown",
+      "Hotel voucher generator (PDF + email)",
+      "Per-tenant bank account details on quote",
+    ],
+  },
+  {
+    title: "Communication",
+    body: "Send emails through your own SMTP. Fire a WhatsApp chat from any lead. Use mail templates for repetitive nudges. Every send is logged.",
+    bullets: [
+      "Per-tenant SMTP (your domain, your reputation)",
+      "Templates with merge fields",
+      "WhatsApp click-to-chat from leads & quotes",
+      "Email log on every booking",
+    ],
+  },
+  {
+    title: "Security & admin",
+    body: "Multi-tenant from the ground up. Per-company roles & permissions, optional email-OTP at login, suspended/expired tenants get blocked automatically.",
+    bullets: [
+      "Granular roles (per sub-page permissions)",
+      "Optional email OTP on every login",
+      "Audit fields on every entity (who, when)",
+      "Platform-admin portal for plan management",
+    ],
+  },
+];
+
+const productJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  name: "TravelERP",
+  applicationCategory: "BusinessApplication",
+  operatingSystem: "Web",
+  description: product.description,
+  url: `${site.url}/products/travel-crm`,
+  offers: {
+    "@type": "Offer",
+    price: "0",
+    priceCurrency: "INR",
+    availability: "https://schema.org/InStock",
+    description: "30-day free trial",
+  },
+  publisher: { "@type": "Organization", name: site.name, url: site.url },
+};
+---
+
+<BaseLayout
+  title="TravelERP — the travel CRM your agents will actually use"
+  description="TravelERP is a multi-tenant travel agency software with leads, public quotes, bookings with installments, hotel vouchers and email/WhatsApp follow-ups."
+  jsonLd={productJsonLd}
+>
+  <!-- ─── Header ─── -->
+  <section class="relative overflow-hidden">
+    <div class="hero-blob"></div>
+    <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-20 pb-12 sm:pt-24 sm:pb-16">
+      <div class="grid gap-12 lg:grid-cols-2 lg:items-center">
+        <div>
+          <span class="inline-flex items-center gap-2 rounded-full bg-emerald-50 text-emerald-700 px-3 py-1 text-xs font-bold uppercase tracking-wider">
+            <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+            Live · Production-ready
+          </span>
+          <h1 class="mt-4 text-4xl sm:text-5xl font-extrabold tracking-tight text-slate-900 leading-tight">
+            The travel CRM your agents <span class="gradient-text">will actually use</span>.
+          </h1>
+          <p class="mt-5 text-lg text-slate-600 leading-relaxed">
+            Lead-to-booking workflows, multi-option public quotes, hotel vouchers, installment tracking,
+            email + WhatsApp follow-ups — built for small agencies that have outgrown spreadsheets but
+            don't want enterprise pain.
+          </p>
+          <div class="mt-7 flex flex-wrap items-center gap-3">
+            <a
+              href={product.appUrl}
+              class="inline-flex items-center gap-2 rounded-xl px-5 py-3 text-sm font-semibold text-white bg-gradient-to-r from-indigo-600 to-cyan-600 shadow-md hover:shadow-lg hover:opacity-95 transition"
+            >
+              Start 30-day free trial
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M5 12h14"/><path d="M13 6l6 6-6 6"/>
+              </svg>
+            </a>
+            <a
+              href="/contact"
+              class="inline-flex items-center rounded-xl px-5 py-3 text-sm font-semibold text-slate-900 bg-white border border-slate-200 hover:border-indigo-300 hover:text-indigo-600 transition"
+            >
+              Book a 15-min demo
+            </a>
+          </div>
+        </div>
+
+        <!-- Right-side quick stats card -->
+        <div class="relative">
+          <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-xl shadow-indigo-500/10">
+            <p class="text-xs font-bold uppercase tracking-wider text-slate-500">What's in the box</p>
+            <ul class="mt-3 grid grid-cols-2 gap-3 text-sm">
+              {product.highlights.map((h) => (
+                <li class="flex items-start gap-2">
+                  <svg class="mt-0.5 shrink-0 text-indigo-500" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="20 6 9 17 4 12"/>
+                  </svg>
+                  <span class="text-slate-700">{h}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div class="absolute -inset-2 -z-10 rounded-3xl bg-gradient-to-tr from-indigo-500/20 to-cyan-500/20 blur-2xl"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── Modules ─── -->
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <div class="max-w-2xl mx-auto text-center">
+        <p class="text-sm font-bold uppercase tracking-widest text-indigo-600">Modules</p>
+        <h2 class="mt-2 text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-900">
+          Everything a travel agency needs, none of the noise
+        </h2>
+      </div>
+
+      <div class="mt-14 space-y-12 sm:space-y-16">
+        {sections.map((s, i) => (
+          <div class={`grid gap-8 lg:grid-cols-2 lg:items-center ${i % 2 === 1 ? "lg:[&>:first-child]:order-2" : ""}`}>
+            <div>
+              <h3 class="text-2xl sm:text-3xl font-extrabold tracking-tight text-slate-900">{s.title}</h3>
+              <p class="mt-3 text-slate-600 leading-relaxed">{s.body}</p>
+              <ul class="mt-5 space-y-2">
+                {s.bullets.map((b) => (
+                  <li class="flex items-start gap-2 text-sm text-slate-700">
+                    <svg class="mt-0.5 shrink-0 text-indigo-500" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+                      <polyline points="20 6 9 17 4 12"/>
+                    </svg>
+                    <span>{b}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div class="rounded-2xl border border-slate-200 bg-gradient-to-br from-slate-50 to-white p-6 sm:p-8 shadow-sm">
+              <div class="aspect-[4/3] rounded-xl bg-white border border-slate-200 grid place-items-center text-slate-300">
+                <span class="text-sm font-medium tracking-wide uppercase">{s.title} preview</span>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <CtaBanner
+    title="Run your agency end-to-end"
+    body="Spin up your tenant in 30 seconds, import your leads, send your first public quote this afternoon."
+    primaryLabel="Start free trial"
+  />
+</BaseLayout>

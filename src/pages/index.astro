@@ -1,0 +1,129 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Hero from "../components/Hero.astro";
+import ProductCard from "../components/ProductCard.astro";
+import FeatureCard from "../components/FeatureCard.astro";
+import CtaBanner from "../components/CtaBanner.astro";
+import { products } from "../data/products";
+import { site } from "../data/site";
+
+const features = [
+  {
+    title: "Built for small teams",
+    body: "No bloated enterprise checkboxes. Workflows are tight, the UI is fast, and your team can onboard in an afternoon.",
+    icon: `<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>`,
+  },
+  {
+    title: "Multi-tenant from day one",
+    body: "Every customer gets isolated data with shared infrastructure. Branding, prefixes, SMTP and plans configurable per tenant.",
+    icon: `<rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/>`,
+  },
+  {
+    title: "Public sharable views",
+    body: "Send a quote, voucher or itinerary as a beautiful public URL — no customer login required. PDF export included.",
+    icon: `<path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>`,
+    color: "text-cyan-600",
+  },
+  {
+    title: "API-first integrations",
+    body: "Every product ships with a REST API and X-Api-Key auth. Wire up your website lead form, Zapier or your own automations.",
+    icon: `<polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>`,
+  },
+  {
+    title: "Email + WhatsApp",
+    body: "Send templated emails through your own SMTP, fire WhatsApp chats with one click, and track every touchpoint on the lead.",
+    icon: `<path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>`,
+    color: "text-emerald-600",
+  },
+  {
+    title: "Secure by default",
+    body: "BCrypt password hashing, optional email OTP, per-role permissions and a full audit trail of who-changed-what.",
+    icon: `<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>`,
+    color: "text-rose-600",
+  },
+];
+
+const homeJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: site.name,
+  url: site.url,
+  description: site.description,
+  potentialAction: {
+    "@type": "SearchAction",
+    target: `${site.url}/?q={search_term_string}`,
+    "query-input": "required name=search_term_string",
+  },
+};
+---
+
+<BaseLayout
+  title={site.name}
+  description={site.description}
+  jsonLd={homeJsonLd}
+>
+  <Hero />
+
+  <!-- ─── Products grid ─── -->
+  <section id="products" class="relative py-20 sm:py-24">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="max-w-2xl mx-auto text-center">
+        <p class="text-sm font-bold uppercase tracking-widest text-indigo-600">Products</p>
+        <h2 class="mt-2 text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-900">
+          One platform, multiple business tools
+        </h2>
+        <p class="mt-4 text-slate-600 text-lg">
+          We build SaaS for small businesses tired of duct-taping spreadsheets together.
+          Each product stands alone and they're all easy to live with.
+        </p>
+      </div>
+
+      <div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {products.map((p) => <ProductCard product={p} />)}
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── Features ─── -->
+  <section id="features" class="relative py-20 sm:py-24 bg-slate-50 dot-bg">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="max-w-2xl mx-auto text-center">
+        <p class="text-sm font-bold uppercase tracking-widest text-indigo-600">Why teams choose us</p>
+        <h2 class="mt-2 text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-900">
+          Built on the same opinionated foundation
+        </h2>
+        <p class="mt-4 text-slate-600 text-lg">
+          Every {site.name} product starts from the same playbook: modern stack, fast UI, clean APIs, secure defaults.
+        </p>
+      </div>
+
+      <div class="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        {features.map((f) => (
+          <FeatureCard icon={f.icon} title={f.title} body={f.body} color={f.color} />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── Social proof / numbers ─── -->
+  <section class="py-20 sm:py-24">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <div class="grid gap-8 sm:grid-cols-3 text-center">
+        <div>
+          <p class="text-4xl sm:text-5xl font-extrabold gradient-text">100k+</p>
+          <p class="mt-2 text-sm font-medium text-slate-600">Leads processed in load tests on a single tenant</p>
+        </div>
+        <div>
+          <p class="text-4xl sm:text-5xl font-extrabold gradient-text">30s</p>
+          <p class="mt-2 text-sm font-medium text-slate-600">From sign-up to your first shareable quote</p>
+        </div>
+        <div>
+          <p class="text-4xl sm:text-5xl font-extrabold gradient-text">100%</p>
+          <p class="mt-2 text-sm font-medium text-slate-600">Multi-tenant — every customer's data is isolated</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <CtaBanner />
+</BaseLayout>

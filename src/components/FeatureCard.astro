@@ -1,0 +1,17 @@
+---
+interface Props {
+  icon: string;       // SVG path data (d attribute)
+  title: string;
+  body: string;
+  color?: string;     // optional tailwind text color class for the icon
+}
+const { icon, title, body, color = "text-indigo-600" } = Astro.props;
+---
+
+<div class="lift rounded-2xl border border-slate-200 bg-white p-6">
+  <div class={`grid place-items-center w-11 h-11 rounded-xl bg-indigo-50 ${color}`}>
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" set:html={icon} />
+  </div>
+  <h3 class="mt-4 font-bold text-slate-900">{title}</h3>
+  <p class="mt-1.5 text-sm text-slate-600 leading-relaxed">{body}</p>
+</div>

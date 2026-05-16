@@ -1,0 +1,69 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import CtaBanner from "../components/CtaBanner.astro";
+import { site } from "../data/site";
+---
+
+<BaseLayout
+  title="About"
+  description={`About ${site.name} — we build SaaS tools for small businesses.`}
+>
+  <section class="relative overflow-hidden">
+    <div class="hero-blob"></div>
+    <div class="relative mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 pt-20 pb-12 sm:pt-24 sm:pb-12">
+      <p class="text-sm font-bold uppercase tracking-widest text-indigo-600">About us</p>
+      <h1 class="mt-3 text-4xl sm:text-5xl font-extrabold tracking-tight text-slate-900">
+        We build software <span class="gradient-text">small businesses</span> actually want to use.
+      </h1>
+    </div>
+  </section>
+
+  <section class="pb-16">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 space-y-6 text-slate-700 leading-relaxed text-lg">
+      <p>
+        {site.name} is an independent software studio building SaaS for small businesses. We started
+        because we kept watching agencies, retailers and small teams stitch together half a dozen
+        spreadsheets, free trials and abandoned tools — and pay for the privilege.
+      </p>
+      <p>
+        Our first product, <a class="text-indigo-600 font-semibold hover:underline" href="/products/travel-crm">TravelERP</a>,
+        is a modern travel-agency CRM. It does the unglamorous, end-to-end work: capture leads, build
+        multi-option quotes, share them publicly, convert to bookings, track installments, send hotel
+        vouchers, and nudge customers via email and WhatsApp.
+      </p>
+      <p>
+        More products are on the way — <strong>Inventory Pro</strong> for retailers and
+        <strong>HR Hub</strong> for people-ops teams. All built on the same opinionated foundation:
+        modern stack, fast UI, multi-tenant from day one, API-first, secure by default.
+      </p>
+      <p>
+        We're a small team that ships often, listens hard, and won't sell you anything you don't need.
+        If you've got feedback, ideas or just want to chat —
+        <a class="text-indigo-600 font-semibold hover:underline" href="/contact">say hello</a>.
+      </p>
+    </div>
+  </section>
+
+  <!-- Stats / values strip -->
+  <section class="py-16 bg-slate-50 dot-bg">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 grid gap-8 sm:grid-cols-3">
+      <div class="rounded-2xl bg-white border border-slate-200 p-6">
+        <p class="text-3xl">🛠</p>
+        <h3 class="mt-2 font-bold text-slate-900">Ship often</h3>
+        <p class="mt-1 text-sm text-slate-600">Small, frequent releases. Real bugs over imaginary roadmaps.</p>
+      </div>
+      <div class="rounded-2xl bg-white border border-slate-200 p-6">
+        <p class="text-3xl">🎯</p>
+        <h3 class="mt-2 font-bold text-slate-900">Focused</h3>
+        <p class="mt-1 text-sm text-slate-600">Each product solves one job really well, instead of fifty jobs badly.</p>
+      </div>
+      <div class="rounded-2xl bg-white border border-slate-200 p-6">
+        <p class="text-3xl">🤝</p>
+        <h3 class="mt-2 font-bold text-slate-900">Customer-led</h3>
+        <p class="mt-1 text-sm text-slate-600">We talk to every customer. Your feedback shapes the next release.</p>
+      </div>
+    </div>
+  </section>
+
+  <CtaBanner />
+</BaseLayout>
