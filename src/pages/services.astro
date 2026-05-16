@@ -1,0 +1,137 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import ServiceCard from "../components/ServiceCard.astro";
+import CtaBanner from "../components/CtaBanner.astro";
+import { services } from "../data/services";
+import { site } from "../data/site";
+
+const servicesJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  provider: { "@type": "Organization", name: site.name, url: site.url },
+  areaServed: "Worldwide",
+  hasOfferCatalog: {
+    "@type": "OfferCatalog",
+    name: `${site.name} services`,
+    itemListElement: services.map((s) => ({
+      "@type": "Offer",
+      itemOffered: {
+        "@type": "Service",
+        name: s.name,
+        description: s.tagline,
+        url: `${site.url}${s.href}`,
+      },
+    })),
+  },
+};
+
+const process = [
+  { step: "01", title: "Discovery",   body: "30-min call to scope goals, constraints and timeline. We send a written proposal within 48 hours." },
+  { step: "02", title: "Design",      body: "Wireframes, data model and tech stack agreed. Fixed-price quote — no scope creep surprises." },
+  { step: "03", title: "Build",       body: "Weekly demos in a staging environment. You see progress every Friday and steer the build." },
+  { step: "04", title: "Launch",      body: "Deploy to your infra or ours. Docs, training and a 30-day post-launch warranty included." },
+  { step: "05", title: "Support",     body: "Optional retainer for new features, monitoring and on-call. Or take ownership — your code, your repo." },
+];
+---
+
+<BaseLayout
+  title="Services"
+  description={`Custom AI chatbot, web app and mobile app development from ${site.name}. Fixed-price engagements, weekly demos, shipped in weeks not quarters.`}
+  jsonLd={servicesJsonLd}
+>
+  <!-- ─── Hero ─── -->
+  <section class="relative overflow-hidden">
+    <div class="hero-blob"></div>
+    <div class="relative mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 pt-20 pb-12 sm:pt-24 sm:pb-12 text-center">
+      <p class="text-sm font-bold uppercase tracking-widest text-indigo-600">Services</p>
+      <h1 class="mt-3 text-4xl sm:text-5xl font-extrabold tracking-tight text-slate-900 leading-tight">
+        Bespoke software, <span class="gradient-text">shipped in weeks</span>.
+      </h1>
+      <p class="mt-5 max-w-2xl mx-auto text-slate-600 text-lg leading-relaxed">
+        We take on focused, fixed-price engagements — AI assistants, web apps and mobile apps —
+        for teams that need custom software without the agency markup or six-month runway.
+      </p>
+      <div class="mt-7 flex flex-wrap items-center justify-center gap-3">
+        <a
+          href="/contact"
+          class="inline-flex items-center gap-2 rounded-xl px-5 py-3 text-sm font-semibold text-white bg-gradient-to-r from-indigo-600 to-cyan-600 shadow-md hover:shadow-lg hover:opacity-95 transition"
+        >
+          Start a project
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M5 12h14"/><path d="M13 6l6 6-6 6"/>
+          </svg>
+        </a>
+        <a
+          href="#process"
+          class="inline-flex items-center rounded-xl px-5 py-3 text-sm font-semibold text-slate-900 bg-white border border-slate-200 hover:border-indigo-300 hover:text-indigo-600 transition"
+        >
+          How we work
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── Service cards ─── -->
+  <section class="pb-16 sm:pb-20">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {services.map((s) => <ServiceCard service={s} />)}
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── Process ─── -->
+  <section id="process" class="py-16 sm:py-20 bg-slate-50 dot-bg">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <div class="max-w-2xl mx-auto text-center">
+        <p class="text-sm font-bold uppercase tracking-widest text-indigo-600">How we work</p>
+        <h2 class="mt-2 text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-900">
+          Five steps, no surprises
+        </h2>
+        <p class="mt-4 text-slate-600 text-lg">
+          A predictable engagement model that respects your time, budget and code.
+        </p>
+      </div>
+
+      <div class="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-5">
+        {process.map((p) => (
+          <div class="rounded-2xl border border-slate-200 bg-white p-5">
+            <p class="text-xs font-bold text-indigo-600">{p.step}</p>
+            <h3 class="mt-2 font-bold text-slate-900">{p.title}</h3>
+            <p class="mt-1.5 text-sm text-slate-600 leading-relaxed">{p.body}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── Trust strip ─── -->
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 grid gap-8 sm:grid-cols-3">
+      <div class="rounded-2xl bg-white border border-slate-200 p-6">
+        <p class="text-3xl">📅</p>
+        <h3 class="mt-2 font-bold text-slate-900">Fixed price, fixed timeline</h3>
+        <p class="mt-1 text-sm text-slate-600">Quoted upfront. We eat the cost of any scope we agreed and missed.</p>
+      </div>
+      <div class="rounded-2xl bg-white border border-slate-200 p-6">
+        <p class="text-3xl">👀</p>
+        <h3 class="mt-2 font-bold text-slate-900">Weekly demos</h3>
+        <p class="mt-1 text-sm text-slate-600">Friday staging demo every week. Steer the build, kill bad ideas early.</p>
+      </div>
+      <div class="rounded-2xl bg-white border border-slate-200 p-6">
+        <p class="text-3xl">🔑</p>
+        <h3 class="mt-2 font-bold text-slate-900">Your code, your repo</h3>
+        <p class="mt-1 text-sm text-slate-600">No vendor lock-in. Full source in your GitHub on day one of build.</p>
+      </div>
+    </div>
+  </section>
+
+  <CtaBanner
+    title="Have a project in mind?"
+    body="Send a short brief — we'll reply within one business day with rough scope and pricing."
+    primaryLabel="Start a project"
+    primaryHref="/contact"
+    secondaryLabel="See our products"
+    secondaryHref="/#products"
+  />
+</BaseLayout>

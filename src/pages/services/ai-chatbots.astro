@@ -1,0 +1,182 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import CtaBanner from "../../components/CtaBanner.astro";
+import { services } from "../../data/services";
+import { site } from "../../data/site";
+
+const service = services.find((s) => s.slug === "ai-chatbots")!;
+
+const useCases = [
+  {
+    title: "Customer support assistant",
+    body: "Answers product, pricing and policy questions on your website 24/7. Hands off to a human in your inbox or Slack when it can't.",
+    bullets: ["Trained on your help docs & FAQs", "Web widget + WhatsApp", "Ticket creation in Zendesk/Freshdesk", "Falls back to email when stuck"],
+  },
+  {
+    title: "Sales & lead-gen bot",
+    body: "Qualifies leads, books demos and pushes contact details into your CRM. Speaks the way your sales team does.",
+    bullets: ["Lead scoring & qualification", "Calendar booking via Calendly/Cal.com", "Pushes to HubSpot / Pipedrive / your CRM", "A/B tested conversation flows"],
+  },
+  {
+    title: "Internal knowledge assistant",
+    body: "Searches your Confluence, Drive, Notion and SharePoint so your team stops asking 'where is that doc?'",
+    bullets: ["RAG over private docs", "Per-user permissions respected", "Slack / Teams / web app interfaces", "Audit log of every query"],
+  },
+  {
+    title: "Domain-specific copilot",
+    body: "Custom assistants for niche workflows — legal review, financial analysis, medical triage, code review. Built with guardrails.",
+    bullets: ["Fine-tuning or RAG, whichever fits", "Tool use (call your APIs)", "Citations on every answer", "Eval suite + red-team review"],
+  },
+];
+
+const stack = [
+  { label: "Models",      items: "Claude 4.x · GPT-4o · Llama 3 · Mistral" },
+  { label: "Retrieval",   items: "pgvector · Pinecone · Weaviate" },
+  { label: "Orchestration", items: "LangChain · LlamaIndex · custom Node/Python" },
+  { label: "Hosting",     items: "Cloudflare Workers · AWS · Azure · your own infra" },
+  { label: "Integrations",items: "WhatsApp Business API · Slack · Teams · Web SDK" },
+  { label: "Observability", items: "LangSmith · Helicone · OpenTelemetry" },
+];
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  name: "AI Chatbot Development",
+  description: service.description,
+  serviceType: "Custom AI chatbot development",
+  provider: { "@type": "Organization", name: site.name, url: site.url },
+  areaServed: "Worldwide",
+  offers: { "@type": "Offer", price: "60000", priceCurrency: "INR", description: "Starts from ₹60,000" },
+};
+---
+
+<BaseLayout
+  title="AI Chatbot Development"
+  description={service.description}
+  jsonLd={jsonLd}
+>
+  <!-- ─── Header ─── -->
+  <section class="relative overflow-hidden">
+    <div class="hero-blob"></div>
+    <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-20 pb-12 sm:pt-24 sm:pb-16">
+      <div class="grid gap-12 lg:grid-cols-2 lg:items-center">
+        <div>
+          <span class="inline-flex items-center gap-2 rounded-full bg-violet-50 text-violet-700 px-3 py-1 text-xs font-bold uppercase tracking-wider">
+            <span class="w-2 h-2 rounded-full bg-violet-500"></span>
+            Service · Custom build
+          </span>
+          <h1 class="mt-4 text-4xl sm:text-5xl font-extrabold tracking-tight text-slate-900 leading-tight">
+            AI chatbots that <span class="gradient-text">actually understand</span> your business.
+          </h1>
+          <p class="mt-5 text-lg text-slate-600 leading-relaxed">
+            Off-the-shelf bots answer generic questions. We build assistants fine-tuned on
+            <em>your</em> docs, products and SOPs — so the answer is right the first time,
+            with citations to back it up.
+          </p>
+          <div class="mt-7 flex flex-wrap items-center gap-3">
+            <a
+              href="/contact"
+              class="inline-flex items-center gap-2 rounded-xl px-5 py-3 text-sm font-semibold text-white bg-gradient-to-r from-indigo-600 to-cyan-600 shadow-md hover:shadow-lg hover:opacity-95 transition"
+            >
+              Get a quote
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M5 12h14"/><path d="M13 6l6 6-6 6"/>
+              </svg>
+            </a>
+            <a
+              href="/services"
+              class="inline-flex items-center rounded-xl px-5 py-3 text-sm font-semibold text-slate-900 bg-white border border-slate-200 hover:border-indigo-300 hover:text-indigo-600 transition"
+            >
+              All services
+            </a>
+          </div>
+          <p class="mt-5 text-xs text-slate-500">
+            Starts from <span class="font-bold text-slate-700">{service.startsFrom}</span> · Typical timeline 3–6 weeks
+          </p>
+        </div>
+
+        <!-- Right-side highlights card -->
+        <div class="relative">
+          <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-xl shadow-violet-500/10">
+            <p class="text-xs font-bold uppercase tracking-wider text-slate-500">What you get</p>
+            <ul class="mt-3 grid grid-cols-1 gap-3 text-sm">
+              {service.highlights.map((h) => (
+                <li class="flex items-start gap-2">
+                  <svg class="mt-0.5 shrink-0 text-violet-500" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="20 6 9 17 4 12"/>
+                  </svg>
+                  <span class="text-slate-700">{h}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div class="absolute -inset-2 -z-10 rounded-3xl bg-gradient-to-tr from-violet-500/20 to-fuchsia-500/20 blur-2xl"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── Use cases ─── -->
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <div class="max-w-2xl mx-auto text-center">
+        <p class="text-sm font-bold uppercase tracking-widest text-indigo-600">Use cases</p>
+        <h2 class="mt-2 text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-900">
+          What we build
+        </h2>
+      </div>
+
+      <div class="mt-12 grid gap-6 sm:grid-cols-2">
+        {useCases.map((u) => (
+          <div class="lift rounded-2xl border border-slate-200 bg-white p-6 sm:p-7">
+            <h3 class="text-xl font-bold text-slate-900">{u.title}</h3>
+            <p class="mt-2 text-sm text-slate-600 leading-relaxed">{u.body}</p>
+            <ul class="mt-4 space-y-1.5">
+              {u.bullets.map((b) => (
+                <li class="flex items-start gap-2 text-sm text-slate-700">
+                  <svg class="mt-0.5 shrink-0 text-violet-500" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="20 6 9 17 4 12"/>
+                  </svg>
+                  <span>{b}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── Tech stack ─── -->
+  <section class="py-16 sm:py-20 bg-slate-50 dot-bg">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <div class="max-w-2xl mx-auto text-center">
+        <p class="text-sm font-bold uppercase tracking-widest text-indigo-600">Tech stack</p>
+        <h2 class="mt-2 text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-900">
+          Modern, model-agnostic, your-infra-friendly
+        </h2>
+        <p class="mt-4 text-slate-600 text-lg">
+          We pick the right tool for the job — and document every choice so you're never locked in.
+        </p>
+      </div>
+
+      <div class="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {stack.map((s) => (
+          <div class="rounded-2xl border border-slate-200 bg-white p-5">
+            <p class="text-xs font-bold uppercase tracking-wider text-indigo-600">{s.label}</p>
+            <p class="mt-2 text-sm text-slate-700 leading-relaxed">{s.items}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <CtaBanner
+    title="Ready to build your assistant?"
+    body="Send a short brief — what should it know, who should it serve, where should it live? We'll reply within one business day."
+    primaryLabel="Get a quote"
+    primaryHref="/contact"
+    secondaryLabel="Other services"
+    secondaryHref="/services"
+  />
+</BaseLayout>

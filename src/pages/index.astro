@@ -2,9 +2,11 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Hero from "../components/Hero.astro";
 import ProductCard from "../components/ProductCard.astro";
+import ServiceCard from "../components/ServiceCard.astro";
 import FeatureCard from "../components/FeatureCard.astro";
 import CtaBanner from "../components/CtaBanner.astro";
 import { products } from "../data/products";
+import { services } from "../data/services";
 import { site } from "../data/site";
 
 const features = [
@@ -80,6 +82,35 @@ const homeJsonLd = {
 
       <div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {products.map((p) => <ProductCard product={p} />)}
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── Services ─── -->
+  <section id="services" class="relative py-20 sm:py-24 bg-gradient-to-b from-white to-slate-50/40">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="max-w-2xl mx-auto text-center">
+        <p class="text-sm font-bold uppercase tracking-widest text-indigo-600">Services</p>
+        <h2 class="mt-2 text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-900">
+          Need something custom? We build it for you.
+        </h2>
+        <p class="mt-4 text-slate-600 text-lg">
+          Beyond our SaaS products, we take on focused engagements — AI assistants,
+          web apps and mobile apps — for teams that need bespoke software shipped fast.
+        </p>
+      </div>
+
+      <div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {services.map((s) => <ServiceCard service={s} />)}
+      </div>
+
+      <div class="mt-10 text-center">
+        <a href="/services" class="inline-flex items-center gap-1.5 text-sm font-semibold text-indigo-600 hover:text-indigo-700">
+          See all services
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M5 12h14"/><path d="M13 6l6 6-6 6"/>
+          </svg>
+        </a>
       </div>
     </div>
   </section>
