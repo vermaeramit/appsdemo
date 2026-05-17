@@ -8,6 +8,7 @@ export type Project = {
   tech?: string[];
   accent: string;              // tailwind gradient classes for the visual band
   year?: number;
+  logo?: string;               // optional project-specific logo (overrides the client logo on the card)
 };
 
 export const projects: Project[] = [
@@ -76,5 +77,6 @@ export const projects: Project[] = [
       "Online exam platform for competitive Indian exams (HSSC CET Haryana, HTET, Physical Education) with multi-subject test delivery, timed sessions and certification.",
     tech: ["Timed test engine", "Multi-subject", "Result analytics"],
     accent: "from-emerald-500 to-teal-500",
+    logo: "/clients/exam.png",
   },
 ];

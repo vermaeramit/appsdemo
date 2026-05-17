@@ -6,7 +6,8 @@ import ClientLogo from "./ClientLogo.astro";
 interface Props { project: Project; }
 const { project } = Astro.props;
 
-const client = clients.find((c) => c.slug === project.clientSlug)!;
+const baseClient = clients.find((c) => c.slug === project.clientSlug)!;
+const client = project.logo ? { ...baseClient, logo: project.logo } : baseClient;
 
 const categoryStyle: Record<Project["category"], string> = {
   "Travel CRM":         "bg-indigo-100 text-indigo-700",
