@@ -1,15 +1,14 @@
 ---
-import { site } from "../data/site";
-// If site.formEndpoint is set, the form POSTs to it (e.g. Web3Forms / Formspree).
-// Otherwise the JS handler builds a mailto: link and opens the user's email client.
-const hasEndpoint = !!site.formEndpoint;
+// Pure markup. Submission is handled by /scripts/contact-form.js which POSTs
+// to /api/contact (handled by src/worker.ts). SMTP credentials live in
+// Cloudflare Worker secrets — never in the browser.
 ---
 
 <form
   id="contactForm"
-  action={hasEndpoint ? site.formEndpoint : `mailto:${site.contactEmail}`}
+  action="/api/contact"
   method="POST"
-  enctype={hasEndpoint ? "application/x-www-form-urlencoded" : "text/plain"}
+  data-endpoint="/api/contact"
   class="space-y-4"
 >
   <div class="grid sm:grid-cols-2 gap-4">
@@ -60,11 +59,10 @@ const hasEndpoint = !!site.formEndpoint;
               placeholder="Tell us a bit about your team and what you're looking to solve..."></textarea>
   </div>
 
-  <!-- Honeypot — bots fill this, humans don't see it -->
-  <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" class="hidden" aria-hidden="true" />
+  <input type="checkbox" name="botcheck" class="hidden" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true" />
 
-  <button type="submit"
-          class="inline-flex items-center justify-center gap-2 rounded-xl px-5 py-3 text-sm font-semibold text-white bg-gradient-to-r from-indigo-600 to-cyan-600 shadow-md hover:shadow-lg hover:opacity-95 transition w-full sm:w-auto">
+  <button type="submit" id="contactSubmit"
+          class="inline-flex items-center justify-center gap-2 rounded-xl px-5 py-3 text-sm font-semibold text-white bg-gradient-to-r from-indigo-600 to-cyan-600 shadow-md hover:shadow-lg hover:opacity-95 transition w-full sm:w-auto disabled:opacity-60 disabled:cursor-not-allowed">
     Send message
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
       <path d="M5 12h14"/><path d="M13 6l6 6-6 6"/>
@@ -74,47 +72,4 @@ const hasEndpoint = !!site.formEndpoint;
   <p id="contactStatus" class="text-sm" role="status" aria-live="polite"></p>
 </form>
 
-<script is:inline define:vars={{ hasEndpoint, contactEmail: site.contactEmail }}>
-  const form = document.getElementById("contactForm");
-  const status = document.getElementById("contactStatus");
-
-  form?.addEventListener("submit", async (e) => {
-    // Honeypot trip → silently drop
-    const hp = form.querySelector('[name="_gotcha"]');
-    if (hp && hp.value) { e.preventDefault(); return; }
-
-    if (hasEndpoint) {
-      // Let the form POST natively to the configured endpoint.
-      // Most form services (Formspree, Web3Forms) redirect to a thank-you page or
-      // accept Accept: application/json — keep this simple and let the user upgrade later.
-      status.textContent = "Sending…";
-      status.className = "text-sm text-slate-500";
-      return;
-    }
-
-    // No endpoint configured → build a mailto: link from the inputs and open the user's email client.
-    e.preventDefault();
-    const fd = new FormData(form);
-    const name    = (fd.get("name")    || "").toString().trim();
-    const email   = (fd.get("email")   || "").toString().trim();
-    const company = (fd.get("company") || "").toString().trim();
-    const topic   = (fd.get("topic")   || "").toString().trim();
-    const message = (fd.get("message") || "").toString().trim();
-
-    const body = [
-      `Name:    ${name}`,
-      `Email:   ${email}`,
-      `Company: ${company || "—"}`,
-      `Topic:   ${topic}`,
-      ``,
-      message,
-    ].join("\n");
-
-    const subject = `[AppsDemo enquiry] ${topic} — ${name}`;
-    const mailto  = `mailto:${contactEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-
-    window.location.href = mailto;
-    status.textContent = "Opening your email app…";
-    status.className   = "text-sm text-indigo-600 font-medium";
-  });
-</script>
+<script src="/scripts/contact-form.js" defer></script>

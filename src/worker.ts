@@ -1,0 +1,141 @@
+import { WorkerMailer } from "worker-mailer";
+
+interface Env {
+  ASSETS: Fetcher;
+  SMTP_HOST: string;        // e.g. smtp.zoho.in
+  SMTP_PORT?: string;       // optional, defaults to 465 (SSL)
+  SMTP_USER: string;        // mailbox to authenticate as
+  SMTP_PASS: string;        // Zoho App Password
+  SMTP_FROM: string;        // From address shown to recipients
+  SMTP_TO?: string;         // optional override; defaults to info@appsdemo.in
+}
+
+const ALLOWED_FIELDS = ["name", "email", "company", "topic", "message"] as const;
+const MAX_LEN = { name: 80, email: 120, company: 120, topic: 60, message: 4000 } as const;
+
+function json(body: unknown, status = 200): Response {
+  return new Response(JSON.stringify(body), {
+    status,
+    headers: { "Content-Type": "application/json; charset=utf-8" },
+  });
+}
+
+function escapeHtml(s: string): string {
+  return s
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
+async function handleContact(request: Request, env: Env): Promise<Response> {
+  // Parse form data
+  let form: FormData;
+  try {
+    form = await request.formData();
+  } catch {
+    return json({ success: false, message: "Invalid form data." }, 400);
+  }
+
+  // Honeypot — bots tick this, humans don't see it
+  const botcheck = form.get("botcheck");
+  if (botcheck && botcheck !== "" && botcheck !== "off") {
+    return json({ success: true, message: "Thanks!" });
+  }
+
+  // Collect + validate
+  const data: Record<string, string> = {};
+  for (const f of ALLOWED_FIELDS) {
+    const v = form.get(f);
+    if (typeof v === "string") data[f] = v.trim();
+  }
+
+  if (!data.name || !data.email || !data.message) {
+    return json({ success: false, message: "Name, email and message are required." }, 400);
+  }
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)) {
+    return json({ success: false, message: "Please enter a valid email address." }, 400);
+  }
+  for (const f of ALLOWED_FIELDS) {
+    const max = MAX_LEN[f as keyof typeof MAX_LEN];
+    if (data[f] && data[f].length > max) {
+      return json({ success: false, message: `${f} is too long.` }, 400);
+    }
+  }
+
+  const recipient = env.SMTP_TO || "info@appsdemo.in";
+  const subject = `[AppsDemo enquiry] ${data.topic || "general"} — ${data.name}`;
+  const port = env.SMTP_PORT ? parseInt(env.SMTP_PORT, 10) : 465;
+  const secure = port === 465;
+
+  const textBody = [
+    `New enquiry from the AppsDemo website`,
+    ``,
+    `Name:    ${data.name}`,
+    `Email:   ${data.email}`,
+    `Company: ${data.company || "—"}`,
+    `Topic:   ${data.topic || "—"}`,
+    ``,
+    `Message:`,
+    data.message,
+    ``,
+    `— Reply directly to this email to respond to the sender.`,
+  ].join("\n");
+
+  const htmlBody = `<!doctype html>
+<html><body style="font-family:system-ui,sans-serif;color:#0f172a;max-width:600px">
+  <h2 style="color:#4f46e5">New enquiry from the AppsDemo website</h2>
+  <table style="border-collapse:collapse;font-size:14px">
+    <tr><td style="padding:4px 12px 4px 0;color:#64748b">Name</td><td><strong>${escapeHtml(data.name)}</strong></td></tr>
+    <tr><td style="padding:4px 12px 4px 0;color:#64748b">Email</td><td><a href="mailto:${escapeHtml(data.email)}">${escapeHtml(data.email)}</a></td></tr>
+    <tr><td style="padding:4px 12px 4px 0;color:#64748b">Company</td><td>${escapeHtml(data.company || "—")}</td></tr>
+    <tr><td style="padding:4px 12px 4px 0;color:#64748b">Topic</td><td>${escapeHtml(data.topic || "—")}</td></tr>
+  </table>
+  <h3 style="margin-top:24px;color:#475569;font-size:13px;text-transform:uppercase;letter-spacing:.08em">Message</h3>
+  <p style="white-space:pre-wrap;background:#f8fafc;padding:16px;border-radius:8px;border:1px solid #e2e8f0">${escapeHtml(data.message)}</p>
+  <p style="color:#64748b;font-size:12px;margin-top:24px">Reply directly to this email to respond to the sender.</p>
+</body></html>`;
+
+  try {
+    const mailer = await WorkerMailer.connect({
+      credentials: { username: env.SMTP_USER, password: env.SMTP_PASS },
+      authType: "plain",
+      host: env.SMTP_HOST,
+      port,
+      secure,
+    });
+
+    await mailer.send({
+      from: { name: "AppsDemo Contact Form", email: env.SMTP_FROM },
+      to: { email: recipient },
+      replyTo: { name: data.name, email: data.email },
+      subject,
+      text: textBody,
+      html: htmlBody,
+    });
+
+    return json({ success: true, message: "Thanks! Your message is on its way." });
+  } catch (err) {
+    const msg = err instanceof Error ? err.message : String(err);
+    console.error("contact-form send failed:", msg);
+    return json(
+      { success: false, message: "We couldn't send your message. Please try again or email us directly." },
+      502
+    );
+  }
+}
+
+export default {
+  async fetch(request: Request, env: Env): Promise<Response> {
+    const url = new URL(request.url);
+
+    if (url.pathname === "/api/contact") {
+      if (request.method === "POST") return handleContact(request, env);
+      return json({ success: false, message: "Method not allowed." }, 405);
+    }
+
+    // Everything else — fall through to static assets (Astro's dist/)
+    return env.ASSETS.fetch(request);
+  },
+} satisfies ExportedHandler<Env>;
