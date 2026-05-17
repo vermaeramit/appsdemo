@@ -64,7 +64,7 @@ async function handleContact(request: Request, env: Env): Promise<Response> {
     }
   }
 
-  const recipient = env.SMTP_TO || "info@appsdemo.in";
+  const recipient = env.SMTP_TO || "vermaeramit@gmail.com";
   const subject = `[AppsDemo enquiry] ${data.topic || "general"} — ${data.name}`;
   const port = env.SMTP_PORT ? parseInt(env.SMTP_PORT, 10) : 465;
   const secure = port === 465;
