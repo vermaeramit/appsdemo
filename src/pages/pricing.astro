@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import CtaBanner from "../components/CtaBanner.astro";
+import { services } from "../data/services";
 
 type Plan = {
   name: string;
@@ -13,7 +14,7 @@ type Plan = {
   featured?: boolean;
 };
 
-// These should mirror the plans configured in TravelERP's SubscriptionPlans table.
+// Product subscriptions — these should mirror the plans in TravelERP's SubscriptionPlans table.
 const plans: Plan[] = [
   {
     name: "Trial",
@@ -55,34 +56,85 @@ const plans: Plan[] = [
 ];
 
 const faqs = [
-  { q: "Can I switch plans later?",          a: "Yes — upgrade or downgrade any time. Unused days are pro-rated." },
-  { q: "What payment methods do you accept?", a: "All major cards, UPI, and bank transfer for annual plans. Indian GST invoice included." },
-  { q: "Is my data isolated?",                a: "Every tenant gets its own database. No data leaks across customers, ever." },
-  { q: "Do you offer onboarding help?",       a: "Yes — Starter onwards includes a 30-minute setup call. Business and Enterprise include data import." },
+  {
+    q: "Do you sell SaaS, build custom software, or both?",
+    a: "Both. We run our own products (TravelERP today, more launching) on a monthly subscription, and we take on fixed-price custom builds — AI chatbots, web apps, mobile apps. Many clients use both: subscribe to a product, then hire us to integrate or extend.",
+  },
+  {
+    q: "Can I switch product plans later?",
+    a: "Yes — upgrade or downgrade any time. Unused days are pro-rated.",
+  },
+  {
+    q: "What does \"starts from\" mean on services?",
+    a: "It's the floor for a typical project in that category. After a 30-min discovery call we send a fixed-price written quote tied to a specific scope — no hourly surprises. Bigger or more complex builds cost more; smaller ones less.",
+  },
+  {
+    q: "What happens if the scope changes mid-build?",
+    a: "Small additions inside the spirit of the original scope: we absorb them. Material changes get a written change order with a delta price and timeline impact before we proceed. Either side can walk if the change isn't worth it.",
+  },
+  {
+    q: "What payment methods do you accept?",
+    a: "All major cards, UPI, and bank transfer for annual plans and project milestones. Indian GST invoice included. International clients can pay via wire transfer.",
+  },
+  {
+    q: "Is my data isolated on the products?",
+    a: "Every tenant gets its own database. No data leaks across customers, ever.",
+  },
+  {
+    q: "Do you take projects from outside India?",
+    a: "Yes — we work remotely with teams across timezones. Billing in INR with GST for Indian customers; USD/EUR for everyone else.",
+  },
 ];
 ---
 
 <BaseLayout
   title="Pricing"
-  description="Simple, predictable monthly pricing for TravelERP. Start with a 30-day free trial — no credit card required."
+  description="Transparent pricing for both our SaaS products and custom development services. Monthly subscriptions for products, fixed-price quotes for custom builds."
 >
+  <!-- ─── Hero ─── -->
   <section class="relative overflow-hidden">
     <div class="hero-blob"></div>
-    <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-20 pb-12 sm:pt-24 sm:pb-12 text-center">
+    <div class="relative mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 pt-20 pb-10 sm:pt-24 text-center">
       <p class="text-sm font-bold uppercase tracking-widest text-indigo-600">Pricing</p>
       <h1 class="mt-3 text-4xl sm:text-5xl font-extrabold tracking-tight text-slate-900">
-        Simple, <span class="gradient-text">predictable pricing</span>
+        Pricing that fits <span class="gradient-text">the work</span>
       </h1>
-      <p class="mt-5 max-w-2xl mx-auto text-slate-600 text-lg">
-        Every plan includes the full feature set. Pay only for the seats you need.
-        Cancel any time.
+      <p class="mt-5 max-w-2xl mx-auto text-slate-600 text-lg leading-relaxed">
+        Buy our SaaS by the seat, or hire us to build something custom — fixed-price, fixed-timeline.
+        Both transparent up front.
       </p>
+
+      <!-- "Two paths" anchor card -->
+      <div class="mt-10 grid gap-4 sm:grid-cols-2 max-w-2xl mx-auto">
+        <a href="#products" class="lift rounded-2xl border border-slate-200 bg-white p-5 text-left">
+          <p class="text-xs font-bold uppercase tracking-wider text-indigo-600">Path 1</p>
+          <p class="mt-2 font-bold text-slate-900">Product subscriptions</p>
+          <p class="mt-1 text-sm text-slate-600">From ₹2,499/mo per tenant. Cancel any time.</p>
+        </a>
+        <a href="#custom" class="lift rounded-2xl border border-slate-200 bg-white p-5 text-left">
+          <p class="text-xs font-bold uppercase tracking-wider text-indigo-600">Path 2</p>
+          <p class="mt-2 font-bold text-slate-900">Custom builds</p>
+          <p class="mt-1 text-sm text-slate-600">From ₹60,000 fixed-price. Quoted upfront.</p>
+        </a>
+      </div>
     </div>
   </section>
 
-  <section class="pb-16 sm:pb-24">
+  <!-- ─── Section 1: Product subscriptions ─── -->
+  <section id="products" class="py-16 sm:py-20 scroll-mt-20">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+      <div class="max-w-2xl mx-auto text-center">
+        <p class="text-sm font-bold uppercase tracking-widest text-indigo-600">Product subscriptions</p>
+        <h2 class="mt-2 text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-900">
+          Buy our SaaS by the seat
+        </h2>
+        <p class="mt-4 text-slate-600 text-lg">
+          Pricing below is for <strong>TravelERP</strong>, our travel-agency CRM. More products
+          (Inventory Pro, HR Hub) launching soon at similar tiers.
+        </p>
+      </div>
+
+      <div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
         {plans.map((p) => (
           <div class={[
             "lift relative flex flex-col rounded-2xl border p-6 sm:p-7",
@@ -128,8 +180,93 @@ const faqs = [
     </div>
   </section>
 
-  <!-- FAQ -->
-  <section class="py-16 sm:py-20 bg-slate-50">
+  <!-- ─── Section 2: Custom builds ─── -->
+  <section id="custom" class="py-16 sm:py-20 bg-slate-50 dot-bg scroll-mt-20">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="max-w-2xl mx-auto text-center">
+        <p class="text-sm font-bold uppercase tracking-widest text-indigo-600">Custom builds</p>
+        <h2 class="mt-2 text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-900">
+          Or hire us to build something
+        </h2>
+        <p class="mt-4 text-slate-600 text-lg">
+          Fixed-price engagements. Quoted upfront after a 30-min discovery call. Weekly demos.
+          Your code, your repo — no vendor lock-in.
+        </p>
+      </div>
+
+      <div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {services.map((s) => (
+          <div class="lift relative flex flex-col rounded-2xl border border-slate-200 bg-white p-6 sm:p-7">
+            <div class="flex items-start justify-between">
+              <div class={`grid place-items-center w-12 h-12 rounded-xl bg-gradient-to-br ${s.iconColor} text-white text-xl font-bold shadow-sm`}>
+                <span aria-hidden="true">{s.icon}</span>
+              </div>
+              <span class="text-[11px] font-semibold text-slate-500">Fixed price</span>
+            </div>
+            <p class="mt-5 text-xs font-bold uppercase tracking-wider text-indigo-600">{s.name}</p>
+            <div class="mt-1 flex items-baseline gap-1">
+              <span class="text-sm text-slate-500">from</span>
+              <span class="text-3xl font-extrabold text-slate-900">{s.startsFrom}</span>
+            </div>
+            <p class="mt-3 text-sm text-slate-600 leading-relaxed flex-1">{s.tagline}</p>
+            <ul class="mt-4 space-y-1.5">
+              {s.highlights.slice(0, 3).map((h) => (
+                <li class="flex items-start gap-2 text-sm text-slate-700">
+                  <svg class="mt-0.5 shrink-0 text-indigo-500" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="20 6 9 17 4 12"/>
+                  </svg>
+                  <span>{h}</span>
+                </li>
+              ))}
+            </ul>
+            <div class="mt-5 flex flex-wrap gap-2">
+              <a
+                href={s.href}
+                class="inline-flex items-center gap-1.5 text-sm font-semibold text-indigo-600 hover:text-indigo-700"
+              >
+                Details →
+              </a>
+              <span class="text-slate-300">·</span>
+              <a
+                href="/contact"
+                class="inline-flex items-center gap-1.5 text-sm font-semibold text-indigo-600 hover:text-indigo-700"
+              >
+                Get a quote
+              </a>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <!-- Retainer / maintenance callout -->
+      <div class="mt-10 rounded-2xl border border-slate-200 bg-white p-6 sm:p-7 flex flex-col sm:flex-row items-start sm:items-center gap-5">
+        <div class="grid place-items-center w-12 h-12 rounded-xl bg-gradient-to-br from-slate-700 to-slate-900 text-white text-xl shadow-sm shrink-0">
+          🔧
+        </div>
+        <div class="flex-1">
+          <p class="text-xs font-bold uppercase tracking-wider text-indigo-600">Ongoing maintenance</p>
+          <p class="mt-1 font-bold text-slate-900">Retainer plans after launch</p>
+          <p class="mt-1 text-sm text-slate-600 leading-relaxed">
+            Monthly retainer for new features, monitoring and on-call support — scoped to your needs.
+            Or take full ownership — your code, your repo, no strings.
+          </p>
+        </div>
+        <a
+          href="/contact"
+          class="inline-flex items-center rounded-xl px-4 py-2.5 text-sm font-semibold text-slate-900 bg-white border border-slate-200 hover:border-indigo-300 hover:text-indigo-600 transition whitespace-nowrap"
+        >
+          Talk to us
+        </a>
+      </div>
+
+      <p class="mt-8 text-center text-sm text-slate-500">
+        Indian clients invoiced in INR with GST · International clients in USD/EUR · 50% on start, 50% on launch
+      </p>
+    </div>
+  </section>
+
+  <!-- ─── FAQ ─── -->
+  <section class="py-16 sm:py-20">
     <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
       <h2 class="text-3xl font-extrabold tracking-tight text-slate-900 text-center">
         Common questions
