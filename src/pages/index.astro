@@ -4,6 +4,7 @@ import Hero from "../components/Hero.astro";
 import ProductCard from "../components/ProductCard.astro";
 import ServiceCard from "../components/ServiceCard.astro";
 import FeatureCard from "../components/FeatureCard.astro";
+import ClientsStrip from "../components/ClientsStrip.astro";
 import CtaBanner from "../components/CtaBanner.astro";
 import { products } from "../data/products";
 import { services } from "../data/services";
@@ -65,6 +66,9 @@ const homeJsonLd = {
   jsonLd={homeJsonLd}
 >
   <Hero />
+
+  <!-- ─── Trusted by (client logos) ─── -->
+  <ClientsStrip title="Trusted by teams building real businesses" compact={true} />
 
   <!-- ─── Products grid ─── -->
   <section id="products" class="relative py-20 sm:py-24">

@@ -1,0 +1,34 @@
+---
+import type { Client } from "../data/clients";
+interface Props {
+  client: Client;
+  /** Tailwind classes controlling the max logo height. Default ~h-10. */
+  size?: string;
+  /** When true, render in grayscale that colors on hover. */
+  monochrome?: boolean;
+}
+const { client, size = "h-10", monochrome = true } = Astro.props;
+
+const imgClass = [
+  size,
+  "w-auto max-w-[160px] object-contain",
+  monochrome ? "opacity-70 grayscale transition group-hover:opacity-100 group-hover:grayscale-0" : "",
+].join(" ");
+
+const fallbackClass = [
+  size,
+  "grid place-items-center rounded-lg bg-slate-100 px-3 font-bold tracking-widest text-slate-500 min-w-[80px]",
+  monochrome ? "transition group-hover:bg-indigo-50 group-hover:text-indigo-600" : "",
+].join(" ");
+---
+
+<img
+  src={client.logo}
+  alt={`${client.name} logo`}
+  loading="lazy"
+  width="160"
+  height="40"
+  class={imgClass}
+  onerror="this.style.display='none';const f=this.nextElementSibling;if(f)f.style.display='grid';"
+/>
+<span class={fallbackClass} style="display:none">{client.initials ?? client.name}</span>
