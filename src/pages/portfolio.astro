@@ -7,6 +7,8 @@ import { projects } from "../data/projects";
 import { clients } from "../data/clients";
 import { site } from "../data/site";
 
+const yearsActive = new Date().getFullYear() - site.founded;
+
 // Group projects by category for the "by type" view
 const categories = ["Travel CRM", "Marketing Site", "Education Platform", "Exam Portal"] as const;
 
@@ -39,19 +41,19 @@ const portfolioJsonLd = {
         Shipped, live, in <span class="gradient-text">real customer hands</span>.
       </h1>
       <p class="mt-5 max-w-2xl mx-auto text-slate-600 text-lg leading-relaxed">
-        {projects.length} production projects across {clients.length} clients — travel agencies running our TravelERP,
-        academic publishers, exam platforms and customer-facing marketing sites.
+        {site.projectsDelivered}+ projects delivered since {site.founded} — travel agencies running our TravelERP,
+        academic publishers, exam platforms and customer-facing marketing sites. A selection is featured below.
       </p>
 
       <!-- Quick stat strip -->
       <div class="mt-10 grid grid-cols-3 gap-4 max-w-xl mx-auto">
         <div>
-          <p class="text-3xl sm:text-4xl font-extrabold gradient-text">{projects.length}</p>
-          <p class="mt-1 text-xs font-semibold uppercase tracking-wider text-slate-500">Live projects</p>
+          <p class="text-3xl sm:text-4xl font-extrabold gradient-text">{yearsActive}+</p>
+          <p class="mt-1 text-xs font-semibold uppercase tracking-wider text-slate-500">Years of experience</p>
         </div>
         <div>
-          <p class="text-3xl sm:text-4xl font-extrabold gradient-text">{clients.length}</p>
-          <p class="mt-1 text-xs font-semibold uppercase tracking-wider text-slate-500">Happy clients</p>
+          <p class="text-3xl sm:text-4xl font-extrabold gradient-text">{site.projectsDelivered}+</p>
+          <p class="mt-1 text-xs font-semibold uppercase tracking-wider text-slate-500">Projects delivered</p>
         </div>
         <div>
           <p class="text-3xl sm:text-4xl font-extrabold gradient-text">100%</p>

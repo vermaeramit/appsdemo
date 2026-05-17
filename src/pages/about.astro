@@ -2,28 +2,48 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import CtaBanner from "../components/CtaBanner.astro";
 import { site } from "../data/site";
+
+const yearsActive = new Date().getFullYear() - site.founded;
 ---
 
 <BaseLayout
   title="About"
-  description={`About ${site.name} — we build SaaS tools for small businesses.`}
+  description={`About ${site.name} — building SaaS tools and custom software since ${site.founded}. ${yearsActive}+ years, ${site.projectsDelivered}+ projects delivered.`}
 >
   <section class="relative overflow-hidden">
     <div class="hero-blob"></div>
-    <div class="relative mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 pt-20 pb-12 sm:pt-24 sm:pb-12">
+    <div class="relative mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 pt-20 pb-10 sm:pt-24">
       <p class="text-sm font-bold uppercase tracking-widest text-indigo-600">About us</p>
       <h1 class="mt-3 text-4xl sm:text-5xl font-extrabold tracking-tight text-slate-900">
         We build software <span class="gradient-text">small businesses</span> actually want to use.
       </h1>
+
+      <!-- Credentials strip -->
+      <div class="mt-10 grid grid-cols-3 gap-4 max-w-2xl">
+        <div>
+          <p class="text-3xl sm:text-4xl font-extrabold gradient-text">{site.founded}</p>
+          <p class="mt-1 text-xs font-semibold uppercase tracking-wider text-slate-500">Founded</p>
+        </div>
+        <div>
+          <p class="text-3xl sm:text-4xl font-extrabold gradient-text">{yearsActive}+</p>
+          <p class="mt-1 text-xs font-semibold uppercase tracking-wider text-slate-500">Years of experience</p>
+        </div>
+        <div>
+          <p class="text-3xl sm:text-4xl font-extrabold gradient-text">{site.projectsDelivered}+</p>
+          <p class="mt-1 text-xs font-semibold uppercase tracking-wider text-slate-500">Projects delivered</p>
+        </div>
+      </div>
     </div>
   </section>
 
   <section class="pb-16">
     <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 space-y-6 text-slate-700 leading-relaxed text-lg">
       <p>
-        {site.name} is an independent software studio building SaaS for small businesses. We started
-        because we kept watching agencies, retailers and small teams stitch together half a dozen
-        spreadsheets, free trials and abandoned tools — and pay for the privilege.
+        {site.name} is an independent software studio founded in {site.founded}. We started because we
+        kept watching agencies, retailers and small teams stitch together half a dozen spreadsheets,
+        free trials and abandoned tools — and pay for the privilege. {yearsActive}+ years and
+        {site.projectsDelivered}+ projects later, we still build the way we did on day one: opinionated
+        stack, fast UI, real customer feedback.
       </p>
       <p>
         Our first product, <a class="text-indigo-600 font-semibold hover:underline" href="/products/travel-crm">TravelERP</a>,

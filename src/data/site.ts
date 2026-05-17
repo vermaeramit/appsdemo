@@ -13,7 +13,8 @@ export const site = {
   whatsapp: "918529983656",                 // E.164 without leading + — used for wa.me links
   whatsappMessage: "Hi AppsDemo, I'm interested in your services.",
   twitter: "@appsdemo",
-  founded: 2025,
+  founded: 2018,
+  projectsDelivered: 100,                   // "100+" — bump as the count grows
   // Used by ContactForm — replace with a real handler URL (Formspree / Web3Forms)
   // or leave blank to fall back to mailto:.
   formEndpoint: "",
