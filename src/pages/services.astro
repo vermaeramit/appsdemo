@@ -32,12 +32,21 @@ const process = [
   { step: "04", title: "Launch",      body: "Deploy to your infra or ours. Docs, training and a 30-day post-launch warranty included." },
   { step: "05", title: "Support",     body: "Optional retainer for new features, monitoring and on-call. Or take ownership — your code, your repo." },
 ];
+
+const breadcrumbJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Home",     item: `${site.url}/` },
+    { "@type": "ListItem", position: 2, name: "Services", item: `${site.url}/services` },
+  ],
+};
 ---
 
 <BaseLayout
   title="Services"
   description={`Custom AI chatbot, web app and mobile app development from ${site.name}. Fixed-price engagements, weekly demos, shipped in weeks not quarters.`}
-  jsonLd={servicesJsonLd}
+  jsonLd={[servicesJsonLd, breadcrumbJsonLd]}
 >
   <!-- ─── Hero ─── -->
   <section class="relative overflow-hidden">

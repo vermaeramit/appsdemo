@@ -15,6 +15,10 @@ export const site = {
   twitter: "@appsdemo",
   founded: 2018,
   projectsDelivered: 100,                   // "100+" — bump as the count grows
+  // SEO: Google Search Console verification token. After verifying your
+  // domain in GSC, paste the 'content' value of the meta tag they provide
+  // (just the token, not the full tag). Empty string = no meta emitted.
+  googleSiteVerification: "",
   // Used by ContactForm — replace with a real handler URL (Formspree / Web3Forms)
   // or leave blank to fall back to mailto:.
   formEndpoint: "",

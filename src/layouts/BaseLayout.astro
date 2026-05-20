@@ -32,9 +32,19 @@ const orgJsonLd = {
   name: site.name,
   url: site.url,
   email: site.contactEmail,
+  telephone: site.phone,
   description: site.description,
   foundingDate: String(site.founded),
+  sameAs: site.socials
+    .filter((s) => s.href.startsWith("http") && !s.href.startsWith("https://github.com/") && !s.href.startsWith("https://linkedin.com/"))
+    .map((s) => s.href),
 };
+
+// Normalize jsonLd prop to an array so we can emit one <script> per schema.
+// This is the correct way to ship multiple schema types per page.
+const jsonLdList: Record<string, unknown>[] = jsonLd
+  ? Array.isArray(jsonLd) ? jsonLd : [jsonLd]
+  : [];
 ---
 
 <!doctype html>
@@ -48,6 +58,9 @@ const orgJsonLd = {
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
     {noindex && <meta name="robots" content="noindex,nofollow" />}
+    {site.googleSiteVerification && (
+      <meta name="google-site-verification" content={site.googleSiteVerification} />
+    )}
 
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -71,9 +84,11 @@ const orgJsonLd = {
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImage} />
 
-    <!-- JSON-LD -->
+    <!-- JSON-LD: one script per schema, per Google's recommended format -->
     <script type="application/ld+json" set:html={JSON.stringify(orgJsonLd)} />
-    {jsonLd && <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
+    {jsonLdList.map((schema) => (
+      <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+    ))}
   </head>
   <body class="min-h-screen flex flex-col">
     <Nav />

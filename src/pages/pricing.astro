@@ -2,6 +2,7 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import CtaBanner from "../components/CtaBanner.astro";
 import { services } from "../data/services";
+import { site } from "../data/site";
 
 type Plan = {
   name: string;
@@ -85,11 +86,33 @@ const faqs = [
     a: "Yes — we work remotely with teams across timezones. Billing in INR with GST for Indian customers; USD/EUR for everyone else.",
   },
 ];
+
+// SEO: BreadcrumbList helps Google show a breadcrumb trail in search results.
+const breadcrumbJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Home",    item: `${site.url}/` },
+    { "@type": "ListItem", position: 2, name: "Pricing", item: `${site.url}/pricing` },
+  ],
+};
+
+// SEO: FAQPage schema makes the FAQ eligible for the rich "FAQ" SERP snippet.
+const faqPageJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.map((f) => ({
+    "@type": "Question",
+    name: f.q,
+    acceptedAnswer: { "@type": "Answer", text: f.a },
+  })),
+};
 ---
 
 <BaseLayout
   title="Pricing"
   description="Transparent pricing for both our SaaS products and custom development services. Monthly subscriptions for products, fixed-price quotes for custom builds."
+  jsonLd={[breadcrumbJsonLd, faqPageJsonLd]}
 >
   <!-- ─── Hero ─── -->
   <section class="relative overflow-hidden">

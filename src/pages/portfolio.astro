@@ -25,12 +25,21 @@ const portfolioJsonLd = {
     description: p.description,
   })),
 };
+
+const breadcrumbJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Home",      item: `${site.url}/` },
+    { "@type": "ListItem", position: 2, name: "Portfolio", item: `${site.url}/portfolio` },
+  ],
+};
 ---
 
 <BaseLayout
   title="Portfolio"
   description={`Projects we've built and deployed: ${projects.length} live applications across travel, education and SaaS — used by ${clients.length}+ teams.`}
-  jsonLd={portfolioJsonLd}
+  jsonLd={[portfolioJsonLd, breadcrumbJsonLd]}
 >
   <!-- ─── Hero ─── -->
   <section class="relative overflow-hidden">
