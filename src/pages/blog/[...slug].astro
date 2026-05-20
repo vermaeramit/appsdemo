@@ -1,0 +1,203 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import CtaBanner from "../../components/CtaBanner.astro";
+import { getCollection } from "astro:content";
+import type { GetStaticPaths } from "astro";
+import { site } from "../../data/site";
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  const posts = await getCollection("blog", ({ data }) => !data.draft);
+  return posts.map((post) => ({ params: { slug: post.slug }, props: { post } }));
+};
+
+const { post } = Astro.props;
+const { Content } = await post.render();
+
+const fmt = (d: Date) =>
+  d.toLocaleDateString("en-IN", { day: "numeric", month: "long", year: "numeric" });
+
+// Rough reading-time estimate from the rendered markdown body.
+const wordCount = post.body.trim().split(/\s+/).length;
+const readingTime = Math.max(1, Math.round(wordCount / 220));
+
+const url = `${site.url}/blog/${post.slug}`;
+
+const articleJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  headline: post.data.title,
+  description: post.data.description,
+  author: { "@type": "Organization", name: post.data.author, url: site.url },
+  publisher: { "@type": "Organization", name: site.name, url: site.url },
+  datePublished: post.data.pubDate.toISOString(),
+  ...(post.data.updatedDate ? { dateModified: post.data.updatedDate.toISOString() } : {}),
+  mainEntityOfPage: { "@type": "WebPage", "@id": url },
+  keywords: post.data.tags.join(", "),
+};
+
+const breadcrumbJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Home", item: `${site.url}/` },
+    { "@type": "ListItem", position: 2, name: "Blog", item: `${site.url}/blog` },
+    { "@type": "ListItem", position: 3, name: post.data.title, item: url },
+  ],
+};
+---
+
+<BaseLayout
+  title={post.data.title}
+  description={post.data.description}
+  image={post.data.heroImage}
+  jsonLd={[articleJsonLd, breadcrumbJsonLd]}
+>
+  <article class="relative">
+    <!-- ─── Header ─── -->
+    <header class="relative overflow-hidden">
+      <div class="hero-blob"></div>
+      <div class="relative mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 pt-20 pb-8 sm:pt-24">
+        <p class="text-sm">
+          <a href="/blog" class="font-bold uppercase tracking-widest text-indigo-600 hover:text-indigo-700">← Blog</a>
+        </p>
+        <h1 class="mt-4 text-3xl sm:text-5xl font-extrabold tracking-tight text-slate-900 leading-tight">
+          {post.data.title}
+        </h1>
+        <p class="mt-5 text-lg text-slate-600 leading-relaxed">{post.data.description}</p>
+        <div class="mt-6 flex flex-wrap items-center gap-3 text-sm text-slate-500">
+          <span class="font-medium">{post.data.author}</span>
+          <span class="text-slate-300">·</span>
+          <time datetime={post.data.pubDate.toISOString()}>{fmt(post.data.pubDate)}</time>
+          <span class="text-slate-300">·</span>
+          <span>{readingTime} min read</span>
+        </div>
+        {post.data.tags.length > 0 && (
+          <ul class="mt-4 flex flex-wrap gap-1.5">
+            {post.data.tags.map((t) => (
+              <li class="text-[11px] font-medium text-slate-600 bg-slate-100 px-2 py-0.5 rounded">{t}</li>
+            ))}
+          </ul>
+        )}
+      </div>
+    </header>
+
+    <!-- ─── Optional hero image / gradient ─── -->
+    {post.data.heroImage ? (
+      <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+        <img src={post.data.heroImage} alt="" class="rounded-2xl w-full aspect-[16/9] object-cover border border-slate-200" />
+      </div>
+    ) : (
+      <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+        <div class={`rounded-2xl aspect-[16/9] bg-gradient-to-br ${post.data.heroAccent ?? "from-indigo-500 to-cyan-500"} border border-slate-200`}></div>
+      </div>
+    )}
+
+    <!-- ─── Body ─── -->
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
+      <div class="prose-content text-slate-700 leading-relaxed">
+        <Content />
+      </div>
+    </div>
+  </article>
+
+  <CtaBanner />
+</BaseLayout>
+
+<style is:global>
+  /* Lightweight in-page prose styles — keeps the marketing-site
+     aesthetic without pulling in a full prose plugin. */
+  .prose-content > h2 {
+    font-size: 1.75rem;
+    font-weight: 800;
+    color: #0f172a;
+    margin-top: 2.5rem;
+    margin-bottom: 0.75rem;
+    letter-spacing: -0.015em;
+    line-height: 1.2;
+  }
+  .prose-content > h3 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #0f172a;
+    margin-top: 2rem;
+    margin-bottom: 0.5rem;
+  }
+  .prose-content > p {
+    margin: 1rem 0;
+    font-size: 1.0625rem;
+    line-height: 1.75;
+  }
+  .prose-content > p + p {
+    margin-top: 1.25rem;
+  }
+  .prose-content > ul,
+  .prose-content > ol {
+    margin: 1rem 0 1.25rem;
+    padding-left: 1.25rem;
+    font-size: 1.0625rem;
+    line-height: 1.75;
+  }
+  .prose-content > ul { list-style: disc; }
+  .prose-content > ol { list-style: decimal; }
+  .prose-content > ul li,
+  .prose-content > ol li { margin: 0.25rem 0; }
+  .prose-content > blockquote {
+    border-left: 3px solid #6366f1;
+    padding: 0.25rem 0 0.25rem 1rem;
+    margin: 1.5rem 0;
+    color: #475569;
+    font-style: italic;
+  }
+  .prose-content a {
+    color: #4f46e5;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+  }
+  .prose-content a:hover { color: #4338ca; }
+  .prose-content code {
+    background: #f1f5f9;
+    color: #4338ca;
+    padding: 0.125rem 0.375rem;
+    border-radius: 4px;
+    font-size: 0.9em;
+  }
+  .prose-content pre {
+    background: #0f172a;
+    color: #e2e8f0;
+    padding: 1rem 1.25rem;
+    border-radius: 0.75rem;
+    overflow-x: auto;
+    margin: 1.5rem 0;
+    font-size: 0.875rem;
+    line-height: 1.6;
+  }
+  .prose-content pre code {
+    background: transparent;
+    color: inherit;
+    padding: 0;
+  }
+  .prose-content strong { color: #0f172a; font-weight: 700; }
+  .prose-content hr {
+    border: 0;
+    border-top: 1px solid #e2e8f0;
+    margin: 2.5rem 0;
+  }
+  .prose-content table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5rem 0;
+    font-size: 0.95rem;
+  }
+  .prose-content table th,
+  .prose-content table td {
+    border: 1px solid #e2e8f0;
+    padding: 0.5rem 0.75rem;
+    text-align: left;
+  }
+  .prose-content table th {
+    background: #f8fafc;
+    font-weight: 700;
+    color: #0f172a;
+  }
+</style>
