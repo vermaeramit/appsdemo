@@ -10,8 +10,8 @@ interface Env {
   SMTP_TO?: string;         // optional override; defaults to info@appsdemo.in
 }
 
-const ALLOWED_FIELDS = ["name", "email", "company", "topic", "message"] as const;
-const MAX_LEN = { name: 80, email: 120, company: 120, topic: 60, message: 4000 } as const;
+const ALLOWED_FIELDS = ["name", "email", "phone", "company", "topic", "message"] as const;
+const MAX_LEN = { name: 80, email: 120, phone: 20, company: 120, topic: 60, message: 4000 } as const;
 
 function json(body: unknown, status = 200): Response {
   return new Response(JSON.stringify(body), {
@@ -51,11 +51,15 @@ async function handleContact(request: Request, env: Env): Promise<Response> {
     if (typeof v === "string") data[f] = v.trim();
   }
 
-  if (!data.name || !data.email || !data.message) {
-    return json({ success: false, message: "Name, email and message are required." }, 400);
+  if (!data.name || !data.email || !data.phone || !data.message) {
+    return json({ success: false, message: "Name, email, mobile number and message are required." }, 400);
   }
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)) {
     return json({ success: false, message: "Please enter a valid email address." }, 400);
+  }
+  // Loose phone check — must contain at least 7 digits. Allows +, spaces, dashes, parens.
+  if ((data.phone.match(/\d/g) || []).length < 7) {
+    return json({ success: false, message: "Please enter a valid mobile number." }, 400);
   }
   for (const f of ALLOWED_FIELDS) {
     const max = MAX_LEN[f as keyof typeof MAX_LEN];
@@ -74,6 +78,7 @@ async function handleContact(request: Request, env: Env): Promise<Response> {
     ``,
     `Name:    ${data.name}`,
     `Email:   ${data.email}`,
+    `Phone:   ${data.phone}`,
     `Company: ${data.company || "—"}`,
     `Topic:   ${data.topic || "—"}`,
     ``,
@@ -89,6 +94,7 @@ async function handleContact(request: Request, env: Env): Promise<Response> {
   <table style="border-collapse:collapse;font-size:14px">
     <tr><td style="padding:4px 12px 4px 0;color:#64748b">Name</td><td><strong>${escapeHtml(data.name)}</strong></td></tr>
     <tr><td style="padding:4px 12px 4px 0;color:#64748b">Email</td><td><a href="mailto:${escapeHtml(data.email)}">${escapeHtml(data.email)}</a></td></tr>
+    <tr><td style="padding:4px 12px 4px 0;color:#64748b">Phone</td><td><a href="tel:${escapeHtml(data.phone)}">${escapeHtml(data.phone)}</a> · <a href="https://wa.me/${escapeHtml(data.phone.replace(/\D/g, ""))}">WhatsApp</a></td></tr>
     <tr><td style="padding:4px 12px 4px 0;color:#64748b">Company</td><td>${escapeHtml(data.company || "—")}</td></tr>
     <tr><td style="padding:4px 12px 4px 0;color:#64748b">Topic</td><td>${escapeHtml(data.topic || "—")}</td></tr>
   </table>

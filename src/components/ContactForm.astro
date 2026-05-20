@@ -28,28 +28,36 @@
 
   <div class="grid sm:grid-cols-2 gap-4">
     <div>
+      <label for="phone" class="block text-sm font-semibold text-slate-800">Mobile number</label>
+      <input id="phone" name="phone" type="tel" required maxlength="20" inputmode="tel"
+             autocomplete="tel"
+             class="mt-1 block w-full rounded-lg border border-slate-300 bg-white px-3 py-2.5 text-sm shadow-sm placeholder:text-slate-400 focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100 transition"
+             placeholder="+91 98765 43210" />
+    </div>
+    <div>
       <label for="company" class="block text-sm font-semibold text-slate-800">Company <span class="text-slate-400 font-normal">(optional)</span></label>
       <input id="company" name="company" type="text" maxlength="120"
              class="mt-1 block w-full rounded-lg border border-slate-300 bg-white px-3 py-2.5 text-sm shadow-sm placeholder:text-slate-400 focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100 transition"
              placeholder="Acme Travels" />
     </div>
-    <div>
-      <label for="topic" class="block text-sm font-semibold text-slate-800">I'm interested in</label>
-      <select id="topic" name="topic"
-              class="mt-1 block w-full rounded-lg border border-slate-300 bg-white px-3 py-2.5 text-sm shadow-sm focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100 transition">
-        <optgroup label="Products">
-          <option value="travel-crm">TravelERP — travel agency CRM</option>
-          <option value="inventory-pro">Inventory Pro (coming soon)</option>
-          <option value="hr-hub">HR Hub (coming soon)</option>
-        </optgroup>
-        <optgroup label="Services">
-          <option value="ai-chatbots">AI Chatbot development</option>
-          <option value="web-apps">Web app development</option>
-          <option value="mobile-apps">Mobile app development</option>
-        </optgroup>
-        <option value="other">Something else</option>
-      </select>
-    </div>
+  </div>
+
+  <div>
+    <label for="topic" class="block text-sm font-semibold text-slate-800">I'm interested in</label>
+    <select id="topic" name="topic"
+            class="mt-1 block w-full rounded-lg border border-slate-300 bg-white px-3 py-2.5 text-sm shadow-sm focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100 transition">
+      <optgroup label="Products">
+        <option value="travel-crm">TravelERP — travel agency CRM</option>
+        <option value="inventory-pro">Inventory Pro (coming soon)</option>
+        <option value="hr-hub">HR Hub (coming soon)</option>
+      </optgroup>
+      <optgroup label="Services">
+        <option value="ai-chatbots">AI Chatbot development</option>
+        <option value="web-apps">Web app development</option>
+        <option value="mobile-apps">Mobile app development</option>
+      </optgroup>
+      <option value="other">Something else</option>
+    </select>
   </div>
 
   <div>
