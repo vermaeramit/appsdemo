@@ -54,6 +54,13 @@ const jsonLdList: Record<string, unknown>[] = jsonLd
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
 
+    {site.ga4MeasurementId && (
+      <Fragment>
+        <script async src={`https://www.googletagmanager.com/gtag/js?id=${site.ga4MeasurementId}`}></script>
+        <script is:inline set:html={`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${site.ga4MeasurementId}');`} />
+      </Fragment>
+    )}
+
     <title>{pageTitle}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />

@@ -19,6 +19,9 @@ export const site = {
   // domain in GSC, paste the 'content' value of the meta tag they provide
   // (just the token, not the full tag). Empty string = no meta emitted.
   googleSiteVerification: "",
+  // Analytics: Google Analytics 4 Measurement ID (format: G-XXXXXXXXXX).
+  // Empty string = no gtag scripts emitted.
+  ga4MeasurementId: "G-P6294NVTNB",
   // Used by ContactForm — replace with a real handler URL (Formspree / Web3Forms)
   // or leave blank to fall back to mailto:.
   formEndpoint: "",
