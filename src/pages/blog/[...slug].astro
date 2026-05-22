@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import CtaBanner from "../../components/CtaBanner.astro";
+import BlogHero from "../../components/BlogHero.astro";
 import { getCollection } from "astro:content";
 import type { GetStaticPaths } from "astro";
 import { site } from "../../data/site";
@@ -81,16 +82,17 @@ const breadcrumbJsonLd = {
       </div>
     </header>
 
-    <!-- ─── Optional hero image / gradient ─── -->
-    {post.data.heroImage ? (
-      <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-        <img src={post.data.heroImage} alt="" class="rounded-2xl w-full aspect-[16/9] object-cover border border-slate-200" />
-      </div>
-    ) : (
-      <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-        <div class={`rounded-2xl aspect-[16/9] bg-gradient-to-br ${post.data.heroAccent ?? "from-indigo-500 to-cyan-500"} border border-slate-200`}></div>
-      </div>
-    )}
+    <!-- ─── Hero image (real or styled fallback) ─── -->
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <BlogHero
+        title={post.data.title}
+        tags={post.data.tags}
+        accent={post.data.heroAccent}
+        heroImage={post.data.heroImage}
+        href={`/blog/${post.slug}`}
+        variant="page"
+      />
+    </div>
 
     <!-- ─── Body ─── -->
     <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
