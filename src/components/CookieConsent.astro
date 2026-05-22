@@ -1,0 +1,38 @@
+---
+// Lightweight cookie consent banner. Stays hidden until /scripts/cookie-consent.js
+// reveals it on first visit. Stores accept/decline in localStorage so it never
+// shows again for returning visitors.
+---
+
+<div
+  id="cookieBanner"
+  hidden
+  role="region"
+  aria-label="Cookie consent"
+  class="fixed bottom-4 left-4 right-4 sm:left-auto sm:right-6 sm:bottom-6 z-40 max-w-md rounded-2xl border border-slate-200 bg-white shadow-xl shadow-slate-900/10 p-4 sm:p-5"
+>
+  <p class="text-sm text-slate-700 leading-relaxed">
+    We use cookies for analytics (Google Analytics) and advertising (Google AdSense)
+    to understand traffic and keep the site free. See our
+    <a href="/privacy" class="font-semibold text-indigo-600 hover:text-indigo-700 underline-offset-2 hover:underline">Privacy Policy</a>
+    for details.
+  </p>
+  <div class="mt-3 flex flex-wrap items-center gap-2">
+    <button
+      type="button"
+      id="cookieAccept"
+      class="inline-flex items-center justify-center rounded-lg px-3.5 py-2 text-sm font-semibold text-white bg-gradient-to-r from-indigo-600 to-cyan-600 shadow-sm hover:shadow-md hover:opacity-95 transition"
+    >
+      Accept
+    </button>
+    <button
+      type="button"
+      id="cookieDecline"
+      class="inline-flex items-center justify-center rounded-lg px-3.5 py-2 text-sm font-semibold text-slate-700 border border-slate-200 hover:border-indigo-300 hover:text-indigo-600 transition"
+    >
+      Decline
+    </button>
+  </div>
+</div>
+
+<script src="/scripts/cookie-consent.js" defer></script>

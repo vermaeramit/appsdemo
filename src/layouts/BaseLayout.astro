@@ -4,6 +4,7 @@ import { site } from "../data/site";
 import Nav from "../components/Nav.astro";
 import Footer from "../components/Footer.astro";
 import WhatsAppFloating from "../components/WhatsAppFloating.astro";
+import CookieConsent from "../components/CookieConsent.astro";
 
 interface Props {
   title?: string;
@@ -112,5 +113,6 @@ const jsonLdList: Record<string, unknown>[] = jsonLd
     </main>
     <Footer />
     <WhatsAppFloating />
+    <CookieConsent />
   </body>
 </html>

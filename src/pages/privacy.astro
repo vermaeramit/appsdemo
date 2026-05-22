@@ -1,0 +1,212 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { site } from "../data/site";
+
+const lastUpdated = "21 May 2026";
+---
+
+<BaseLayout
+  title="Privacy Policy"
+  description={`How ${site.name} collects, uses and protects your data. Cookies, analytics, advertising, contact-form submissions and your rights.`}
+>
+  <section class="relative overflow-hidden">
+    <div class="hero-blob"></div>
+    <div class="relative mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 pt-20 pb-8 sm:pt-24">
+      <p class="text-sm font-bold uppercase tracking-widest text-indigo-600">Legal</p>
+      <h1 class="mt-3 text-4xl sm:text-5xl font-extrabold tracking-tight text-slate-900">Privacy Policy</h1>
+      <p class="mt-3 text-sm text-slate-500">Last updated: {lastUpdated}</p>
+    </div>
+  </section>
+
+  <section class="pb-20">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 space-y-6 text-slate-700 leading-relaxed">
+      <p>
+        This Privacy Policy explains how <strong>{site.name}</strong> ("we", "us", "our") collects,
+        uses, shares and protects your personal information when you visit <a href={site.url} class="text-indigo-600 hover:underline">{site.domain}</a>
+        or interact with our marketing site. It does <strong>not</strong> cover our SaaS products
+        like TravelERP, which have their own product-level privacy terms shown at signup.
+      </p>
+
+      <h2 class="text-2xl font-extrabold text-slate-900 mt-10 mb-2 tracking-tight">1. Who we are</h2>
+      <p>
+        {site.name} is an independent software studio based in India. You can reach us at
+        <a href={`mailto:${site.contactEmail}`} class="text-indigo-600 hover:underline">{site.contactEmail}</a>
+        or on the number listed on our <a href="/contact" class="text-indigo-600 hover:underline">contact page</a>.
+      </p>
+
+      <h2 class="text-2xl font-extrabold text-slate-900 mt-10 mb-2 tracking-tight">2. What we collect</h2>
+      <p>We collect two kinds of information from this website:</p>
+      <ul class="list-disc pl-6 space-y-1">
+        <li>
+          <strong>Information you give us actively.</strong> When you submit the contact form, we
+          collect your name, email address, mobile number, company name (if provided), the topic
+          you selected, and the message text. If you contact us via email, phone or WhatsApp we
+          will also have whatever details you share in that conversation.
+        </li>
+        <li>
+          <strong>Information collected automatically.</strong> Like most websites, when you visit
+          we automatically receive standard log data — your IP address (typically anonymised by
+          our analytics provider), browser type, device type, pages viewed, time on page, referring
+          URL, and approximate location derived from IP. We do not collect precise GPS location.
+        </li>
+      </ul>
+
+      <h2 class="text-2xl font-extrabold text-slate-900 mt-10 mb-2 tracking-tight">3. How we use your information</h2>
+      <p>We use the information we collect for the following purposes:</p>
+      <ul class="list-disc pl-6 space-y-1">
+        <li>To respond to enquiries and provide the services or information you requested.</li>
+        <li>To improve our website, content and services based on aggregate usage patterns.</li>
+        <li>To send relevant follow-up communications about your enquiry (we do not add you to any marketing list without consent).</li>
+        <li>To detect and prevent abuse, spam and security incidents.</li>
+        <li>To comply with our legal and tax obligations under Indian law.</li>
+      </ul>
+
+      <h2 class="text-2xl font-extrabold text-slate-900 mt-10 mb-2 tracking-tight">4. Cookies and similar technologies</h2>
+      <p>
+        We and our third-party service providers use cookies and similar tracking technologies
+        (pixels, local storage) to make the site work, measure how it is used and serve relevant
+        advertising. The main categories are:
+      </p>
+      <ul class="list-disc pl-6 space-y-1">
+        <li>
+          <strong>Strictly necessary cookies.</strong> Required for the site to function — for example
+          remembering that you have accepted our cookie banner.
+        </li>
+        <li>
+          <strong>Analytics cookies.</strong> Set by Google Analytics 4 to help us understand how visitors
+          use the site (which pages get traffic, where they come from, how long they stay). The data
+          is aggregated and does not identify you personally.
+        </li>
+        <li>
+          <strong>Advertising cookies.</strong> Set by Google AdSense and its advertising partners to
+          show you relevant ads on this and other sites and to measure ad performance. These cookies
+          can include personalised advertising identifiers.
+        </li>
+      </ul>
+      <p>
+        You can control or disable cookies in your browser settings at any time. You can also opt
+        out of personalised Google advertising at
+        <a href="https://adssettings.google.com" target="_blank" rel="noopener noreferrer" class="text-indigo-600 hover:underline">adssettings.google.com</a>.
+        Disabling cookies will not break the site, but some features (analytics, ad relevance)
+        will not work for you.
+      </p>
+
+      <h2 class="text-2xl font-extrabold text-slate-900 mt-10 mb-2 tracking-tight">5. Third-party services we use</h2>
+      <p>This site relies on a small number of third-party services. Each has its own privacy policy that also applies to you when you use this site:</p>
+      <ul class="list-disc pl-6 space-y-1">
+        <li>
+          <strong>Cloudflare</strong> — hosting, DNS, CDN and edge compute. They see your IP address
+          and request metadata for security and performance reasons.
+          <a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noopener noreferrer" class="text-indigo-600 hover:underline">Cloudflare Privacy Policy</a>.
+        </li>
+        <li>
+          <strong>Google Analytics 4</strong> — anonymised traffic analytics.
+          <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer" class="text-indigo-600 hover:underline">Google Privacy Policy</a>.
+        </li>
+        <li>
+          <strong>Google AdSense</strong> — advertising delivery and measurement.
+          <a href="https://policies.google.com/technologies/ads" target="_blank" rel="noopener noreferrer" class="text-indigo-600 hover:underline">How Google uses your data</a>.
+          Third-party vendors and ad networks served by Google may use cookies to serve ads based on
+          your prior visits to this and other websites. You can opt out of personalised advertising
+          via <a href="https://adssettings.google.com" target="_blank" rel="noopener noreferrer" class="text-indigo-600 hover:underline">Google Ads Settings</a>
+          or <a href="https://www.aboutads.info/choices/" target="_blank" rel="noopener noreferrer" class="text-indigo-600 hover:underline">aboutads.info</a>.
+        </li>
+        <li>
+          <strong>Zoho Mail</strong> — we send transactional email (contact-form responses) via Zoho
+          using our own SMTP credentials. Your message body and contact details pass through Zoho's
+          mail servers.
+          <a href="https://www.zoho.com/privacy.html" target="_blank" rel="noopener noreferrer" class="text-indigo-600 hover:underline">Zoho Privacy Policy</a>.
+        </li>
+        <li>
+          <strong>Google Fonts</strong> — the Inter typeface is loaded from Google Fonts. Google may
+          log IP addresses of font requests.
+        </li>
+      </ul>
+
+      <h2 class="text-2xl font-extrabold text-slate-900 mt-10 mb-2 tracking-tight">6. How we share your information</h2>
+      <p>
+        We do not sell your personal information. We share it only in these limited cases:
+      </p>
+      <ul class="list-disc pl-6 space-y-1">
+        <li>With the third-party service providers listed in section 5, strictly to operate this site.</li>
+        <li>With our internal team members who need access to respond to your enquiry.</li>
+        <li>When required by law, court order, or to enforce our legal rights.</li>
+        <li>If we ever sell or transfer our business, with the acquiring entity (subject to this Privacy Policy).</li>
+      </ul>
+
+      <h2 class="text-2xl font-extrabold text-slate-900 mt-10 mb-2 tracking-tight">7. How long we keep your data</h2>
+      <p>
+        We retain contact-form submissions and email correspondence for as long as we have an
+        active commercial relationship with you, plus the period required by Indian tax and
+        accounting law (typically 7 years). Analytics data is retained per Google Analytics'
+        default settings (up to 14 months for event-level data). You can request earlier deletion —
+        see section 9.
+      </p>
+
+      <h2 class="text-2xl font-extrabold text-slate-900 mt-10 mb-2 tracking-tight">8. Security</h2>
+      <p>
+        We use industry-standard security measures including HTTPS encryption for all site traffic,
+        Cloudflare's edge protection against common attacks, encrypted secrets for our SMTP and
+        third-party credentials, and access controls on our internal tools. No system is perfectly
+        secure; please use a unique password if you create an account on any of our products, and
+        let us know immediately if you suspect a security issue.
+      </p>
+
+      <h2 class="text-2xl font-extrabold text-slate-900 mt-10 mb-2 tracking-tight">9. Your rights</h2>
+      <p>
+        Subject to applicable law, you have the right to:
+      </p>
+      <ul class="list-disc pl-6 space-y-1">
+        <li>Ask us what personal data we hold about you.</li>
+        <li>Ask us to correct inaccurate data.</li>
+        <li>Ask us to delete data we no longer need.</li>
+        <li>Ask us to stop sending you communications.</li>
+        <li>Withdraw consent you previously gave (where consent is the legal basis).</li>
+      </ul>
+      <p>
+        To exercise any of these rights, write to <a href={`mailto:${site.contactEmail}`} class="text-indigo-600 hover:underline">{site.contactEmail}</a>.
+        We will respond within 30 days. If you are in a jurisdiction with stronger data-protection
+        rights (such as the EU, UK or California), those rights also apply to your data and we will
+        comply with the higher standard.
+      </p>
+
+      <h2 class="text-2xl font-extrabold text-slate-900 mt-10 mb-2 tracking-tight">10. Children's privacy</h2>
+      <p>
+        This site is not directed at children under 13 (or under 16 in the EU). We do not knowingly
+        collect personal information from children. If you believe a child has provided us with
+        personal information, please contact us and we will delete it.
+      </p>
+
+      <h2 class="text-2xl font-extrabold text-slate-900 mt-10 mb-2 tracking-tight">11. International data transfers</h2>
+      <p>
+        Our service providers may store and process your data outside India (notably the United
+        States, where Google and Cloudflare are headquartered). Where this happens, we rely on
+        the standard contractual protections those providers offer, and the data remains subject
+        to this Privacy Policy.
+      </p>
+
+      <h2 class="text-2xl font-extrabold text-slate-900 mt-10 mb-2 tracking-tight">12. Changes to this policy</h2>
+      <p>
+        We may update this Privacy Policy from time to time to reflect changes in our practices or
+        in applicable law. The "Last updated" date at the top of this page will always reflect the
+        most recent revision. Material changes will be highlighted on this page for at least 30 days.
+      </p>
+
+      <h2 class="text-2xl font-extrabold text-slate-900 mt-10 mb-2 tracking-tight">13. Contact us</h2>
+      <p>
+        Questions about this Privacy Policy or our data practices?
+      </p>
+      <ul class="list-disc pl-6 space-y-1">
+        <li>Email: <a href={`mailto:${site.contactEmail}`} class="text-indigo-600 hover:underline">{site.contactEmail}</a></li>
+        <li>Phone: <a href={`tel:${site.phone}`} class="text-indigo-600 hover:underline">{site.phoneDisplay}</a></li>
+        <li>Web: <a href="/contact" class="text-indigo-600 hover:underline">{site.url}/contact</a></li>
+      </ul>
+
+      <p class="mt-10 pt-6 border-t border-slate-200 text-sm text-slate-500">
+        This policy is provided for general informational purposes and to set out our actual data
+        practices. It is not legal advice. If you need a privacy policy tailored to a specific
+        regulatory regime (DPDP Act, GDPR, CCPA, HIPAA, etc.), consult a qualified lawyer.
+      </p>
+    </div>
+  </section>
+</BaseLayout>

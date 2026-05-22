@@ -1,0 +1,173 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { site } from "../data/site";
+
+const lastUpdated = "21 May 2026";
+---
+
+<BaseLayout
+  title="Terms of Service"
+  description={`The terms under which you may use the ${site.name} website and its content.`}
+>
+  <section class="relative overflow-hidden">
+    <div class="hero-blob"></div>
+    <div class="relative mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 pt-20 pb-8 sm:pt-24">
+      <p class="text-sm font-bold uppercase tracking-widest text-indigo-600">Legal</p>
+      <h1 class="mt-3 text-4xl sm:text-5xl font-extrabold tracking-tight text-slate-900">Terms of Service</h1>
+      <p class="mt-3 text-sm text-slate-500">Last updated: {lastUpdated}</p>
+    </div>
+  </section>
+
+  <section class="pb-20">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 space-y-6 text-slate-700 leading-relaxed">
+      <p>
+        Welcome. These Terms of Service ("Terms") govern your use of the <strong>{site.name}</strong>
+        marketing website at <a href={site.url} class="text-indigo-600 hover:underline">{site.domain}</a>
+        ("the Site"). By accessing or using the Site you agree to these Terms. If you do not agree,
+        please do not use the Site.
+      </p>
+      <p>
+        These Terms cover only the marketing website. Our SaaS products (e.g. TravelERP) have
+        separate product terms presented at signup, which take precedence for product use.
+      </p>
+
+      <h2 class="text-2xl font-extrabold text-slate-900 mt-10 mb-2 tracking-tight">1. About {site.name}</h2>
+      <p>
+        {site.name} is a software studio that develops and operates SaaS products and provides
+        custom software development services. The Site is informational — it describes what we
+        offer and lets you contact us. Engaging us for a service or subscribing to a product
+        creates a separate commercial agreement.
+      </p>
+
+      <h2 class="text-2xl font-extrabold text-slate-900 mt-10 mb-2 tracking-tight">2. Using the Site</h2>
+      <p>You agree to use the Site lawfully and respectfully. You will not:</p>
+      <ul class="list-disc pl-6 space-y-1">
+        <li>Attempt to gain unauthorised access to the Site, its underlying servers or accounts of others.</li>
+        <li>Interfere with the operation of the Site (DoS attacks, scraping at abusive rates, etc.).</li>
+        <li>Submit content through our contact form that is unlawful, defamatory, infringing or harmful.</li>
+        <li>Use the Site to send spam, phishing messages or unsolicited commercial communications.</li>
+        <li>Reverse-engineer, scrape or systematically extract content from the Site for commercial use without our written consent.</li>
+      </ul>
+      <p>
+        We may suspend or block access to the Site at our discretion if we believe these Terms have
+        been breached, without notice.
+      </p>
+
+      <h2 class="text-2xl font-extrabold text-slate-900 mt-10 mb-2 tracking-tight">3. Intellectual property</h2>
+      <p>
+        Unless otherwise indicated, all content on the Site — text, layouts, code, graphics, logos,
+        product names, photographs and the design itself — is owned by or licensed to {site.name}
+        and protected by Indian and international intellectual property laws.
+      </p>
+      <p>
+        You may view, share and link to our content for non-commercial purposes with appropriate
+        attribution. You may not reproduce or republish substantial portions of our content
+        (including blog posts) commercially, or train machine-learning models on our content,
+        without prior written consent. Quote responsibly with a link back.
+      </p>
+      <p>
+        Our marks <strong>{site.name}</strong>, <strong>TravelERP</strong>, and the associated logos
+        are our trademarks. Third-party names mentioned on the Site belong to their respective
+        owners.
+      </p>
+
+      <h2 class="text-2xl font-extrabold text-slate-900 mt-10 mb-2 tracking-tight">4. Content disclaimer</h2>
+      <p>
+        Our blog posts and other educational content reflect our genuine experience and the best
+        information available at time of writing. We provide them for general guidance only. They
+        are not professional advice (legal, financial, medical, regulatory, or otherwise) and
+        should not be relied on as a substitute for advice from a qualified expert for your
+        specific situation.
+      </p>
+      <p>
+        Industry numbers, benchmarks and cost ranges cited in our posts are based on publicly
+        available sources or our own deployment experience. They are honest estimates but actual
+        results will vary by use case. We are not liable for decisions made solely on the basis
+        of our published content.
+      </p>
+
+      <h2 class="text-2xl font-extrabold text-slate-900 mt-10 mb-2 tracking-tight">5. Third-party links</h2>
+      <p>
+        The Site contains links to third-party websites and services. We do not control those sites
+        and are not responsible for their content, accuracy, security or privacy practices. A link
+        does not imply endorsement.
+      </p>
+
+      <h2 class="text-2xl font-extrabold text-slate-900 mt-10 mb-2 tracking-tight">6. Advertising</h2>
+      <p>
+        The Site may display advertising delivered by Google AdSense and its partner networks. We
+        do not control the specific ads shown to you; they are selected based on your browsing
+        history, this Site's content and Google's ad-relevance algorithms. We are not responsible
+        for the products, services or content of advertisers. Click and purchase at your own
+        discretion. See our <a href="/privacy" class="text-indigo-600 hover:underline">Privacy Policy</a>
+        for information about ad cookies and how to opt out of personalised advertising.
+      </p>
+
+      <h2 class="text-2xl font-extrabold text-slate-900 mt-10 mb-2 tracking-tight">7. Availability</h2>
+      <p>
+        We try to keep the Site available 24×7 but do not guarantee uninterrupted access. The Site
+        may be unavailable for maintenance, third-party outages (Cloudflare, DNS) or factors beyond
+        our reasonable control. We are not liable for any loss arising from temporary unavailability
+        of the Site.
+      </p>
+
+      <h2 class="text-2xl font-extrabold text-slate-900 mt-10 mb-2 tracking-tight">8. Disclaimer of warranties</h2>
+      <p>
+        The Site is provided on an "as is" and "as available" basis. To the maximum extent permitted
+        by applicable law, we disclaim all warranties — express, implied or statutory — including
+        warranties of merchantability, fitness for a particular purpose, accuracy, reliability and
+        non-infringement. We do not warrant that the Site will be error-free, secure or free from
+        malware.
+      </p>
+
+      <h2 class="text-2xl font-extrabold text-slate-900 mt-10 mb-2 tracking-tight">9. Limitation of liability</h2>
+      <p>
+        To the maximum extent permitted by applicable law, {site.name}, its directors, employees
+        and contractors will not be liable for any indirect, incidental, consequential, special or
+        exemplary damages — including loss of profits, revenue, data, goodwill or business
+        opportunity — arising from your use of the Site, even if we have been advised of the
+        possibility of such damages.
+      </p>
+      <p>
+        Where liability cannot be excluded by law, our total aggregate liability to you arising
+        from your use of the Site is limited to ₹1,000.
+      </p>
+
+      <h2 class="text-2xl font-extrabold text-slate-900 mt-10 mb-2 tracking-tight">10. Indemnity</h2>
+      <p>
+        You agree to indemnify and hold harmless {site.name} from any claims, damages, liabilities
+        and reasonable costs (including legal fees) arising from your breach of these Terms or
+        your misuse of the Site.
+      </p>
+
+      <h2 class="text-2xl font-extrabold text-slate-900 mt-10 mb-2 tracking-tight">11. Governing law and disputes</h2>
+      <p>
+        These Terms are governed by the laws of India. Any dispute arising out of or in connection
+        with these Terms or your use of the Site will be subject to the exclusive jurisdiction of
+        the courts at Gurugram, Haryana, India, except where mandatory consumer-protection law
+        requires otherwise.
+      </p>
+
+      <h2 class="text-2xl font-extrabold text-slate-900 mt-10 mb-2 tracking-tight">12. Changes to these Terms</h2>
+      <p>
+        We may update these Terms from time to time. The "Last updated" date at the top of this
+        page reflects the latest revision. Continued use of the Site after changes are posted
+        constitutes acceptance of the revised Terms.
+      </p>
+
+      <h2 class="text-2xl font-extrabold text-slate-900 mt-10 mb-2 tracking-tight">13. Contact</h2>
+      <p>Questions about these Terms? Reach us at:</p>
+      <ul class="list-disc pl-6 space-y-1">
+        <li>Email: <a href={`mailto:${site.contactEmail}`} class="text-indigo-600 hover:underline">{site.contactEmail}</a></li>
+        <li>Phone: <a href={`tel:${site.phone}`} class="text-indigo-600 hover:underline">{site.phoneDisplay}</a></li>
+        <li>Web: <a href="/contact" class="text-indigo-600 hover:underline">{site.url}/contact</a></li>
+      </ul>
+
+      <p class="mt-10 pt-6 border-t border-slate-200 text-sm text-slate-500">
+        These Terms are provided as general informational content. They are not legal advice and
+        do not establish a lawyer-client relationship. For advice tailored to a specific situation
+        or jurisdiction, consult a qualified lawyer.
+      </p>
+    </div>
+  </section>
+</BaseLayout>

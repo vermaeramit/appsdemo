@@ -72,6 +72,13 @@ const year = new Date().getFullYear();
 
     <div class="mt-10 pt-6 border-t border-slate-200 flex flex-col md:flex-row items-center justify-between gap-3 text-sm text-slate-500">
       <p>© {year} {site.name}. All rights reserved.</p>
+      <nav aria-label="Legal" class="flex items-center gap-4">
+        <a href="/privacy" class="hover:text-indigo-600 transition">Privacy</a>
+        <span class="text-slate-300">·</span>
+        <a href="/terms" class="hover:text-indigo-600 transition">Terms</a>
+        <span class="text-slate-300">·</span>
+        <a href="/contact" class="hover:text-indigo-600 transition">Contact</a>
+      </nav>
       <p>Made with care · <a href="/" class="underline-offset-2 hover:underline">{site.name}</a></p>
     </div>
   </div>
