@@ -35,6 +35,27 @@ export const products: Product[] = [
     ],
   },
   {
+    slug: "ai-email-autoreply",
+    name: "AI Email AutoReply",
+    tagline: "Never let an important email sit unanswered.",
+    description:
+      "Connects to your Gmail or Outlook inbox and drafts replies in your own tone — using AI tuned on your past emails, docs and SOPs. Review-then-send or full auto-send. Built for sales teams, support inboxes and busy founders who get too much mail.",
+    status: "beta",
+    href: "/products/ai-email-autoreply",
+    iconColor: "from-rose-500 to-pink-500",
+    icon: "✉",
+    highlights: [
+      "Connects to Gmail and Outlook in one click",
+      "AI drafts replies in your tone, not a robot's",
+      "Review-then-send or fully autonomous mode",
+      "Trained on your past emails + knowledge base",
+      "Sentiment routing — angry mail goes to a human",
+      "Multi-language (Hindi, English, regional)",
+      "Audit log of every reply the AI sent",
+      "Team plans with shared templates",
+    ],
+  },
+  {
     slug: "inventory-pro",
     name: "Inventory Pro",
     tagline: "Real-time stock control for growing retailers.",

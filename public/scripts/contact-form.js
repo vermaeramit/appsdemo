@@ -5,6 +5,20 @@
   var submitBtn = document.getElementById("contactSubmit");
   var endpoint = form.getAttribute("data-endpoint") || "/api/contact";
 
+  // Preselect topic from ?topic= URL param.
+  // e.g. /contact?topic=ai-email-autoreply lands with that option chosen.
+  try {
+    var params = new URLSearchParams(window.location.search);
+    var topic = params.get("topic");
+    var select = form.querySelector('select[name="topic"]');
+    if (topic && select) {
+      var found = Array.prototype.some.call(select.options, function (opt) {
+        return opt.value === topic;
+      });
+      if (found) select.value = topic;
+    }
+  } catch (e) {}
+
   function setStatus(text, tone) {
     if (!status) return;
     status.textContent = text;
