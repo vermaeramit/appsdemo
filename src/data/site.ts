@@ -22,6 +22,10 @@ export const site = {
   // Analytics: Google Analytics 4 Measurement ID (format: G-XXXXXXXXXX).
   // Empty string = no gtag scripts emitted.
   ga4MeasurementId: "G-P6294NVTNB",
+  // Monetisation: Google AdSense Publisher ID (format: ca-pub-XXXXXXXXXXXXXXXX).
+  // Empty string = no AdSense loader emitted. Auto-ads activate from the
+  // AdSense dashboard once this is live and the site is approved.
+  adsensePublisherId: "ca-pub-1017227658621829",
   // Used by ContactForm — replace with a real handler URL (Formspree / Web3Forms)
   // or leave blank to fall back to mailto:.
   formEndpoint: "",

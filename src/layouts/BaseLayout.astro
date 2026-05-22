@@ -61,6 +61,14 @@ const jsonLdList: Record<string, unknown>[] = jsonLd
       </Fragment>
     )}
 
+    {site.adsensePublisherId && (
+      <script
+        async
+        src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${site.adsensePublisherId}`}
+        crossorigin="anonymous"
+      ></script>
+    )}
+
     <title>{pageTitle}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
