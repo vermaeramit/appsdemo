@@ -2,6 +2,7 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import CtaBanner from "../../components/CtaBanner.astro";
 import BlogHero from "../../components/BlogHero.astro";
+import NewsletterForm from "../../components/NewsletterForm.astro";
 import { getCollection } from "astro:content";
 import type { GetStaticPaths } from "astro";
 import { site } from "../../data/site";
@@ -99,6 +100,7 @@ const breadcrumbJsonLd = {
       <div class="prose-content text-slate-700 leading-relaxed">
         <Content />
       </div>
+      <NewsletterForm source={`post:${post.slug}`} />
     </div>
   </article>
 

@@ -18,7 +18,10 @@ interface Props {
 const {
   title = site.name,
   description = site.description,
-  image = "/og-default.png",
+  // SVG works for LinkedIn / Twitter / Facebook OG. For maximum WhatsApp
+  // compatibility, drop a PNG at /og-default.png and BaseLayout will use
+  // whatever a page explicitly passes in via the `image` prop.
+  image = "/og-default.svg",
   noindex = false,
   jsonLd,
 } = Astro.props;
@@ -79,6 +82,7 @@ const jsonLdList: Record<string, unknown>[] = jsonLd
     )}
 
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="alternate" type="application/rss+xml" title={`${site.name} blog`} href={`${site.url}/rss.xml`} />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link

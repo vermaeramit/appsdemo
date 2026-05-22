@@ -53,6 +53,8 @@ But there are pockets where a well-scoped chatbot pays for itself in weeks. We'v
 
 **Rough cost to build.** Small add-on once the FAQ bot exists. ~₹20,000 of additional prompt engineering and testing.
 
+_Related: we've written a broader piece on [AI WhatsApp bots that fit any business](/blog/ai-whatsapp-bots-for-any-business) covering eight industries beyond travel._
+
 ## 4. WhatsApp-native lead qualification
 
 **The problem.** Indian travel customers don't fill out web forms. They WhatsApp. Often a single message: *"Goa 4 days budget 25k 4 people."*
@@ -111,8 +113,8 @@ Use case 6 (internal copilot) is the one most agencies sleep on. It doesn't gene
 
 ## How AppsDemo helps
 
-We build AI chatbots end-to-end — for travel agencies and beyond. RAG on your real documents, deployed on your website, WhatsApp, Slack or as an internal portal. Built on Claude, GPT-4 or open models depending on what your data needs.
+We build AI chatbots end-to-end — for travel agencies and beyond. RAG on your real documents, deployed on your website, WhatsApp, Slack or as an internal portal. Built on Claude, GPT-4 or open models depending on what your data needs. Recent [client work is here](/portfolio).
 
-If you're a [TravelERP](/products/travel-crm) customer, most of these use cases plug into the CRM's existing data model and APIs, so the build is faster. If you're not, we still take projects — see [AI Chatbots](/services/ai-chatbots) for what's in scope.
+If you're a [TravelERP](/products/travel-crm) customer, most of these use cases plug into the CRM's existing data model and APIs, so the build is faster. If you're not sure whether TravelERP fits — read our [travel CRM buyer's guide](/blog/how-to-choose-travel-agency-crm-2026) first. We still take pure-services projects without the CRM — see [AI Chatbots](/services/ai-chatbots) for what's in scope.
 
 Fixed-price quotes, 30-min discovery call, 3-6 week typical timeline. [Get in touch](/contact) and we'll write a proposal within 48 hours.

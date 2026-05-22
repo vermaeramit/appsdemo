@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import BlogHero from "../../components/BlogHero.astro";
+import NewsletterForm from "../../components/NewsletterForm.astro";
 import { getCollection } from "astro:content";
 import { site } from "../../data/site";
 
@@ -37,6 +38,12 @@ const breadcrumbJsonLd = {
         Engineering deep-dives, product updates and field reports from real client work.
         Travel tech, AI, SaaS and the lessons we've learnt along the way.
       </p>
+      <p class="mt-4 text-sm">
+        <a href="/rss.xml" class="inline-flex items-center gap-1.5 font-semibold text-indigo-600 hover:text-indigo-700">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4 11a9 9 0 0 1 9 9h-3a6 6 0 0 0-6-6v-3zm0-7a16 16 0 0 1 16 16h-3A13 13 0 0 0 4 7V4zm1.5 14a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5z"/></svg>
+          Subscribe via RSS
+        </a>
+      </p>
     </div>
   </section>
 
@@ -46,6 +53,7 @@ const breadcrumbJsonLd = {
       {posts.length === 0 ? (
         <p class="text-center text-slate-500">No posts yet — check back soon.</p>
       ) : (
+        <>
         <ul class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {posts.map((post) => (
             <li>
@@ -80,6 +88,8 @@ const breadcrumbJsonLd = {
             </li>
           ))}
         </ul>
+        <NewsletterForm source="blog-index" />
+        </>
       )}
     </div>
   </section>

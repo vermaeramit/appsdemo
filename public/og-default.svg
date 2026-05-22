@@ -1,0 +1,92 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%"   stop-color="#4f46e5"/>
+      <stop offset="50%"  stop-color="#3b82f6"/>
+      <stop offset="100%" stop-color="#06b6d4"/>
+    </linearGradient>
+    <linearGradient id="logoBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%"   stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#e0e7ff"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="80%" cy="20%" r="60%">
+      <stop offset="0%"   stop-color="rgba(255,255,255,0.30)"/>
+      <stop offset="60%"  stop-color="rgba(255,255,255,0)"/>
+    </radialGradient>
+    <pattern id="dots" width="22" height="22" patternUnits="userSpaceOnUse">
+      <circle cx="1" cy="1" r="1" fill="rgba(255,255,255,0.10)"/>
+    </pattern>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect width="1200" height="630" fill="url(#dots)"/>
+  <rect width="1200" height="630" fill="url(#glow)"/>
+
+  <!-- Decorative circles -->
+  <circle cx="1080" cy="120" r="180" fill="rgba(255,255,255,0.08)"/>
+  <circle cx="1180" cy="560" r="220" fill="rgba(255,255,255,0.06)"/>
+  <circle cx="160"  cy="540" r="140" fill="rgba(255,255,255,0.07)"/>
+
+  <!-- Logo + wordmark, top-left -->
+  <g transform="translate(80, 90)">
+    <rect width="76" height="76" rx="18" fill="url(#logoBg)"/>
+    <text x="38" y="55" font-family="Inter, -apple-system, Segoe UI, sans-serif"
+          font-size="48" font-weight="800" fill="#4f46e5"
+          text-anchor="middle">A</text>
+    <text x="100" y="55" font-family="Inter, -apple-system, Segoe UI, sans-serif"
+          font-size="44" font-weight="800" fill="#ffffff" letter-spacing="-1">
+      AppsDemo
+    </text>
+  </g>
+
+  <!-- Main headline -->
+  <text x="80" y="320" font-family="Inter, -apple-system, Segoe UI, sans-serif"
+        font-size="68" font-weight="800" fill="#ffffff" letter-spacing="-1.5">
+    Software that runs
+  </text>
+  <text x="80" y="400" font-family="Inter, -apple-system, Segoe UI, sans-serif"
+        font-size="68" font-weight="800" fill="#ffffff" letter-spacing="-1.5">
+    your business.
+  </text>
+
+  <!-- Subhead -->
+  <text x="80" y="465" font-family="Inter, -apple-system, Segoe UI, sans-serif"
+        font-size="28" font-weight="500" fill="rgba(255,255,255,0.85)">
+    SaaS products and custom AI / web / mobile builds for small businesses.
+  </text>
+
+  <!-- Footer strip with chips and URL -->
+  <g transform="translate(80, 530)">
+    <!-- Chip 1 -->
+    <rect width="170" height="46" rx="23" fill="rgba(255,255,255,0.18)"/>
+    <text x="85" y="30" font-family="Inter, -apple-system, Segoe UI, sans-serif"
+          font-size="18" font-weight="700" fill="#ffffff" text-anchor="middle"
+          letter-spacing="0.5">TravelERP</text>
+
+    <!-- Chip 2 -->
+    <rect x="185" width="200" height="46" rx="23" fill="rgba(255,255,255,0.18)"/>
+    <text x="285" y="30" font-family="Inter, -apple-system, Segoe UI, sans-serif"
+          font-size="18" font-weight="700" fill="#ffffff" text-anchor="middle"
+          letter-spacing="0.5">AI Chatbots</text>
+
+    <!-- Chip 3 -->
+    <rect x="400" width="180" height="46" rx="23" fill="rgba(255,255,255,0.18)"/>
+    <text x="490" y="30" font-family="Inter, -apple-system, Segoe UI, sans-serif"
+          font-size="18" font-weight="700" fill="#ffffff" text-anchor="middle"
+          letter-spacing="0.5">Web Apps</text>
+
+    <!-- Chip 4 -->
+    <rect x="595" width="180" height="46" rx="23" fill="rgba(255,255,255,0.18)"/>
+    <text x="685" y="30" font-family="Inter, -apple-system, Segoe UI, sans-serif"
+          font-size="18" font-weight="700" fill="#ffffff" text-anchor="middle"
+          letter-spacing="0.5">Mobile Apps</text>
+  </g>
+
+  <!-- Bottom-right URL -->
+  <text x="1120" y="595" font-family="Inter, -apple-system, Segoe UI, sans-serif"
+        font-size="22" font-weight="700" fill="rgba(255,255,255,0.85)"
+        text-anchor="end" letter-spacing="0.5">
+    appsdemo.in
+  </text>
+</svg>

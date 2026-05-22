@@ -132,12 +132,95 @@ async function handleContact(request: Request, env: Env): Promise<Response> {
   }
 }
 
+async function handleSubscribe(request: Request, env: Env): Promise<Response> {
+  let form: FormData;
+  try {
+    form = await request.formData();
+  } catch {
+    return json({ success: false, message: "Invalid form data." }, 400);
+  }
+
+  const botcheck = form.get("botcheck");
+  if (botcheck && botcheck !== "" && botcheck !== "off") {
+    return json({ success: true, message: "Thanks!" });
+  }
+
+  const emailRaw = form.get("email");
+  const email = typeof emailRaw === "string" ? emailRaw.trim() : "";
+  if (!email) return json({ success: false, message: "Please enter an email." }, 400);
+  if (email.length > 120) return json({ success: false, message: "Email is too long." }, 400);
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    return json({ success: false, message: "Please enter a valid email." }, 400);
+  }
+
+  const sourceRaw = form.get("source");
+  const source = typeof sourceRaw === "string" ? sourceRaw.slice(0, 60) : "";
+
+  const recipient = env.SMTP_TO || "vermaeramit@gmail.com";
+  const port = env.SMTP_PORT ? parseInt(env.SMTP_PORT, 10) : 465;
+  const secure = port === 465;
+
+  const subject = `[AppsDemo subscribe] ${email}`;
+  const textBody = [
+    `New newsletter subscriber on AppsDemo`,
+    ``,
+    `Email:  ${email}`,
+    `Source: ${source || "—"}`,
+    `When:   ${new Date().toISOString()}`,
+    ``,
+    `— Add this address to whichever mailing list service you use (Brevo, Zoho Campaigns, etc).`,
+  ].join("\n");
+
+  const htmlBody = `<!doctype html>
+<html><body style="font-family:system-ui,sans-serif;color:#0f172a;max-width:600px">
+  <h2 style="color:#4f46e5">New newsletter subscriber</h2>
+  <table style="border-collapse:collapse;font-size:14px">
+    <tr><td style="padding:4px 12px 4px 0;color:#64748b">Email</td><td><a href="mailto:${escapeHtml(email)}">${escapeHtml(email)}</a></td></tr>
+    <tr><td style="padding:4px 12px 4px 0;color:#64748b">Source</td><td>${escapeHtml(source || "—")}</td></tr>
+    <tr><td style="padding:4px 12px 4px 0;color:#64748b">When</td><td>${escapeHtml(new Date().toISOString())}</td></tr>
+  </table>
+  <p style="color:#64748b;font-size:12px;margin-top:24px">Add this address to whichever mailing list service you use.</p>
+</body></html>`;
+
+  try {
+    const mailer = await WorkerMailer.connect({
+      credentials: { username: env.SMTP_USER, password: env.SMTP_PASS },
+      authType: "plain",
+      host: env.SMTP_HOST,
+      port,
+      secure,
+    });
+
+    await mailer.send({
+      from: { name: "AppsDemo Newsletter", email: env.SMTP_FROM },
+      to: { email: recipient },
+      subject,
+      text: textBody,
+      html: htmlBody,
+    });
+
+    return json({ success: true, message: "Thanks! You're on the list." });
+  } catch (err) {
+    const msg = err instanceof Error ? err.message : String(err);
+    console.error("subscribe send failed:", msg);
+    return json(
+      { success: false, message: "Couldn't save your subscription. Please try again." },
+      502
+    );
+  }
+}
+
 export default {
   async fetch(request: Request, env: Env): Promise<Response> {
     const url = new URL(request.url);
 
     if (url.pathname === "/api/contact") {
       if (request.method === "POST") return handleContact(request, env);
+      return json({ success: false, message: "Method not allowed." }, 405);
+    }
+
+    if (url.pathname === "/api/subscribe") {
+      if (request.method === "POST") return handleSubscribe(request, env);
       return json({ success: false, message: "Method not allowed." }, 405);
     }
 

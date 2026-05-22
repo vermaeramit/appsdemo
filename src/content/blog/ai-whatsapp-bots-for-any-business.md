@@ -137,7 +137,7 @@ These three things are what separate a bot that customers tolerate from a bot th
 
 We've covered this in depth in our [previous post on AI chatbots for travel agencies](/blog/ai-chatbots-for-travel-agencies-7-use-cases), so we'll keep this short. The same principles apply: bot captures enquiries 24/7, qualifies them into structured leads, books demo trips, sends quotes via the public-link feature, handles post-booking factual questions.
 
-If you're a [TravelERP](/products/travel-crm) customer, the WhatsApp bot plugs into the existing CRM data model — leads, packages, quotes, bookings — so the build is faster.
+If you're a [TravelERP](/products/travel-crm) customer, the WhatsApp bot plugs into the existing CRM data model — leads, packages, quotes, bookings — so the build is faster. If you're still picking a CRM, read our [travel agency CRM buyer's guide](/blog/how-to-choose-travel-agency-crm-2026) first.
 
 **Rough cost.** ₹80,000-1,50,000 as an add-on to an existing TravelERP deployment. Higher as a standalone build.
 
@@ -196,7 +196,7 @@ We take on WhatsApp bot projects end-to-end:
 4. **Pilot (Week 4-5)** — soft-launch with a subset of your customers, monitor conversations, refine.
 5. **Production (Week 6+)** — full rollout, monthly maintenance retainer optional.
 
-Most projects ship in **4-6 weeks** for a single use case, fixed-price, weekly demos. See [AI Chatbots](/services/ai-chatbots) for what's in scope, or [contact us](/contact) for a written proposal within 48 hours.
+Most projects ship in **4-6 weeks** for a single use case, fixed-price, weekly demos. See [AI Chatbots](/services/ai-chatbots) for what's in scope, [our portfolio](/portfolio) for shipped work, or [contact us](/contact) for a written proposal within 48 hours.
 
 ---
 

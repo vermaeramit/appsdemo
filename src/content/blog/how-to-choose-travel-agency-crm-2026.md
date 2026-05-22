@@ -54,6 +54,8 @@ Email matters too — and it should come from **your domain via your own SMTP**,
 
 **What to ask in a demo:** "Can I send a WhatsApp message from a lead with two clicks, and will it be logged automatically on the lead's timeline?"
 
+If you're considering layering a WhatsApp AI bot on top later, our [guide to AI WhatsApp bots](/blog/ai-whatsapp-bots-for-any-business) covers what's involved and when it pays off.
+
 ### 4. Multi-tenant data isolation — non-negotiable
 
 You're an agency. Your customer database is your business. The CRM vendor must be running **proper multi-tenant architecture** with per-customer data isolation — ideally per-customer databases, at minimum per-customer schemas with strict row-level filters.
@@ -151,6 +153,8 @@ What it does well:
 - **Standard data export** at any time, no fees
 
 It's not the right fit for every agency. If you're a 100-agent enterprise with a dedicated IT team and need SAP-grade workflows, you'll outgrow TravelERP. If you're a 1-person freelance travel consultant, you might not need its full feature set yet. We're built for the middle — small-to-mid travel agencies with 3-30 agents who've outgrown spreadsheets but don't want enterprise pain.
+
+Real deployments are visible on our [portfolio page](/portfolio) — three travel agencies are running TravelERP in production today. Current [pricing is here](/pricing).
 
 [Start the 30-day free trial](https://crm.appsdemo.in/register) or [book a 15-min demo](/contact). Either way, use the seven criteria in this guide to evaluate us against any alternative. If we're not the right fit, we'll tell you.
 
