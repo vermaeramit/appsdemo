@@ -16,12 +16,13 @@ Living doc — update statuses as posts go out. Cadence is **1 post every 2 week
 |----|---------------|------------|--------------------------------------------------------------|------------------------------------|----------------|-------|
 | 1  | 2026-05-21    | ✅ Published | 7 use cases for AI chatbots in travel (with real numbers)   | `AI chatbot for travel agency`     | Service post   | Live at `/blog/ai-chatbots-for-travel-agencies-7-use-cases` |
 | 2  | 2026-06-04    | 🚧 Drafted  | How to choose a travel agency CRM in 2026                    | `travel agency CRM India`          | Product pillar | Drafted — live at `/blog/how-to-choose-travel-agency-crm-2026`. Mark Published after final review. |
-| 3  | 2026-06-18    | 📝 Planned  | Case study: Big Bull Travels — CRM + marketing site         | `<client name> case study`         | Case study     | Real numbers from their account (ask client for: leads handled, quotes sent, time saved). Get a quote for the article. |
-| 4  | 2026-07-02    | 📝 Planned  | Why we built TravelERP instead of using off-the-shelf       | Brand + `TravelERP`                | Founder voice  | Engineering taste piece. ~1500 words — shorter is fine here. |
-| 5  | 2026-07-16    | 📝 Planned  | What it actually costs to build a custom CRM in 2026        | `custom CRM cost India`            | Service post   | Transparent-pricing angle for the Web Apps service. Use real ranges from your historical projects. |
-| 6  | 2026-07-30    | 💡 Idea     | Case study: View Holiday Trip — CRM rollout                 | `<client name> case study`         | Case study     | Same as #3 but for VHT. |
-| 7  | 2026-08-13    | 💡 Idea     | Multi-tenancy in SaaS: lessons from building TravelERP      | `multi-tenant SaaS architecture`   | Technical      | Goes deeper into engineering — attracts developer audience and other founders. |
-| 8  | 2026-08-27    | 💡 Idea     | Case study: The Scholars Time — academic journal + exam     | `<client name> case study`         | Case study     | Two products for one client makes a richer story. |
+| 3  | 2026-06-18    | 🚧 Drafted  | An AI WhatsApp bot for any business: 8 industries it pays off in | `whatsapp ai bot business india` | Service post   | Drafted — live at `/blog/ai-whatsapp-bots-for-any-business`. Cross-industry pitch for the AI Chatbots service. |
+| 4  | 2026-07-02    | 📝 Planned  | Case study: Big Bull Travels — CRM + marketing site         | `<client name> case study`         | Case study     | Real numbers from their account (ask client for: leads handled, quotes sent, time saved). Get a quote for the article. |
+| 5  | 2026-07-16    | 📝 Planned  | Why we built TravelERP instead of using off-the-shelf       | Brand + `TravelERP`                | Founder voice  | Engineering taste piece. ~1500 words — shorter is fine here. |
+| 6  | 2026-07-30    | 📝 Planned  | What it actually costs to build a custom CRM in 2026        | `custom CRM cost India`            | Service post   | Transparent-pricing angle for the Web Apps service. Use real ranges from your historical projects. |
+| 7  | 2026-08-13    | 💡 Idea     | Case study: View Holiday Trip — CRM rollout                 | `<client name> case study`         | Case study     | Same as #4 but for VHT. |
+| 8  | 2026-08-27    | 💡 Idea     | Multi-tenancy in SaaS: lessons from building TravelERP      | `multi-tenant SaaS architecture`   | Technical      | Goes deeper into engineering — attracts developer audience and other founders. |
+| 9  | 2026-09-10    | 💡 Idea     | Case study: The Scholars Time — academic journal + exam     | `<client name> case study`         | Case study     | Two products for one client makes a richer story. |
 
 **Legend:** ✅ Published · 🚧 Drafting · 📝 Planned (next up) · 💡 Idea (rough)
 
