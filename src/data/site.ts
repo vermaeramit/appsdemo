@@ -26,6 +26,11 @@ export const site = {
   // Empty string = no AdSense loader emitted. Auto-ads activate from the
   // AdSense dashboard once this is live and the site is approved.
   adsensePublisherId: "ca-pub-1017227658621829",
+  // Anti-spam: Cloudflare Turnstile site key (format: 0x4AAAAAAA...).
+  // Public — safe in source. Get it from Cloudflare dashboard -> Turnstile -> add site.
+  // The matching Secret Key goes into the Worker as TURNSTILE_SECRET.
+  // Empty string = captcha disabled (forms still work).
+  turnstileSiteKey: "",
   // Used by ContactForm — replace with a real handler URL (Formspree / Web3Forms)
   // or leave blank to fall back to mailto:.
   formEndpoint: "",

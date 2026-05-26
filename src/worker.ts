@@ -8,6 +8,7 @@ interface Env {
   SMTP_PASS: string;        // Zoho App Password
   SMTP_FROM: string;        // From address shown to recipients
   SMTP_TO?: string;         // optional override; defaults to info@appsdemo.in
+  TURNSTILE_SECRET?: string; // optional — Cloudflare Turnstile secret key; when absent, captcha check is skipped
 }
 
 const ALLOWED_FIELDS = ["name", "email", "phone", "company", "topic", "message"] as const;
@@ -18,6 +19,34 @@ function json(body: unknown, status = 200): Response {
     status,
     headers: { "Content-Type": "application/json; charset=utf-8" },
   });
+}
+
+/**
+ * Verify a Cloudflare Turnstile token. Returns true when:
+ * - TURNSTILE_SECRET is not configured (captcha disabled), OR
+ * - the token is valid per Cloudflare's siteverify endpoint.
+ * Returns false only when captcha IS configured and the token is missing or invalid.
+ */
+async function verifyTurnstile(token: string, env: Env, ip: string | null): Promise<boolean> {
+  if (!env.TURNSTILE_SECRET) return true;
+  if (!token) return false;
+
+  const body = new URLSearchParams();
+  body.append("secret", env.TURNSTILE_SECRET);
+  body.append("response", token);
+  if (ip) body.append("remoteip", ip);
+
+  try {
+    const res = await fetch("https://challenges.cloudflare.com/turnstile/v0/siteverify", {
+      method: "POST",
+      body,
+    });
+    const data = (await res.json()) as { success?: boolean };
+    return !!data.success;
+  } catch (err) {
+    console.error("turnstile siteverify error:", err);
+    return false;
+  }
 }
 
 function escapeHtml(s: string): string {
@@ -42,6 +71,17 @@ async function handleContact(request: Request, env: Env): Promise<Response> {
   const botcheck = form.get("botcheck");
   if (botcheck && botcheck !== "" && botcheck !== "off") {
     return json({ success: true, message: "Thanks!" });
+  }
+
+  // Turnstile captcha — only enforced when TURNSTILE_SECRET is configured
+  const turnstileToken = form.get("cf-turnstile-response");
+  const captchaOk = await verifyTurnstile(
+    typeof turnstileToken === "string" ? turnstileToken : "",
+    env,
+    request.headers.get("CF-Connecting-IP")
+  );
+  if (!captchaOk) {
+    return json({ success: false, message: "Captcha verification failed. Please reload the page and try again." }, 400);
   }
 
   // Collect + validate
@@ -143,6 +183,17 @@ async function handleSubscribe(request: Request, env: Env): Promise<Response> {
   const botcheck = form.get("botcheck");
   if (botcheck && botcheck !== "" && botcheck !== "off") {
     return json({ success: true, message: "Thanks!" });
+  }
+
+  // Turnstile captcha — only enforced when TURNSTILE_SECRET is configured
+  const turnstileToken = form.get("cf-turnstile-response");
+  const captchaOk = await verifyTurnstile(
+    typeof turnstileToken === "string" ? turnstileToken : "",
+    env,
+    request.headers.get("CF-Connecting-IP")
+  );
+  if (!captchaOk) {
+    return json({ success: false, message: "Captcha verification failed. Please reload the page and try again." }, 400);
   }
 
   const emailRaw = form.get("email");

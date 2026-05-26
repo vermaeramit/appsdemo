@@ -2,6 +2,7 @@
 // Pure markup. Submission is handled by /scripts/contact-form.js which POSTs
 // to /api/contact (handled by src/worker.ts). SMTP credentials live in
 // Cloudflare Worker secrets — never in the browser.
+import { site } from "../data/site";
 ---
 
 <form
@@ -69,6 +70,10 @@
   </div>
 
   <input type="checkbox" name="botcheck" class="hidden" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true" />
+
+  {site.turnstileSiteKey && (
+    <div class="cf-turnstile" data-sitekey={site.turnstileSiteKey} data-theme="light" data-size="flexible"></div>
+  )}
 
   <button type="submit" id="contactSubmit"
           class="inline-flex items-center justify-center gap-2 rounded-xl px-5 py-3 text-sm font-semibold text-white bg-gradient-to-r from-indigo-600 to-cyan-600 shadow-md hover:shadow-lg hover:opacity-95 transition w-full sm:w-auto disabled:opacity-60 disabled:cursor-not-allowed">

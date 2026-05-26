@@ -73,6 +73,10 @@ const jsonLdList: Record<string, unknown>[] = jsonLd
       ></script>
     )}
 
+    {site.turnstileSiteKey && (
+      <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+    )}
+
     <title>{pageTitle}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
