@@ -30,7 +30,7 @@ export const site = {
   // Public — safe in source. Get it from Cloudflare dashboard -> Turnstile -> add site.
   // The matching Secret Key goes into the Worker as TURNSTILE_SECRET.
   // Empty string = captcha disabled (forms still work).
-  turnstileSiteKey: "",
+  turnstileSiteKey: "0x4AAAAAADWYbLi-08yhy7DI",
   // Used by ContactForm — replace with a real handler URL (Formspree / Web3Forms)
   // or leave blank to fall back to mailto:.
   formEndpoint: "",
