@@ -1,0 +1,280 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import CtaBanner from "../components/CtaBanner.astro";
+import { site } from "../data/site";
+
+const sections = [
+  {
+    id: "about-us",
+    title: "About AppsDemo",
+    faqs: [
+      {
+        q: "What does AppsDemo do?",
+        a: "Two things. One: we build and run our own SaaS products — TravelERP (a travel agency CRM, live), AI Email AutoReply (in beta), and two more launching soon (Inventory Pro and HR Hub). Two: we take on fixed-price custom builds — AI chatbots, web apps, mobile apps — for clients who need bespoke software. Many clients use both: subscribe to one of our products and hire us to extend it or integrate with their other systems.",
+      },
+      {
+        q: "When were you founded and how big is the team?",
+        a: "AppsDemo was founded in 2018. We're a small core team supplemented by senior contractors we've worked with for years. We deliberately stay small because every layer of management dilutes engineering quality. Our engineers talk to customers directly; our founders still answer support tickets.",
+      },
+      {
+        q: "Where are you based?",
+        a: "India-based, remote-first. Our team is distributed across India. We meet clients in person in Delhi NCR / Gurugram when it matters, but most engagements run on video calls, async updates, and weekly demos.",
+      },
+      {
+        q: "Do you work with clients outside India?",
+        a: "Yes. We have clients across India, the Middle East, Singapore, the UK and beyond. Indian customers are billed in INR with GST; everyone else in USD or EUR. We've found timezone overlap is sufficient for daily standups across India, Middle East and Europe. For North America we use async updates and one weekly synchronous call.",
+      },
+      {
+        q: "How many projects have you delivered?",
+        a: "100+ across travel, education, finance, e-commerce and field services. Public examples are on our portfolio page — the more confidential work isn't listed but we can share details under NDA.",
+      },
+    ],
+  },
+  {
+    id: "products",
+    title: "Products (SaaS)",
+    faqs: [
+      {
+        q: "What is TravelERP?",
+        a: "Our flagship product — a complete CRM for travel agencies. Handles lead management, multi-option quotes with day-wise itineraries, public shareable quote URLs, bookings with installment tracking, hotel voucher generation, and email/WhatsApp follow-ups. Built multi-tenant from the ground up. Currently used in production by three travel agencies in India.",
+      },
+      {
+        q: "Can I try TravelERP before paying?",
+        a: "Yes. We offer a 30-day free trial of TravelERP with full feature access — no credit card required. After the trial you can convert to one of the paid tiers (Starter / Business / Enterprise) or walk away with your data. Sign up at crm.appsdemo.in/register.",
+      },
+      {
+        q: "What is AI Email AutoReply?",
+        a: "An AI tool we built that connects to your Gmail or Outlook inbox, learns your tone from your sent folder, and drafts replies in your voice. Backed by your documents and CRM data. Two modes: Review-then-send (default — drafts appear in your inbox waiting for one-click approval) and Autonomous (AI sends below a confidence threshold you set). Currently in closed beta. Join the waitlist on the product page.",
+      },
+      {
+        q: "When will Inventory Pro and HR Hub launch?",
+        a: "Inventory Pro is targeting public beta in Q4 2026. HR Hub will follow in 2027. Both are open for waitlist signup — members get founder pricing locked in for life. Read the detailed product pages for what we're building and who they're for.",
+      },
+      {
+        q: "Can I get a demo of any of your products?",
+        a: "Yes. For TravelERP, book a 15-minute walkthrough via the contact form — we run one most business days. For beta products (AI Email AutoReply, Inventory Pro, HR Hub), demo access is rolled out to waitlist members in batches.",
+      },
+      {
+        q: "What happens to my data if I cancel?",
+        a: "You can export your full data — leads, bookings, customers, communications — in standard formats (CSV / JSON) at any time, free of charge. We don't withhold data on cancellation; that's both unethical and not how we run things. Read our Terms for the formal statement.",
+      },
+      {
+        q: "Is my data isolated from other customers?",
+        a: "Yes. Every tenant gets its own database. No shared tables, no row-level filters depending on someone remembering to add the right WHERE clause. Proper isolation. This applies to TravelERP and to every future product.",
+      },
+    ],
+  },
+  {
+    id: "services",
+    title: "Services (custom builds)",
+    faqs: [
+      {
+        q: "What kind of services do you offer?",
+        a: "Three main categories: AI chatbots (web widgets, WhatsApp, Slack, internal copilots), web app development (SaaS, customer portals, internal tools, marketing sites), and mobile app development (React Native and Flutter for iOS + Android). See our services page for what's in scope per category.",
+      },
+      {
+        q: "What's the typical engagement model?",
+        a: "Fixed-price, fixed-timeline. After a 30-minute discovery call we send a written proposal within 48 hours with scope, timeline and price. You sign, we build with weekly Friday demos, you accept at the end. Material scope changes go through written change orders; small additions are absorbed.",
+      },
+      {
+        q: "How long does a typical project take?",
+        a: "AI chatbots: 3–6 weeks. Web apps: 6–12 weeks. Mobile apps: 8–12 weeks. These are honest averages — small/simple projects can be shorter, large/complex ones longer. The proposal will quote a specific date.",
+      },
+      {
+        q: "How much do projects cost?",
+        a: "AI chatbots start from ₹60,000 fixed-price. Web apps from ₹1,50,000. Mobile apps from ₹2,00,000. Those are floors — real prices depend on your specific scope. We'll quote a specific number in the proposal.",
+      },
+      {
+        q: "Do we own the code?",
+        a: "Yes, fully. The codebase lives in your GitHub repo from the first day of build. IP transfers to you on final payment. No reserved licenses, no usage royalties, no 'core platform' we lock you out of. You can take the code and run it without us.",
+      },
+      {
+        q: "What about after launch?",
+        a: "Every project includes a 30-day post-launch warranty — anything we shipped that breaks in the first month, we fix at no charge. Beyond that, ongoing maintenance is available on a retainer scoped to your needs. Or you can take full ownership and run it yourself; we'll hand off cleanly.",
+      },
+      {
+        q: "What technologies do you typically use?",
+        a: "Backend: ASP.NET Core, Node.js, Python. Frontend: React, Next.js, Astro, TypeScript. Mobile: React Native, Expo, Flutter. Databases: PostgreSQL, SQL Server, MongoDB where it fits. AI: Claude, GPT-4, open-source models depending on the use case. Hosting: Cloudflare, Vercel, AWS, Azure, or your own infrastructure.",
+      },
+      {
+        q: "Do you take small projects?",
+        a: "We're a poor fit for sub-₹50,000 projects — the discovery and proposal overhead doesn't make sense at that size. We're a much better fit for projects in the ₹1-10 lakh range where we can do a quality job and not have to cut corners.",
+      },
+      {
+        q: "What do you NOT do?",
+        a: "We don't do branding or logo design. We don't do video production. We don't do social media management or paid advertising. We don't do anything blockchain-related. We're a software studio — we say no to work outside that lane rather than do it badly.",
+      },
+    ],
+  },
+  {
+    id: "buying",
+    title: "Pricing, contracts and billing",
+    faqs: [
+      {
+        q: "Do you accept GST invoices?",
+        a: "For Indian customers, yes — we issue GST-compliant invoices with your registered GSTIN. The format meets the requirements for input tax credit. For international customers we issue invoices without GST.",
+      },
+      {
+        q: "What payment methods do you accept?",
+        a: "Indian customers: NEFT, UPI, RTGS, and major cards. International customers: wire transfer and Wise. For project work we typically structure payments as 50% on start and 50% on launch; for retainers it's monthly in advance.",
+      },
+      {
+        q: "Do you sign NDAs?",
+        a: "Yes, before discussing any sensitive business information. Standard mutual NDAs are processed in a day; if you need our team to sign your custom NDA we typically turn it around within 2-3 business days.",
+      },
+      {
+        q: "Will you sign a contract / MSA?",
+        a: "Yes. For services engagements we have a standard Master Services Agreement (or work under yours). It covers scope, payment, IP, confidentiality, warranty, liability, and dispute resolution — all the standard pieces. We're happy to share a sample before the first call.",
+      },
+      {
+        q: "Can I cancel a SaaS subscription anytime?",
+        a: "Yes. Monthly plans cancel any time and continue to the end of the current billing month. Annual plans (which include a discount) cancel any time, but the prepaid balance for the remaining months is not refunded unless we're materially in breach of our terms. We don't auto-renew silently — you'll get a renewal email 14 days in advance.",
+      },
+      {
+        q: "What's your refund policy?",
+        a: "For products: 30-day money-back guarantee on the first month of any paid plan if it doesn't fit your needs. For services: we don't issue refunds once work has started, but we will rework deliverables that don't match the agreed scope without charging again.",
+      },
+    ],
+  },
+  {
+    id: "security-privacy",
+    title: "Security, privacy and compliance",
+    faqs: [
+      {
+        q: "Where is my data stored?",
+        a: "By default, on Cloudflare's edge network and AWS / Azure data centres in the Mumbai region. Enterprise customers can request deployment to their own VPC. We can host outside India (Singapore, US, EU regions) on request — useful for international customers with data-residency requirements.",
+      },
+      {
+        q: "Is my data encrypted?",
+        a: "Yes. All data is encrypted in transit (TLS 1.3) and at rest (AES-256). Database backups are encrypted before being written to backup storage. Secrets (SMTP credentials, API keys, OAuth refresh tokens) live in Cloudflare Workers' encrypted secrets store — never in source code.",
+      },
+      {
+        q: "Do you have SOC 2 / ISO 27001?",
+        a: "Not yet. We have these on the roadmap as our enterprise pipeline grows, but we're being honest about not having them today. If your procurement requires SOC 2, we may not be the right fit yet. Custom compliance reviews are available for Enterprise plans.",
+      },
+      {
+        q: "What's your privacy policy?",
+        a: "Read our full Privacy Policy at /privacy. The short version: we collect what we need to deliver the service, we use Google Analytics for traffic measurement and Google AdSense on our marketing site, we don't sell your data, and you can request deletion at any time by emailing us.",
+      },
+      {
+        q: "What happens in a security incident?",
+        a: "We notify affected customers within 72 hours of confirming a security incident that affects their data, with what we know, what we don't, and what we're doing about it. We publish a post-incident report within two weeks of resolution. This is independent of any legal-notification deadlines.",
+      },
+    ],
+  },
+  {
+    id: "support",
+    title: "Support and getting help",
+    faqs: [
+      {
+        q: "How do I get support?",
+        a: `Email is the default — ${site.contactEmail} — and gets a response within one business day on all paid plans. Phone (${site.phoneDisplay}) and WhatsApp are available for Business and Enterprise plans during IST business hours.`,
+      },
+      {
+        q: "What hours is support available?",
+        a: "Email support is monitored 9am-7pm IST, Monday-Saturday. Critical issues (production down, data loss) are responded to within 4 hours regardless of time. Phone and WhatsApp during the same business hours.",
+      },
+      {
+        q: "Where can I report bugs or request features?",
+        a: "Email us with details. We log everything in our internal tracker and respond to confirm receipt. Real bugs in production are fixed in the next release cycle (we ship weekly). Feature requests are scored against our roadmap; we'll tell you honestly whether and when something is likely to happen.",
+      },
+      {
+        q: "Do you offer training for new users?",
+        a: "Yes. For TravelERP, every paid plan includes a 30-minute setup call with an actual engineer (not a sales rep). Business and Enterprise plans include data import help and team training. Custom training sessions are available for an additional fee.",
+      },
+      {
+        q: "What's your SLA?",
+        a: "Starter: best-effort. Business: 99% uptime, 24-hour response on support tickets. Enterprise: 99.9% uptime, 4-hour response on production-critical tickets, with credits for downtime. Specific terms are in the relevant subscription agreement.",
+      },
+    ],
+  },
+];
+
+const faqPageJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: sections.flatMap((s) =>
+    s.faqs.map((f) => ({
+      "@type": "Question",
+      name: f.q,
+      acceptedAnswer: { "@type": "Answer", text: f.a },
+    }))
+  ),
+};
+
+const breadcrumbJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Home", item: `${site.url}/` },
+    { "@type": "ListItem", position: 2, name: "FAQ",  item: `${site.url}/faq` },
+  ],
+};
+---
+
+<BaseLayout
+  title="FAQ — frequently asked questions"
+  description={`Common questions about ${site.name}'s SaaS products (TravelERP, AI Email AutoReply, Inventory Pro, HR Hub) and custom development services. Pricing, contracts, security, support and more.`}
+  jsonLd={[faqPageJsonLd, breadcrumbJsonLd]}
+>
+  <!-- Hero -->
+  <section class="relative overflow-hidden">
+    <div class="hero-blob"></div>
+    <div class="relative mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 pt-20 pb-10 sm:pt-24 text-center">
+      <p class="text-sm font-bold uppercase tracking-widest text-indigo-600">Help</p>
+      <h1 class="mt-3 text-4xl sm:text-5xl font-extrabold tracking-tight text-slate-900 leading-tight">
+        Frequently asked <span class="gradient-text">questions</span>
+      </h1>
+      <p class="mt-5 max-w-2xl mx-auto text-slate-600 text-lg leading-relaxed">
+        Honest answers to the questions we get most often. If you don't see your question here,
+        <a href="/contact" class="text-indigo-600 font-semibold hover:underline">drop us a message</a> —
+        we usually reply within one business day.
+      </p>
+    </div>
+  </section>
+
+  <!-- Section index -->
+  <section class="pb-8">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <p class="text-xs font-bold uppercase tracking-wider text-slate-500">Jump to</p>
+      <ul class="mt-3 flex flex-wrap gap-2 text-sm">
+        {sections.map((s) => (
+          <li>
+            <a href={`#${s.id}`} class="inline-block rounded-full border border-slate-200 bg-white px-3.5 py-1.5 text-slate-700 hover:border-indigo-300 hover:text-indigo-600 transition">
+              {s.title}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- Sections -->
+  {sections.map((section, idx) => (
+    <section id={section.id} class={`py-10 sm:py-12 scroll-mt-20 ${idx % 2 === 1 ? "bg-slate-50" : ""}`}>
+      <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+        <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight text-slate-900">{section.title}</h2>
+        <div class="mt-6 space-y-3">
+          {section.faqs.map((f) => (
+            <details class="group rounded-xl border border-slate-200 bg-white p-5">
+              <summary class="cursor-pointer list-none flex items-center justify-between gap-3 font-semibold text-slate-900">
+                {f.q}
+                <svg class="shrink-0 transition-transform group-open:rotate-180" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+              </summary>
+              <p class="mt-3 text-sm text-slate-600 leading-relaxed">{f.a}</p>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+  ))}
+
+  <CtaBanner
+    title="Didn't find what you were looking for?"
+    body="Drop us a message — questions help us understand what we should document next. Most enquiries get a reply within one business day."
+    primaryLabel="Contact us"
+    primaryHref="/contact"
+    secondaryLabel="See pricing"
+    secondaryHref="/pricing"
+  />
+</BaseLayout>

@@ -36,51 +36,264 @@ const yearsActive = new Date().getFullYear() - site.founded;
     </div>
   </section>
 
-  <section class="pb-16">
+  <!-- Story -->
+  <section class="pb-12">
     <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 space-y-6 text-slate-700 leading-relaxed text-lg">
+      <h2 class="text-3xl font-extrabold text-slate-900 tracking-tight">The story</h2>
       <p>
-        {site.name} is an independent software studio founded in {site.founded}. We started because we
-        kept watching agencies, retailers and small teams stitch together half a dozen spreadsheets,
-        free trials and abandoned tools — and pay for the privilege. {yearsActive}+ years and
+        {site.name} is an independent software studio founded in {site.founded}. We started because we kept
+        watching agencies, retailers and small teams stitch together half a dozen spreadsheets, free
+        trials, and abandoned tools — and pay for the privilege. {yearsActive}+ years and
         {site.projectsDelivered}+ projects later, we still build the way we did on day one: opinionated
         stack, fast UI, real customer feedback.
       </p>
       <p>
-        Our first product, <a class="text-indigo-600 font-semibold hover:underline" href="/products/travel-crm">TravelERP</a>,
+        Most software for small businesses is built by one of two camps. The first is enterprise vendors
+        who scale their product down — same complexity, same feature creep, same six-figure professional-services
+        bill — just with a "small business edition" label. The second is shoestring SaaS startups whose
+        product works fine for fifty customers and starts crumbling at five hundred. Neither serves the
+        actual middle: a 5-30 person business that needs production-grade software but doesn't want to be
+        billed like a hedge fund.
+      </p>
+      <p>
+        That middle is who we build for. Our first product, <a class="text-indigo-600 font-semibold hover:underline" href="/products/travel-crm">TravelERP</a>,
         is a modern travel-agency CRM. It does the unglamorous, end-to-end work: capture leads, build
         multi-option quotes, share them publicly, convert to bookings, track installments, send hotel
-        vouchers, and nudge customers via email and WhatsApp.
+        vouchers, and nudge customers via email and WhatsApp. It runs in production for travel agencies
+        across India — small operators handling 50 leads a month, established agencies handling several
+        hundred.
       </p>
       <p>
-        More products are on the way — <strong>Inventory Pro</strong> for retailers and
-        <strong>HR Hub</strong> for people-ops teams. All built on the same opinionated foundation:
-        modern stack, fast UI, multi-tenant from day one, API-first, secure by default.
+        We've followed it with <a class="text-indigo-600 font-semibold hover:underline" href="/products/ai-email-autoreply">AI Email AutoReply</a>
+        (currently in private beta), and have two more products on the way:
+        <a class="text-indigo-600 font-semibold hover:underline" href="/products/inventory-pro">Inventory Pro</a>
+        for retailers and <a class="text-indigo-600 font-semibold hover:underline" href="/products/hr-hub">HR Hub</a>
+        for people-ops teams. All built on the same opinionated foundation: modern stack, fast UI,
+        multi-tenant from day one, API-first, secure by default.
       </p>
       <p>
-        We're a small team that ships often, listens hard, and won't sell you anything you don't need.
-        If you've got feedback, ideas or just want to chat —
-        <a class="text-indigo-600 font-semibold hover:underline" href="/contact">say hello</a>.
+        Alongside the products, we take on <a class="text-indigo-600 font-semibold hover:underline" href="/services">custom-build engagements</a>
+        — AI chatbots, web apps, mobile apps — for teams that need bespoke software shipped fast. Most
+        years, services revenue is what funds product development. That arrangement keeps us close to
+        real customer problems and prevents us from designing products in a vacuum.
       </p>
     </div>
   </section>
 
-  <!-- Stats / values strip -->
+  <!-- Values -->
   <section class="py-16 bg-slate-50 dot-bg">
-    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 grid gap-8 sm:grid-cols-3">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-slate-900 tracking-tight text-center">What we believe</h2>
+      <p class="mt-4 text-slate-600 text-center">
+        Six things we keep coming back to when we make decisions.
+      </p>
+    </div>
+
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
       <div class="rounded-2xl bg-white border border-slate-200 p-6">
         <p class="text-3xl">🛠</p>
-        <h3 class="mt-2 font-bold text-slate-900">Ship often</h3>
-        <p class="mt-1 text-sm text-slate-600">Small, frequent releases. Real bugs over imaginary roadmaps.</p>
+        <h3 class="mt-2 font-bold text-slate-900">Ship often, ship small</h3>
+        <p class="mt-2 text-sm text-slate-600 leading-relaxed">
+          We release every week. Small releases are easier to reason about, easier to roll back, and
+          easier for customers to consume. Quarterly mega-releases are how organisations hide that nothing
+          actually got shipped.
+        </p>
       </div>
       <div class="rounded-2xl bg-white border border-slate-200 p-6">
         <p class="text-3xl">🎯</p>
-        <h3 class="mt-2 font-bold text-slate-900">Focused</h3>
-        <p class="mt-1 text-sm text-slate-600">Each product solves one job really well, instead of fifty jobs badly.</p>
+        <h3 class="mt-2 font-bold text-slate-900">Each product does one job well</h3>
+        <p class="mt-2 text-sm text-slate-600 leading-relaxed">
+          The temptation to bolt a "marketing automation module" onto a CRM, or a "POS module" onto an
+          HRMS, is endless. We resist it. A product that does one thing brilliantly beats a product that
+          does fifty things badly every time.
+        </p>
       </div>
       <div class="rounded-2xl bg-white border border-slate-200 p-6">
         <p class="text-3xl">🤝</p>
-        <h3 class="mt-2 font-bold text-slate-900">Customer-led</h3>
-        <p class="mt-1 text-sm text-slate-600">We talk to every customer. Your feedback shapes the next release.</p>
+        <h3 class="mt-2 font-bold text-slate-900">Customers shape the roadmap</h3>
+        <p class="mt-2 text-sm text-slate-600 leading-relaxed">
+          We talk to every customer who'll talk to us. Pricing changes, feature decisions, design choices
+          — they're informed by what real users tell us in real calls, not by what we think they want
+          based on a survey.
+        </p>
+      </div>
+      <div class="rounded-2xl bg-white border border-slate-200 p-6">
+        <p class="text-3xl">🔒</p>
+        <h3 class="mt-2 font-bold text-slate-900">Multi-tenant by default</h3>
+        <p class="mt-2 text-sm text-slate-600 leading-relaxed">
+          Every product is built multi-tenant from the first line of code. Each customer gets isolated
+          data — proper isolation, not "best efforts". Going multi-tenant after the fact is one of the
+          hardest re-architectures in SaaS; we'd rather pay the upfront cost.
+        </p>
+      </div>
+      <div class="rounded-2xl bg-white border border-slate-200 p-6">
+        <p class="text-3xl">📖</p>
+        <h3 class="mt-2 font-bold text-slate-900">No vendor lock-in</h3>
+        <p class="mt-2 text-sm text-slate-600 leading-relaxed">
+          For services projects, your code lives in your GitHub from day one. For products, your data is
+          exportable at any time in standard formats. Both decisions cost us short-term leverage and earn
+          us long-term trust.
+        </p>
+      </div>
+      <div class="rounded-2xl bg-white border border-slate-200 p-6">
+        <p class="text-3xl">💬</p>
+        <h3 class="mt-2 font-bold text-slate-900">Honest sales</h3>
+        <p class="mt-2 text-sm text-slate-600 leading-relaxed">
+          If our product doesn't fit your use case, we say so on the first call. If a freelancer would
+          do a better job at half the price, we recommend a freelancer. The sales conversations we lose
+          this way are the ones that would have ended in refunds anyway.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- How we work -->
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-slate-900 tracking-tight">How we work</h2>
+      <p class="mt-3 text-slate-600 text-lg leading-relaxed">
+        Some practical details about how we actually run the studio.
+      </p>
+
+      <div class="mt-10 space-y-6 text-slate-700 leading-relaxed">
+        <div>
+          <h3 class="text-xl font-bold text-slate-900">Remote-first, India-based</h3>
+          <p class="mt-2">
+            We're headquartered in India and work remotely. That gives us reach across IST business hours
+            and US/EU overlap. We meet clients in person in NCR / Gurugram when it matters, but most
+            engagements run on calls, async written updates, and Friday demos.
+          </p>
+        </div>
+        <div>
+          <h3 class="text-xl font-bold text-slate-900">Modern, boring stack</h3>
+          <p class="mt-2">
+            Our products and most service projects use ASP.NET Core or Node.js on the backend, React
+            and Next.js on the web, React Native and Flutter on mobile. PostgreSQL or SQL Server for
+            relational data; we add Redis or pgvector when there's a real reason. We use boring tech on
+            purpose — fewer surprises in production, easier to hand off, easier to hire for.
+          </p>
+        </div>
+        <div>
+          <h3 class="text-xl font-bold text-slate-900">Fixed-price engagements</h3>
+          <p class="mt-2">
+            Service work is quoted upfront after a 30-minute discovery call. The proposal locks scope and
+            timeline and we eat the cost of anything we agreed to and missed. Material scope changes go
+            through a written change order with a delta price — but the default is to absorb small
+            additions inside the spirit of the original agreement.
+          </p>
+        </div>
+        <div>
+          <h3 class="text-xl font-bold text-slate-900">Weekly Friday demos</h3>
+          <p class="mt-2">
+            Every project gets a working build deployed to staging every Friday. You see real progress,
+            not slide decks, and you steer the build week by week. Bad ideas die early; good ones get
+            polished.
+          </p>
+        </div>
+        <div>
+          <h3 class="text-xl font-bold text-slate-900">Documentation and handoff</h3>
+          <p class="mt-2">
+            For services projects, we ship the codebase with architecture documentation, environment
+            setup, and a one-page operations runbook. For products, we maintain public release notes,
+            a help centre, and respond to support requests within one business day on all paid plans.
+          </p>
+        </div>
+        <div>
+          <h3 class="text-xl font-bold text-slate-900">Post-launch support</h3>
+          <p class="mt-2">
+            Every services project includes a 30-day post-launch warranty: anything we shipped that
+            breaks within the first month is on us to fix at no charge. Beyond that, ongoing maintenance
+            is available on a retainer scoped to your actual needs — or you can take full ownership of
+            the codebase and run it yourself.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Team -->
+  <section class="py-16 bg-slate-50">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-slate-900 tracking-tight">The team</h2>
+      <p class="mt-3 text-slate-600 text-lg leading-relaxed">
+        {site.name} is a small core team supplemented by senior contractors we've worked with for years.
+        We deliberately stay small because every additional layer of management dilutes the quality of
+        the engineering. Our engineers talk to customers directly; our designers ship code; our founders
+        still answer support tickets.
+      </p>
+      <p class="mt-4 text-slate-700 leading-relaxed">
+        If you want to know who specifically will work on your project — we'll tell you on the call.
+        Same names, same code review process, same QA standards across every engagement. No "expert team"
+        on the sales call and offshore juniors on the build. What you see is what you get.
+      </p>
+    </div>
+  </section>
+
+  <!-- Quick FAQ -->
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-slate-900 tracking-tight">Quick answers</h2>
+      <p class="mt-3 text-slate-600 text-lg leading-relaxed">
+        Common questions about working with us. There's a fuller <a href="/faq" class="text-indigo-600 font-semibold hover:underline">FAQ here</a> if you want detail.
+      </p>
+
+      <div class="mt-10 space-y-3">
+        <details class="group rounded-xl border border-slate-200 bg-white p-5">
+          <summary class="cursor-pointer list-none flex items-center justify-between font-semibold text-slate-900">
+            Are you an agency or a SaaS company?
+            <svg class="shrink-0 transition-transform group-open:rotate-180" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </summary>
+          <p class="mt-3 text-sm text-slate-600 leading-relaxed">
+            Both. We run our own SaaS products on monthly subscriptions, and we take on fixed-price
+            custom builds — AI chatbots, web apps, mobile apps. Many clients use both: subscribe to
+            TravelERP, and hire us to integrate it with their other systems.
+          </p>
+        </details>
+        <details class="group rounded-xl border border-slate-200 bg-white p-5">
+          <summary class="cursor-pointer list-none flex items-center justify-between font-semibold text-slate-900">
+            Do you work with clients outside India?
+            <svg class="shrink-0 transition-transform group-open:rotate-180" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </summary>
+          <p class="mt-3 text-sm text-slate-600 leading-relaxed">
+            Yes. We have clients across India, the Middle East, Singapore and the UK. Billing in INR
+            with GST for Indian customers; USD or EUR for everyone else. Time zone overlap is sufficient
+            for daily standups across India, the Middle East and Europe; for North America we run async
+            communication and one weekly call.
+          </p>
+        </details>
+        <details class="group rounded-xl border border-slate-200 bg-white p-5">
+          <summary class="cursor-pointer list-none flex items-center justify-between font-semibold text-slate-900">
+            How long does a typical project take?
+            <svg class="shrink-0 transition-transform group-open:rotate-180" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </summary>
+          <p class="mt-3 text-sm text-slate-600 leading-relaxed">
+            AI chatbots: 3–6 weeks. Web apps: 6–12 weeks. Mobile apps: 8–12 weeks. These are honest
+            ranges for projects of typical scope — bigger or more complex builds take longer, smaller
+            ones less. We send a quote with a real timeline within 48 hours of the discovery call.
+          </p>
+        </details>
+        <details class="group rounded-xl border border-slate-200 bg-white p-5">
+          <summary class="cursor-pointer list-none flex items-center justify-between font-semibold text-slate-900">
+            Can we own the code?
+            <svg class="shrink-0 transition-transform group-open:rotate-180" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </summary>
+          <p class="mt-3 text-sm text-slate-600 leading-relaxed">
+            For services projects: yes, fully. Code lives in your GitHub from day one of build. The IP
+            transfers to you on final payment. No reserved licenses, no "core platform" we lock you out
+            of, no usage royalties.
+          </p>
+        </details>
+        <details class="group rounded-xl border border-slate-200 bg-white p-5">
+          <summary class="cursor-pointer list-none flex items-center justify-between font-semibold text-slate-900">
+            What do you not do?
+            <svg class="shrink-0 transition-transform group-open:rotate-180" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </summary>
+          <p class="mt-3 text-sm text-slate-600 leading-relaxed">
+            We don't do pure marketing or branding work (logos, brand books). We don't do video
+            production. We don't do social media management. We don't do anything blockchain-related.
+            We're a software studio — we build software, and we say no to work outside that lane.
+          </p>
+        </details>
       </div>
     </div>
   </section>

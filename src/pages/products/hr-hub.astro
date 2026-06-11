@@ -1,0 +1,356 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import CtaBanner from "../../components/CtaBanner.astro";
+import { products } from "../../data/products";
+import { site } from "../../data/site";
+
+const product = products.find((p) => p.slug === "hr-hub")!;
+
+const modules = [
+  {
+    title: "Attendance and shift planning",
+    body: "Track who's in, who's out, who's on leave and who's on which shift — from one dashboard. Capture attendance via phone GPS punch-in, biometric integration (where you already have a device), or a simple manual check-in for office teams. The shift planner handles fixed shifts, rotating shifts and on-call schedules. Conflicts (one person on two shifts, no one on Sunday morning) get flagged automatically before they cause problems.",
+    bullets: [
+      "Phone-based GPS punch-in for field teams",
+      "Biometric device integration (ZKTeco, Mantra, eSSL)",
+      "Visual shift planner with drag-and-drop",
+      "Rotating shifts and on-call rotations",
+      "Conflict detection before shifts go live",
+    ],
+  },
+  {
+    title: "Leave management",
+    body: "Custom leave policies, multi-level approvals, balance calculations that handle carry-forward and encashment correctly, and a leave calendar that shows the whole team's planned absences in one view. Employees apply via the self-service portal or WhatsApp; managers approve in one click; HR sees the running balance without having to maintain a spreadsheet.",
+    bullets: [
+      "Custom leave types (sick, casual, earned, comp-off, study)",
+      "Multi-level approval chains (manager → HOD → HR)",
+      "Carry-forward, encashment, lapse policies per leave type",
+      "WhatsApp-based leave application",
+      "Team-view calendar showing planned absences",
+    ],
+  },
+  {
+    title: "Payroll runs",
+    body: "Run monthly payroll without a CA-grade Excel sheet. Built-in handling of PF, ESI, professional tax, TDS at the right slab, gratuity provisions, and India-specific edge cases like LOP (Loss of Pay), reimbursements, advance recovery and mid-month joiners. Generate Form 16 at year-end. Push salary to bank via NEFT batch upload. Send digital payslips by email with a one-click link to the self-service portal for tax declarations.",
+    bullets: [
+      "PF, ESI, PT, TDS calculations with current slabs",
+      "LOP, reimbursements, advances and recoveries",
+      "Bank NEFT batch file for one-click salary disbursement",
+      "Digital payslips delivered by email",
+      "Form 16 generation at year-end",
+    ],
+  },
+  {
+    title: "Employee self-service portal",
+    body: "Employees apply for leave, download payslips, declare investments (80C, HRA, LTA), submit reimbursement claims and update personal information without anyone in HR doing data entry. That's typically 30-40% of HR's actual workload, gone. The mobile app keeps the same workflows available on phones — important because most employees check on-the-go, not from a desk.",
+    bullets: [
+      "Leave applications and balance tracking",
+      "Payslip download (current month + past 12)",
+      "Investment declarations with auto-calculated TDS impact",
+      "Reimbursement claims with photo upload",
+      "Profile updates (address, bank, nominee details)",
+    ],
+  },
+  {
+    title: "Hiring and onboarding",
+    body: "Track candidates through your interview pipeline (sourced → screened → interviewed → offered → joined). Send offer letters from templates. Generate onboarding checklists per role so a new hire's first week has structure. Capture documents (PAN, Aadhaar, education certificates, previous payslips) digitally — no more chasing scanned PDFs over WhatsApp.",
+    bullets: [
+      "Pipeline view with custom stages",
+      "Offer letter templates with merge fields",
+      "Per-role onboarding checklists",
+      "Digital document upload (PAN, Aadhaar, certificates)",
+      "Background-verification vendor integrations (e.g. AuthBridge)",
+    ],
+  },
+];
+
+const useCases = [
+  {
+    title: "Small services businesses (5-50 employees)",
+    body: "Agencies, consulting firms, healthcare clinics, small accounting practices — anyone where 'doing payroll' currently means an Excel file and a frustrated person.",
+  },
+  {
+    title: "Growing tech startups",
+    body: "Companies past the 'we'll worry about HR later' phase but not yet big enough for a Workday/Darwinbox license.",
+  },
+  {
+    title: "Retail and F&B chains",
+    body: "Distributed workforce across branches, shift-based attendance, lots of joiners and leavers month over month. HR Hub's mobile-first design fits this audience particularly well.",
+  },
+  {
+    title: "Manufacturing and field-services teams",
+    body: "Where attendance from the field matters and biometric punch-in at the factory gate is the norm. HR Hub integrates with standard Indian biometric devices.",
+  },
+];
+
+const productJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  name: "HR Hub",
+  applicationCategory: "BusinessApplication",
+  operatingSystem: "Web",
+  description: product.description,
+  url: `${site.url}/products/hr-hub`,
+  offers: {
+    "@type": "Offer",
+    availability: "https://schema.org/PreOrder",
+    description: "Coming soon — join the waitlist",
+  },
+  publisher: { "@type": "Organization", name: site.name, url: site.url },
+};
+
+const breadcrumbJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Home",      item: `${site.url}/` },
+    { "@type": "ListItem", position: 2, name: "Products",  item: `${site.url}/#products` },
+    { "@type": "ListItem", position: 3, name: "HR Hub",    item: `${site.url}/products/hr-hub` },
+  ],
+};
+
+const waitlistHref = "/contact?topic=hr-hub#contactForm";
+---
+
+<BaseLayout
+  title="HR Hub — modern HRMS for small and mid-sized teams"
+  description="Attendance, leave, payroll and self-service in one place — built for Indian small and mid-sized businesses tired of duct-taping Excel sheets together. Coming soon."
+  jsonLd={[productJsonLd, breadcrumbJsonLd]}
+>
+  <!-- Hero -->
+  <section class="relative overflow-hidden">
+    <div class="hero-blob"></div>
+    <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-20 pb-12 sm:pt-24 sm:pb-16">
+      <div class="grid gap-12 lg:grid-cols-2 lg:items-center">
+        <div>
+          <span class="inline-flex items-center gap-2 rounded-full bg-slate-100 text-slate-700 px-3 py-1 text-xs font-bold uppercase tracking-wider">
+            <span class="w-2 h-2 rounded-full bg-slate-500"></span>
+            Coming soon · Waitlist open
+          </span>
+          <h1 class="mt-4 text-4xl sm:text-5xl font-extrabold tracking-tight text-slate-900 leading-tight">
+            Payroll, attendance and people ops — <span class="gradient-text">simplified</span>.
+          </h1>
+          <p class="mt-5 text-lg text-slate-600 leading-relaxed">
+            HR Hub is a modern HRMS for Indian small-to-mid teams (5-200 employees). Attendance, leave,
+            payroll runs (with PF/ESI/TDS calculated correctly), and an employee self-service portal —
+            all in one product. Cloud-based, mobile-first, integrates with standard Indian biometric
+            devices and accounting tools.
+          </p>
+          <div class="mt-7 flex flex-wrap items-center gap-3">
+            <a
+              href={waitlistHref}
+              class="inline-flex items-center gap-2 rounded-xl px-5 py-3 text-sm font-semibold text-white bg-gradient-to-r from-indigo-600 to-cyan-600 shadow-md hover:shadow-lg hover:opacity-95 transition"
+            >
+              Join the waitlist
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M5 12h14"/><path d="M13 6l6 6-6 6"/>
+              </svg>
+            </a>
+            <a
+              href="#features"
+              class="inline-flex items-center rounded-xl px-5 py-3 text-sm font-semibold text-slate-900 bg-white border border-slate-200 hover:border-indigo-300 hover:text-indigo-600 transition"
+            >
+              See what's planned
+            </a>
+          </div>
+          <p class="mt-5 text-xs text-slate-500">
+            Targeted launch · 2027 · Waitlist members get founder pricing
+          </p>
+        </div>
+
+        <div class="relative">
+          <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-xl shadow-emerald-500/10">
+            <p class="text-xs font-bold uppercase tracking-wider text-slate-500">What's planned</p>
+            <ul class="mt-3 grid grid-cols-1 gap-3 text-sm">
+              {product.highlights.map((h) => (
+                <li class="flex items-start gap-2">
+                  <svg class="mt-0.5 shrink-0 text-emerald-500" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="20 6 9 17 4 12"/>
+                  </svg>
+                  <span class="text-slate-700">{h}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div class="absolute -inset-2 -z-10 rounded-3xl bg-gradient-to-tr from-emerald-500/20 to-teal-500/20 blur-2xl"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- The problem -->
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-slate-900 tracking-tight">The problem we're solving</h2>
+      <div class="mt-6 space-y-5 text-slate-700 leading-relaxed">
+        <p>
+          HR software in India splits cleanly into two camps. On one side, enterprise HRMS platforms
+          like Darwinbox, Keka, Zoho People and SumHR — feature-rich, polished, and priced at
+          ₹100-300 per employee per month, often with implementation fees of ₹1-5 lakh. Built for
+          companies of 100+ employees with a dedicated HR function.
+        </p>
+        <p>
+          On the other side, ad-hoc tools: an Excel file for payroll, a WhatsApp group for leave
+          approvals, a printed register for attendance, an accountant who runs Form 16 in March. Free
+          (sort of), but a constant drain on the founder or HR generalist who's doing it all.
+        </p>
+        <p>
+          Most small and mid-sized businesses (5-50 employees) sit awkwardly in the middle. The
+          enterprise tools are overkill and overpriced. The ad-hoc approach breaks down once you cross
+          15-20 people. HR Hub is built for that middle — a complete HRMS that handles the actual
+          complexity of Indian payroll and statutory compliance, priced for businesses that don't have
+          a CFO yet.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section id="features" class="py-16 sm:py-20 bg-slate-50 dot-bg">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <div class="max-w-2xl mx-auto text-center">
+        <p class="text-sm font-bold uppercase tracking-widest text-indigo-600">What's in v1</p>
+        <h2 class="mt-2 text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-900">
+          The five modules every Indian SMB needs
+        </h2>
+        <p class="mt-4 text-slate-600 text-lg">
+          We've spoken to HR managers, accountants and founders at over 30 Indian SMBs to figure out
+          what actually matters in the first version. These are the modules that made the cut.
+        </p>
+      </div>
+
+      <div class="mt-14 space-y-12 sm:space-y-16">
+        {modules.map((s, i) => (
+          <div class={`grid gap-8 lg:grid-cols-2 lg:items-center ${i % 2 === 1 ? "lg:[&>:first-child]:order-2" : ""}`}>
+            <div>
+              <h3 class="text-2xl sm:text-3xl font-extrabold tracking-tight text-slate-900">{s.title}</h3>
+              <p class="mt-3 text-slate-600 leading-relaxed">{s.body}</p>
+              <ul class="mt-5 space-y-2">
+                {s.bullets.map((b) => (
+                  <li class="flex items-start gap-2 text-sm text-slate-700">
+                    <svg class="mt-0.5 shrink-0 text-emerald-500" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+                      <polyline points="20 6 9 17 4 12"/>
+                    </svg>
+                    <span>{b}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div class="rounded-2xl border border-slate-200 bg-gradient-to-br from-slate-50 to-white p-6 sm:p-8 shadow-sm">
+              <div class="aspect-[4/3] rounded-xl bg-white border border-slate-200 grid place-items-center text-slate-300">
+                <span class="text-sm font-medium tracking-wide uppercase">{s.title} preview</span>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Who it's for -->
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <div class="max-w-2xl mx-auto text-center">
+        <p class="text-sm font-bold uppercase tracking-widest text-indigo-600">Who it's for</p>
+        <h2 class="mt-2 text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-900">
+          Built for the businesses in the middle
+        </h2>
+      </div>
+
+      <div class="mt-12 grid gap-6 sm:grid-cols-2">
+        {useCases.map((u) => (
+          <div class="lift rounded-2xl border border-slate-200 bg-white p-6 sm:p-7">
+            <h3 class="text-xl font-bold text-slate-900">{u.title}</h3>
+            <p class="mt-2 text-sm text-slate-600 leading-relaxed">{u.body}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="py-16 sm:py-20 bg-slate-50">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold tracking-tight text-slate-900 text-center">Common questions</h2>
+      <div class="mt-10 space-y-3">
+        <details class="group rounded-xl border border-slate-200 bg-white p-5">
+          <summary class="cursor-pointer list-none flex items-center justify-between font-semibold text-slate-900">
+            When does HR Hub launch?
+            <svg class="shrink-0 transition-transform group-open:rotate-180" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </summary>
+          <p class="mt-3 text-sm text-slate-600 leading-relaxed">
+            Targeted public beta in 2027 after Inventory Pro lands. Waitlist members will be invited to
+            early-access in batches as we expand capacity. Statutory compliance (PF, ESI, TDS) needs to
+            be rock-solid before we let it loose on real payrolls — that's why we're taking our time.
+          </p>
+        </details>
+        <details class="group rounded-xl border border-slate-200 bg-white p-5">
+          <summary class="cursor-pointer list-none flex items-center justify-between font-semibold text-slate-900">
+            How does it handle PF, ESI, professional tax and TDS?
+            <svg class="shrink-0 transition-transform group-open:rotate-180" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </summary>
+          <p class="mt-3 text-sm text-slate-600 leading-relaxed">
+            Built in. PF and ESI contributions are calculated at the current statutory rates and on the
+            correct base. Professional tax is handled per-state (PT rates vary by state and HR Hub knows
+            the differences). TDS is computed based on declared investments and the current income-tax
+            slabs, with the option for the employee to switch between old and new regime.
+          </p>
+        </details>
+        <details class="group rounded-xl border border-slate-200 bg-white p-5">
+          <summary class="cursor-pointer list-none flex items-center justify-between font-semibold text-slate-900">
+            Does it integrate with my biometric attendance device?
+            <svg class="shrink-0 transition-transform group-open:rotate-180" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </summary>
+          <p class="mt-3 text-sm text-slate-600 leading-relaxed">
+            v1 will support standard Indian devices — ZKTeco, Mantra, eSSL and Realtime. Attendance
+            data flows from the device into HR Hub via the device's standard push API. If your device
+            isn't on this list, let us know — we'll prioritise the ones our customers actually use.
+          </p>
+        </details>
+        <details class="group rounded-xl border border-slate-200 bg-white p-5">
+          <summary class="cursor-pointer list-none flex items-center justify-between font-semibold text-slate-900">
+            What about accounting integration?
+            <svg class="shrink-0 transition-transform group-open:rotate-180" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </summary>
+          <p class="mt-3 text-sm text-slate-600 leading-relaxed">
+            Salary entries and statutory contributions can be exported to Tally Prime via XML, or
+            pushed directly into Zoho Books and QuickBooks via their APIs. Custom integrations are
+            available for Business and Enterprise plans.
+          </p>
+        </details>
+        <details class="group rounded-xl border border-slate-200 bg-white p-5">
+          <summary class="cursor-pointer list-none flex items-center justify-between font-semibold text-slate-900">
+            What's the pricing model?
+            <svg class="shrink-0 transition-transform group-open:rotate-180" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </summary>
+          <p class="mt-3 text-sm text-slate-600 leading-relaxed">
+            Per-employee per-month pricing in INR, in line with the Indian SMB HRMS market — we're
+            targeting around half the price of Keka and Darwinbox. Final numbers will be published
+            before launch. Waitlist members lock in a permanent founder discount.
+          </p>
+        </details>
+        <details class="group rounded-xl border border-slate-200 bg-white p-5">
+          <summary class="cursor-pointer list-none flex items-center justify-between font-semibold text-slate-900">
+            We already use Keka / Zoho People. Why would we switch?
+            <svg class="shrink-0 transition-transform group-open:rotate-180" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </summary>
+          <p class="mt-3 text-sm text-slate-600 leading-relaxed">
+            Honestly? Maybe you wouldn't. Both Keka and Zoho People are solid products for the SMB
+            segment. We'd recommend switching to HR Hub if you find their pricing too expensive for
+            your headcount, or if you want a UI that doesn't feel like enterprise software.
+            For most teams on Keka or Zoho People who are happy, we'd say stay.
+          </p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <CtaBanner
+    title="Get on the HR Hub waitlist"
+    body="Tell us a bit about your team — size, how you handle payroll today, what's most painful. We'll send your beta invite when slots open."
+    primaryLabel="Join the waitlist"
+    primaryHref={waitlistHref}
+    secondaryLabel="See our live products"
+    secondaryHref="/#products"
+  />
+</BaseLayout>

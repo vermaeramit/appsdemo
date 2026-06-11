@@ -9,7 +9,8 @@ const statusPill = {
   soon: { text: "Coming Soon", cls: "bg-slate-100  text-slate-600"   },
 }[product.status];
 
-const isClickable = product.status !== "soon";
+// A "soon" product is clickable only if it has a real href (not "#").
+const isClickable = product.status !== "soon" || (product.href && product.href !== "#");
 const Tag = isClickable ? "a" : "div";
 ---
 
@@ -48,7 +49,7 @@ const Tag = isClickable ? "a" : "div";
 
   {isClickable ? (
     <span class="mt-6 inline-flex items-center gap-1.5 text-sm font-semibold text-indigo-600">
-      Learn more
+      {product.status === "soon" ? "Preview & join waitlist" : "Learn more"}
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
         <path d="M5 12h14"/><path d="M13 6l6 6-6 6"/>
       </svg>

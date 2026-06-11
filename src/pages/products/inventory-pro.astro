@@ -1,0 +1,347 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import CtaBanner from "../../components/CtaBanner.astro";
+import { products } from "../../data/products";
+import { site } from "../../data/site";
+
+const product = products.find((p) => p.slug === "inventory-pro")!;
+
+const modules = [
+  {
+    title: "Multi-location stock",
+    body: "Track inventory across multiple warehouses, branches, godowns and stores from one screen. See aggregate stock by SKU, drill down to per-location quantities, and move stock between locations with a built-in transfer workflow that captures who shipped, who received, and what was lost in transit. No more reconciling separate Excel sheets per branch — and no more 'we said we had 12 of those, where did the other 5 go?' conversations on Monday morning.",
+    bullets: [
+      "Unlimited warehouses, branches and bins",
+      "Per-location stock with aggregate roll-up",
+      "Stock transfers with shipped / received / variance tracking",
+      "Per-location pricing if you need it",
+      "Branch-restricted user access (Mumbai team can't see Delhi stock)",
+    ],
+  },
+  {
+    title: "Barcode scanning and labels",
+    body: "Every SKU gets a barcode. Generate them in standard formats (Code128, EAN-13, QR) and print labels in any size from a roll printer or a regular printer. Scan to receive stock at GRN time, scan to pick at packing time, scan at POS. Scanning is faster than typing SKUs and cuts data-entry errors to near zero. Works with any USB or Bluetooth barcode scanner; works on phones via the camera.",
+    bullets: [
+      "Code128, EAN-13, QR code generation",
+      "Custom label layouts (size, fields, branding)",
+      "Bulk-print labels for a batch of incoming stock",
+      "Phone camera scanning via the mobile app",
+      "Scan-to-receive, scan-to-pick, scan-to-sell",
+    ],
+  },
+  {
+    title: "Supplier POs and GRN",
+    body: "Create purchase orders, send them to suppliers via email, track which line items have been received vs which are pending, and reconcile bills against the original PO. Goods Received Notes capture quantity, quality and any variance — and the variance feeds back into supplier-performance reports so you know which vendors are reliable and which aren't.",
+    bullets: [
+      "Multi-line POs with per-item delivery dates",
+      "Email PO directly to the supplier with PDF attachment",
+      "Partial GRNs as stock comes in batches",
+      "Variance tracking against the original PO",
+      "Supplier performance reports (on-time %, variance %)",
+    ],
+  },
+  {
+    title: "Low-stock alerts and auto-reorder",
+    body: "Set a reorder level and a reorder quantity per SKU. When stock drops below the threshold, Inventory Pro alerts your buying team and can auto-generate a draft PO to the preferred supplier. No more discovering you're out of your best-selling item the day a big order comes in — and no more over-ordering 'just in case' because nobody trusted the manual count.",
+    bullets: [
+      "Per-SKU reorder level and quantity",
+      "Email and in-app alerts when below threshold",
+      "Auto-generated draft POs for one-click approval",
+      "Seasonal reorder rules (more stock for Diwali)",
+      "Forecast suggestions based on past sales velocity",
+    ],
+  },
+  {
+    title: "Built-in POS",
+    body: "A clean, fast point-of-sale that runs in a browser. Touch-friendly, keyboard-friendly, scanner-friendly. Handles UPI, card, cash, store credit and split payments. Issues GST-compliant invoices. Records every sale against the right branch, the right user, and the right inventory locations — so stock decrements automatically the moment a sale is rung up.",
+    bullets: [
+      "Browser-based — runs on any laptop / tablet",
+      "Touch + barcode + keyboard input modes",
+      "UPI, card, cash, store credit, split payments",
+      "GST-compliant invoice generation",
+      "Auto stock decrement and journal entry on every sale",
+    ],
+  },
+];
+
+const useCases = [
+  {
+    title: "Small-format retail (1-10 stores)",
+    body: "Cafes, specialty stores, boutiques and franchises that need basic multi-location stock without the SAP price tag.",
+  },
+  {
+    title: "Wholesalers and distributors",
+    body: "B2B businesses moving inventory between godowns and onto trucks. Heavy on PO + GRN workflows.",
+  },
+  {
+    title: "E-commerce with physical stock",
+    body: "Sellers on Amazon / Flipkart / Shopify who need a single source of truth for stock across channels and a real warehouse picking workflow.",
+  },
+  {
+    title: "Restaurants and cloud kitchens",
+    body: "Track raw material consumption against menu items. Get alerts when palak paneer ingredients are running low before the dinner rush.",
+  },
+];
+
+const productJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  name: "Inventory Pro",
+  applicationCategory: "BusinessApplication",
+  operatingSystem: "Web",
+  description: product.description,
+  url: `${site.url}/products/inventory-pro`,
+  offers: {
+    "@type": "Offer",
+    availability: "https://schema.org/PreOrder",
+    description: "Coming soon — join the waitlist",
+  },
+  publisher: { "@type": "Organization", name: site.name, url: site.url },
+};
+
+const breadcrumbJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Home",          item: `${site.url}/` },
+    { "@type": "ListItem", position: 2, name: "Products",      item: `${site.url}/#products` },
+    { "@type": "ListItem", position: 3, name: "Inventory Pro", item: `${site.url}/products/inventory-pro` },
+  ],
+};
+
+const waitlistHref = "/contact?topic=inventory-pro#contactForm";
+---
+
+<BaseLayout
+  title="Inventory Pro — real-time stock control for growing retailers"
+  description="Multi-location inventory management with barcode scanning, supplier POs, low-stock alerts, auto-reorder and a built-in POS. Coming soon — join the waitlist."
+  jsonLd={[productJsonLd, breadcrumbJsonLd]}
+>
+  <!-- Hero -->
+  <section class="relative overflow-hidden">
+    <div class="hero-blob"></div>
+    <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-20 pb-12 sm:pt-24 sm:pb-16">
+      <div class="grid gap-12 lg:grid-cols-2 lg:items-center">
+        <div>
+          <span class="inline-flex items-center gap-2 rounded-full bg-slate-100 text-slate-700 px-3 py-1 text-xs font-bold uppercase tracking-wider">
+            <span class="w-2 h-2 rounded-full bg-slate-500"></span>
+            Coming soon · Waitlist open
+          </span>
+          <h1 class="mt-4 text-4xl sm:text-5xl font-extrabold tracking-tight text-slate-900 leading-tight">
+            Real-time stock control for <span class="gradient-text">growing retailers</span>.
+          </h1>
+          <p class="mt-5 text-lg text-slate-600 leading-relaxed">
+            Inventory Pro brings together everything a small-to-mid retailer or wholesaler actually
+            needs: multi-location stock, barcode scanning, supplier purchase orders, low-stock alerts,
+            auto-reorder and a built-in POS. Built multi-tenant from day one. Designed for businesses
+            who've outgrown spreadsheets but don't want enterprise pain.
+          </p>
+          <div class="mt-7 flex flex-wrap items-center gap-3">
+            <a
+              href={waitlistHref}
+              class="inline-flex items-center gap-2 rounded-xl px-5 py-3 text-sm font-semibold text-white bg-gradient-to-r from-indigo-600 to-cyan-600 shadow-md hover:shadow-lg hover:opacity-95 transition"
+            >
+              Join the waitlist
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M5 12h14"/><path d="M13 6l6 6-6 6"/>
+              </svg>
+            </a>
+            <a
+              href="#features"
+              class="inline-flex items-center rounded-xl px-5 py-3 text-sm font-semibold text-slate-900 bg-white border border-slate-200 hover:border-indigo-300 hover:text-indigo-600 transition"
+            >
+              See what's planned
+            </a>
+          </div>
+          <p class="mt-5 text-xs text-slate-500">
+            Targeted launch · Q4 2026 · Waitlist members get founder pricing
+          </p>
+        </div>
+
+        <div class="relative">
+          <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-xl shadow-amber-500/10">
+            <p class="text-xs font-bold uppercase tracking-wider text-slate-500">What's planned</p>
+            <ul class="mt-3 grid grid-cols-1 gap-3 text-sm">
+              {product.highlights.map((h) => (
+                <li class="flex items-start gap-2">
+                  <svg class="mt-0.5 shrink-0 text-amber-500" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="20 6 9 17 4 12"/>
+                  </svg>
+                  <span class="text-slate-700">{h}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div class="absolute -inset-2 -z-10 rounded-3xl bg-gradient-to-tr from-amber-500/20 to-rose-500/20 blur-2xl"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- The problem -->
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold text-slate-900 tracking-tight">The problem we're solving</h2>
+      <div class="mt-6 space-y-5 text-slate-700 leading-relaxed">
+        <p>
+          Most small retailers and wholesalers in India run inventory on one of three things: an Excel
+          sheet on a single laptop, a desktop application from the early 2000s, or one of the legacy
+          on-premise ERP systems that requires a dedicated IT person to keep running.
+        </p>
+        <p>
+          The Excel approach breaks the moment you have more than one location, more than one person
+          updating it, or more than a few hundred SKUs. The desktop application breaks the day the
+          laptop crashes. The legacy ERP works, but costs ₹5-20 lakh upfront, takes 3-6 months to
+          implement, and requires a customisation invoice every time you want a small change.
+        </p>
+        <p>
+          There's a gap in the middle: a modern, cloud-based inventory system that handles the actual
+          complexity of multi-location retail and wholesale — barcoded SKUs, GRN workflows, supplier
+          performance, auto-reorder, GST-compliant invoicing — without the cost or implementation
+          overhead of enterprise software. That gap is what Inventory Pro is built to fill.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section id="features" class="py-16 sm:py-20 bg-slate-50 dot-bg">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <div class="max-w-2xl mx-auto text-center">
+        <p class="text-sm font-bold uppercase tracking-widest text-indigo-600">What's in v1</p>
+        <h2 class="mt-2 text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-900">
+          Built around how retail actually works
+        </h2>
+        <p class="mt-4 text-slate-600 text-lg">
+          The features we're prioritising for launch, based on conversations with 20+ small retailers
+          and wholesalers in India.
+        </p>
+      </div>
+
+      <div class="mt-14 space-y-12 sm:space-y-16">
+        {modules.map((s, i) => (
+          <div class={`grid gap-8 lg:grid-cols-2 lg:items-center ${i % 2 === 1 ? "lg:[&>:first-child]:order-2" : ""}`}>
+            <div>
+              <h3 class="text-2xl sm:text-3xl font-extrabold tracking-tight text-slate-900">{s.title}</h3>
+              <p class="mt-3 text-slate-600 leading-relaxed">{s.body}</p>
+              <ul class="mt-5 space-y-2">
+                {s.bullets.map((b) => (
+                  <li class="flex items-start gap-2 text-sm text-slate-700">
+                    <svg class="mt-0.5 shrink-0 text-amber-500" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+                      <polyline points="20 6 9 17 4 12"/>
+                    </svg>
+                    <span>{b}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div class="rounded-2xl border border-slate-200 bg-gradient-to-br from-slate-50 to-white p-6 sm:p-8 shadow-sm">
+              <div class="aspect-[4/3] rounded-xl bg-white border border-slate-200 grid place-items-center text-slate-300">
+                <span class="text-sm font-medium tracking-wide uppercase">{s.title} preview</span>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Who it's for -->
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <div class="max-w-2xl mx-auto text-center">
+        <p class="text-sm font-bold uppercase tracking-widest text-indigo-600">Who it's for</p>
+        <h2 class="mt-2 text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-900">
+          Built for a specific kind of business
+        </h2>
+      </div>
+
+      <div class="mt-12 grid gap-6 sm:grid-cols-2">
+        {useCases.map((u) => (
+          <div class="lift rounded-2xl border border-slate-200 bg-white p-6 sm:p-7">
+            <h3 class="text-xl font-bold text-slate-900">{u.title}</h3>
+            <p class="mt-2 text-sm text-slate-600 leading-relaxed">{u.body}</p>
+          </div>
+        ))}
+      </div>
+
+      <p class="mt-10 text-center text-sm text-slate-500 max-w-2xl mx-auto">
+        Not building for: large-format retail chains (you need SAP / Oracle Retail), single-store
+        operators with under 200 SKUs (a spreadsheet is fine), or pure D2C brands without physical stock.
+      </p>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="py-16 sm:py-20 bg-slate-50">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-extrabold tracking-tight text-slate-900 text-center">Common questions</h2>
+      <div class="mt-10 space-y-3">
+        <details class="group rounded-xl border border-slate-200 bg-white p-5">
+          <summary class="cursor-pointer list-none flex items-center justify-between font-semibold text-slate-900">
+            When will Inventory Pro launch?
+            <svg class="shrink-0 transition-transform group-open:rotate-180" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </summary>
+          <p class="mt-3 text-sm text-slate-600 leading-relaxed">
+            We're targeting public beta in Q4 2026 with paid plans launching shortly after. Waitlist
+            members are first in line for beta access and get permanent founder pricing.
+          </p>
+        </details>
+        <details class="group rounded-xl border border-slate-200 bg-white p-5">
+          <summary class="cursor-pointer list-none flex items-center justify-between font-semibold text-slate-900">
+            How will it integrate with Tally / Zoho Books / other accounting?
+            <svg class="shrink-0 transition-transform group-open:rotate-180" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </summary>
+          <p class="mt-3 text-sm text-slate-600 leading-relaxed">
+            v1 will have a Tally export (the standard XML format that Tally Prime accepts) and direct
+            API integrations with Zoho Books and QuickBooks. Sales, purchases and journal entries flow
+            into your accounting software automatically.
+          </p>
+        </details>
+        <details class="group rounded-xl border border-slate-200 bg-white p-5">
+          <summary class="cursor-pointer list-none flex items-center justify-between font-semibold text-slate-900">
+            Will it work without internet?
+            <svg class="shrink-0 transition-transform group-open:rotate-180" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </summary>
+          <p class="mt-3 text-sm text-slate-600 leading-relaxed">
+            The POS will support offline mode — sales continue to be recorded locally when the internet
+            drops, and sync once it's back. Stock updates, however, do need internet because multiple
+            people across multiple locations are reading and writing to the same shared data. We'll have
+            a clear "you're working offline" indicator so cashiers know.
+          </p>
+        </details>
+        <details class="group rounded-xl border border-slate-200 bg-white p-5">
+          <summary class="cursor-pointer list-none flex items-center justify-between font-semibold text-slate-900">
+            Multi-tenant — do we share a database with other businesses?
+            <svg class="shrink-0 transition-transform group-open:rotate-180" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </summary>
+          <p class="mt-3 text-sm text-slate-600 leading-relaxed">
+            No. Each customer gets their own isolated database. Same multi-tenant architecture as
+            <a href="/products/travel-crm" class="text-indigo-600 hover:underline">TravelERP</a>.
+            No data leaks across customers, ever.
+          </p>
+        </details>
+        <details class="group rounded-xl border border-slate-200 bg-white p-5">
+          <summary class="cursor-pointer list-none flex items-center justify-between font-semibold text-slate-900">
+            How will pricing work?
+            <svg class="shrink-0 transition-transform group-open:rotate-180" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </summary>
+          <p class="mt-3 text-sm text-slate-600 leading-relaxed">
+            Monthly per-seat pricing in INR, similar to TravelERP's tiers (Starter / Business /
+            Enterprise). Final numbers will be announced before launch. Waitlist members will see
+            pricing 30 days before the public, with a permanent discount locked in for joining early.
+          </p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <CtaBanner
+    title="Get on the Inventory Pro waitlist"
+    body="Tell us about your business — what you sell, how many locations, what tool you're using now. We'll send your beta invite when slots open."
+    primaryLabel="Join the waitlist"
+    primaryHref={waitlistHref}
+    secondaryLabel="See our live products"
+    secondaryHref="/#products"
+  />
+</BaseLayout>

@@ -62,7 +62,7 @@ export const products: Product[] = [
     description:
       "Multi-location inventory, barcode scanning, supplier POs, low-stock alerts and a beautiful POS — all in one place.",
     status: "soon",
-    href: "#",
+    href: "/products/inventory-pro",
     iconColor: "from-amber-500 to-rose-500",
     icon: "📦",
     highlights: [
@@ -79,7 +79,7 @@ export const products: Product[] = [
     description:
       "Modern HRMS with attendance, leave management, payroll runs and an employee self-service portal.",
     status: "soon",
-    href: "#",
+    href: "/products/hr-hub",
     iconColor: "from-emerald-500 to-teal-500",
     icon: "👥",
     highlights: [
